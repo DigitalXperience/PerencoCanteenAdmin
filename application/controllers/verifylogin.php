@@ -18,13 +18,15 @@ class VerifyLogin extends CI_Controller {
 
 	if($this->form_validation->run() == FALSE)
 	{
-	//Field validation failed.  User redirected to login page
-	$this->load->view('login');
+		//Field validation failed.  User redirected to login page
+		//$this->load->view('login');
+		echo "false";
 	}
 	else
 	{
-	//Go to private area
-	redirect('dashboard', 'refresh');
+		//Go to private area
+		echo "true";
+		redirect('dashboard', 'refresh');
 	}
 
  }
@@ -43,7 +45,7 @@ function check_database($password) {
 		{
 			$sess_array = array(
 				'id' => $row->id,
-				'username' => $row->username
+				'username' => $row->user
 			);
 			$this->session->set_userdata('logged_in', $sess_array);
 		}
