@@ -7,6 +7,7 @@ class Dashboard extends CI_Controller{
 		{
 			$session_data = $this->session->userdata('logged_in');
 			$data['username'] = $session_data['username'];
+			$data['title'] = "Dashboard";
 			$this->load->view('dashboard', $data);
 		}
 		else
