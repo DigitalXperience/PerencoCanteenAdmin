@@ -10,7 +10,6 @@ Class User extends CI_Model
 		$this -> db -> limit(1);
 
 		$query = $this -> db -> get();
-		
 		if($query -> num_rows() == 1)
 		{
 			return $query->result();
@@ -19,6 +18,20 @@ Class User extends CI_Model
 		{
 			return false;
 		}
+	}
+	
+	public function getInfo($id)
+	{
+		$query = $this->db->query("SELECT * FROM info_user WHERE id_user = '$id' LIMIT 1;");
+		
+		$row = $query->row();
+
+		if (isset($row))
+		{
+			return $row;
+		}
+		
+		return false;
 	}
 }
 ?>
