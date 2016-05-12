@@ -27,7 +27,25 @@ class Users extends CI_Controller{
 		
 	}
 	
-	public function new()
+	public function newuser()
+	{
+		if($this->session->userdata('logged_in'))
+		{
+			$session_data = $this->session->userdata('logged_in');
+			$data['name'] = $this->user->getInfo($session_data['id']);
+			$data['title'] = "Dashboard";
+			$data['menu'] = $this->load->view('menu', NULL, TRUE);
+			$data['menu'] = $this->load->view('menu', NULL, TRUE);
+			$this->load->view('user_new', $data);
+		}
+		else
+		{
+			//If no session, redirect to login page
+			redirect('login', 'refresh');
+		}
+	}
+	
+	public function updateuser()
 	{
 		if($this->session->userdata('logged_in'))
 		{
