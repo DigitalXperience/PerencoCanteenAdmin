@@ -43,7 +43,7 @@
                                         <td>'.$row->status.'</td>
                                         <td>'.$v.'</td>
                                         <td><a href="users/updateuser/'.$row->id_user.'" class="btn btn-xs btn-primary" data-toggle="tooltip" title="Modifier"><i class="fa fa-pencil"></i></a>
-                                            <a href="users/deleteuser/'.$row->id_user.'" class="btn btn-xs btn-danger" data-toggle="tooltip" title="Supprimer"><i class="fa fa-trash"></i></a>
+                                            <a href="#" class="btn btn-xs btn-danger" data-toggle="tooltip" title="Supprimer"><i class="fa fa-trash"></i></a>
                                         </td>
                                       </tr>';
                             }
