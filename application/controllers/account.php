@@ -27,15 +27,15 @@ class Account extends CI_Controller{
 		}
 	}
 	
-	public function newuser()
+	public function newaccount()
 	{
 		if($this->session->userdata('logged_in'))
 		{
 			$session_data = $this->session->userdata('logged_in');
 			$data['name'] = $this->user->getInfo($session_data['id']);
-			$data['title'] = "Ajouter un utilisateur";
+			$data['title'] = "Ajouter un compte";
 			$data['menu'] = $this->load->view('menu', NULL, TRUE);
-			$this->load->view('user_new', $data);
+			$this->load->view('account_new', $data);
 		}
 		else
 		{
