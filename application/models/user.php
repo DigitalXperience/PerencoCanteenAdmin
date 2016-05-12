@@ -31,7 +31,7 @@ Class User extends CI_Model
 	}
     public function getList($clause=null)
 	{
-		$query = $this->db->query('SELECT * FROM user_info INNER JOIN user_account ON user_info.id_user = user_account.id_user WHERE user_info.deleted IS NULL '.$clause.';');
+		$query = $this->db->query('SELECT * FROM user_info LEFT JOIN user_account ON user_info.id_user = user_account.id_user WHERE user_info.deleted IS NULL '.$clause.';');
 		$row = $query->result();
 		if (isset($row))
 		{

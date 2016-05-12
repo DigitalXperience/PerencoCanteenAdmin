@@ -35,13 +35,16 @@
                 <tbody>
                      <?php if($liste){
                             foreach ($liste as $row){
+                                if(!empty($row->PIN)) $v='Oui'; else $v='Non';
                                 echo '<tr>
                                         <td>'.$row->firstname.'</td>
                                         <td>'.$row->lastname.'</td>
                                         <td>'.$row->email.'</td>
                                         <td>'.$row->status.'</td>
-                                        <td>'.$row->PIN.'</td>
-                                        <td><a class="btn"><i class="fa fa-pencil"></i></a></td>
+                                        <td>'.$v.'</td>
+                                        <td><a href="users/updateuser/'.$row->id_user.'" class="btn btn-xs btn-primary" data-toggle="tooltip" title="Modifier"><i class="fa fa-pencil"></i></a>
+                                            <a href="users/deleteuser/'.$row->id_user.'" class="btn btn-xs btn-danger" data-toggle="tooltip" title="Supprimer"><i class="fa fa-trash"></i></a>
+                                        </td>
                                       </tr>';
                             }
                     } ?>
