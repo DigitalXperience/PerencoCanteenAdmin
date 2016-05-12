@@ -6,12 +6,12 @@
 		<i class="fa fa-dashboard"></i> <span>Tableau de Bord</span> <i class="fa fa-angle-left pull-right"></i>
 	  </a>
 	  <ul class="treeview-menu">
-		<li class="active"><a href="users"><i class="fa fa-circle-o"></i> Liste Utilisateurs</a></li>
-		<li><a href="users/new"><i class="fa fa-circle-o"></i> Nouvel Utilisateur</a></li>
-		<li><a href="account/list"><i class="fa fa-circle-o"></i> Solde des Comptes</a></li>
-		<li><a href="account/new_account"><i class="fa fa-circle-o"></i> Créer Compte</a></li>
-		<li><a href="account/reset_pin"><i class="fa fa-circle-o"></i> Reset PIN</a></li>
-		<li><a href="report"><i class="fa fa-circle-o"></i> Statistique & Rapports</a></li>
+		<li class="active"><a href="<?php echo base_url(); ?>users"><i class="fa fa-circle-o"></i> Liste Utilisateurs</a></li>
+		<li><a href="<?php echo base_url(); ?>users/newuser"><i class="fa fa-circle-o"></i> Nouvel Utilisateur</a></li>
+		<li><a href="<?php echo base_url(); ?>account/list"><i class="fa fa-circle-o"></i> Solde des Comptes</a></li>
+		<li><a href="<?php echo base_url(); ?>account/new_account"><i class="fa fa-circle-o"></i> Créer Compte</a></li>
+		<li><a href="<?php echo base_url(); ?>account/reset_pin"><i class="fa fa-circle-o"></i> Reset PIN</a></li>
+		<li><a href="<?php echo base_url(); ?>report"><i class="fa fa-circle-o"></i> Statistique & Rapports</a></li>
 	  </ul>
 	
            <!--
