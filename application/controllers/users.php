@@ -14,8 +14,7 @@ class Users extends CI_Controller{
 		{
 			$session_data = $this->session->userdata('logged_in');
 			$data['name'] = $this->user->getInfo($session_data['id']);
-			$data['title'] = "Dashboard";
-			$data['menu'] = $this->load->view('menu', NULL, TRUE);
+			$data['title'] = "Liste des utilisateurs";
 			$data['menu'] = $this->load->view('menu', NULL, TRUE);
 			$this->load->view('user', $data);
 		}
@@ -24,7 +23,6 @@ class Users extends CI_Controller{
 			//If no session, redirect to login page
 			redirect('login', 'refresh');
 		}
-		
 	}
 	
 	public function newuser()
