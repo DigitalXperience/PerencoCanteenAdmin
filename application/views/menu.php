@@ -8,7 +8,7 @@
 	  <ul class="treeview-menu">
 		<li class="active"><a href="<?php echo base_url(); ?>users"><i class="fa fa-circle-o"></i> Liste Utilisateurs</a></li>
 		<li><a href="<?php echo base_url(); ?>users/newuser"><i class="fa fa-circle-o"></i> Nouvel Utilisateur</a></li>
-		<li><a href="<?php echo base_url(); ?>account/list"><i class="fa fa-circle-o"></i> Solde des Comptes</a></li>
+		<li><a href="<?php echo base_url(); ?>account"><i class="fa fa-circle-o"></i> Solde des Comptes</a></li>
 		<li><a href="<?php echo base_url(); ?>account/new_account"><i class="fa fa-circle-o"></i> Créer Compte</a></li>
 		<li><a href="<?php echo base_url(); ?>account/reset_pin"><i class="fa fa-circle-o"></i> Reset PIN</a></li>
 		<li><a href="<?php echo base_url(); ?>report"><i class="fa fa-circle-o"></i> Statistique & Rapports</a></li>
