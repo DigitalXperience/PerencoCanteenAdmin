@@ -22,15 +22,21 @@ Class User extends CI_Model
 	
 	public function getInfo($id)
 	{
-		$query = $this->db->query("SELECT * FROM info_user WHERE id_user = '$id' LIMIT 1;");
-		
+		$query = $this->db->query("SELECT * FROM user_info WHERE id_user = '$id' LIMIT 1;");
 		$row = $query->row();
-
+		if (isset($row)) {
+			return $row;
+		}
+		return false;
+	}
+    public function getList($clause=null)
+	{
+		$query = $this->db->query('SELECT * FROM user_info INNER JOIN user_account ON user_info.id_user = user_account.id_user WHERE user_info.deleted IS NULL '.$clause.';');
+		$row = $query->result();
 		if (isset($row))
 		{
 			return $row;
 		}
-		
 		return false;
 	}
 }

@@ -15,7 +15,7 @@ class Users extends CI_Controller{
 			$session_data = $this->session->userdata('logged_in');
 			$data['name'] = $this->user->getInfo($session_data['id']);
 			$data['title'] = "Liste des utilisateurs";
-			$data['menu'] = $this->load->view('menu', NULL, TRUE);
+            $data['liste'] = $this->user->getList();
 			$this->load->view('user', $data);
 		}
 		else
