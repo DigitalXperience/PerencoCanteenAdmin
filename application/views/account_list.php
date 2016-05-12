@@ -348,9 +348,9 @@
                       <tr>
                         <td><?php echo $compte->lastname; ?></td>
                         <td><?php echo $compte->firstname; ?></td>
-                        <td><?php echo ''; ?></td>
-                        <td><?php echo ''; ?></td>
-                        <td><?php echo ''; ?></td>
+                        <td><?php echo $compte->starter; ?></td>
+                        <td><?php echo $compte->meal; ?></td>
+                        <td><?php echo $compte->dessert; ?></td>
                         <td><?php echo $compte->status; ?></td>
                         <td><?php echo $compte->PIN; ?></td>
                         <td>X</td>
