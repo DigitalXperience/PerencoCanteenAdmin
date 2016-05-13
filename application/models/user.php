@@ -20,6 +20,11 @@ Class User extends CI_Model
 		}
 	}
 	
+	public function getTotal()
+	{
+		return $this->db->count_all('user_info');
+	}
+	
 	public function getInfo($id)
 	{
 		$query = $this->db->query("SELECT * FROM user_info WHERE id_user = '$id' LIMIT 1;");

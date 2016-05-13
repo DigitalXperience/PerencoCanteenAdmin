@@ -1,7 +1,6 @@
 <?php defined('BASEPATH') OR exit('No direct script access allowed'); ?>
 <?php include ('inc/head.php'); ?>
 <?php include ('inc/menu.php'); ?>
-
       <!-- Content Wrapper. Contains page content -->
       <div class="content-wrapper">
         <!-- Content Header (Page header) -->
@@ -24,26 +23,44 @@
               <!-- general form elements -->
               <div class="box box-primary">
                 <div class="box-header with-border">
-                  <h3 class="box-title">Créer le comptes d'un utilisateur</h3>
+                  <h3 class="box-title">Réinitialiser le PIN d'un utilisateur</h3>
                 </div><!-- /.box-header -->
                 <!-- form start -->
-                <form role="form" method="POST" action="<?php echo base_url(); ?>account/credit/<?php echo $user->id_user; ?>">
+                <form role="form" method="POST" action="<?php echo base_url(); ?>account/resetpin/<?php echo $user->id_user; ?>">
                   <div class="box-body">
 					<div class="form-group">
                       <label for="user">Utilisateur</label>
                       <input type="text" class="form-control" value="<?php echo $user->lastname . ' ' . $user->firstname; ?>">
                     </div>
                     <div class="form-group">
-                      <label for="entree">Entrees (Actuellement <?php echo ($user->starter) ? : 0; ?>)</label>
-                      <input type="text" class="form-control" id="starter" name="starter" value="">
+                      <label for="entree">PIN (Actuellement <?php echo $user->PIN; ?>)</label>
+                      <input type="text" class="form-control" id="PIN" name="PIN" value="<?php echo $newpin; ?>">
                     </div>
+					
+                  </div><!-- /.box-body -->
+                  <div class="box-footer">
+					<input type="hidden" id="id_user" name="id_user" value="<?php echo $user->id_user; ?>">
+                    <button type="submit" class="btn btn-primary">Réinitialiser</button>
+                  </div>
+                </form>
+              </div>
+            </div><!--/.col (left) -->
+			<div class="col-md-6">
+              <!-- general form elements -->
+              <div class="box box box-info">
+                <div class="box-header with-border">
+                  <h3 class="box-title">Reset par email</h3>
+                </div><!-- /.box-header -->
+                <!-- form start -->
+                <form role="form" method="POST" action="<?php echo base_url(); ?>account/resetpin/<?php echo $user->id_user; ?>">
+                  <div class="box-body">
 					<div class="form-group">
-                      <label for="entree">Plat chaud (Actuellement <?php echo ($user->meal) ? : 0; ?>)</label>
-                      <input type="text" class="form-control" id="meal" name="meal" value="">
+                      <label for="user">Utilisateur</label>
+                      <input type="text" class="form-control" value="<?php echo $user->lastname . ' ' . $user->firstname; ?>">
                     </div>
-					<div class="form-group">
-                      <label for="entree">Dessert (Actuellement <?php echo ($user->dessert) ? : 0; ?>)</label>
-                      <input type="text" class="form-control" id="dessert" name="dessert" value="">
+                    <div class="form-group">
+                      <label for="entree">Email</label>
+                      <input type="text" class="form-control" id="starter" name="starter" value="<?php echo $user->email; ?>">
                     </div>
 					
                   </div><!-- /.box-body -->
@@ -52,7 +69,7 @@
 					<input type="hidden" id="old_starter" name="old_starter" value="<?php echo $user->starter; ?>">
 					<input type="hidden" id="old_meal" name="old_meal" value="<?php echo $user->meal; ?>">
 					<input type="hidden" id="old_dessert" name="old_dessert" value="<?php echo $user->dessert; ?>">
-                    <button type="submit" class="btn btn-primary">Submit</button>
+                    <button type="submit" class="btn btn-primary">Envoyer email</button>
                   </div>
                 </form>
               </div>

@@ -94,15 +94,32 @@ class Account extends CI_Controller{
 		}
 	}
 	
-	public function updateuser()
+	public function resetPin($iduser)
 	{
 		if($this->session->userdata('logged_in'))
 		{
 			$session_data = $this->session->userdata('logged_in');
 			$data['name'] = $this->user->getInfo($session_data['id']);
-			$data['title'] = "Dashboard";
+			if((!empty($this->input->post('id_user')))) {
+				$result = $this->accounts->resetPin($this->input->post()); 
+			
+				if($result){
+					$data['alert'] = '<div class="alert alert-success alert-dismissable">
+							<button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+							<h4>	<i class="icon fa fa-check"></i> Bravo!</h4>
+							Le PIN a été reinitialisé.
+						  </div>';
+				} else {
+				   $data['alert']='<div class="alert alert-danger alert-dismissable"> <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+					<h4><i class="icon fa fa-ban"></i> Erreur !</h4> Problème survenu lors de la mise à jour. </div>'; 
+				}
+			}
+			
+			$data['user'] = $this->accounts->getAccount($iduser);
+			$data['newpin'] = $this->accounts->generateNewPin();
+			$data['title'] = "Changer un PIN";
 			$data['menu'] = $this->load->view('inc/menu', NULL, TRUE);
-			$this->load->view('user_new', $data);
+			$this->load->view('account_reset_pin', $data);
 		}
 		else
 		{

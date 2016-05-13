@@ -7,6 +7,11 @@ Class Accounts extends CI_Model
 		$this->load->model('user','',TRUE);
 	}
 	
+	public function getTotal()
+	{
+		return $this->db->count_all('user_account');
+	}
+	
 	public function getAccounts()
 	{
 		$query = $this->db->query("SELECT ua.`PIN`, ua.`blocked`, ui.`firstname`, ui.`lastname`, ui.`status`, ub.`starter`, ub.`meal`, ub.`dessert`, ua.id_user  
@@ -26,7 +31,7 @@ Class Accounts extends CI_Model
 	
 	public function getAccount($id)
 	{
-		$query = $this->db->query("SELECT ua.`PIN`, ua.`blocked`, ui.`firstname`, ui.`lastname`, ui.`status`, ub.`starter`, ub.`meal`, ub.`dessert`, ua.id_user 
+		$query = $this->db->query("SELECT ua.`PIN`, ua.`blocked`, ui.`firstname`, ui.`lastname`, ui.`status`, ub.`starter`, ub.`meal`, ub.`dessert`, ua.id_user, ui.email 
 									FROM `user_account` AS ua 
 									LEFT JOIN `user_info` AS ui ON ua.`id_user` = ui.`id_user` 
 									LEFT JOIN `user_balance` AS ub ON ub.`id_user` = ua.`id_user` 
@@ -102,6 +107,12 @@ Class Accounts extends CI_Model
 		$this->db->update('user_balance', $balance);
 		
 		return $this->db->insert('logs', $values);
+	}
+	
+	public function resetPin($values)
+	{
+		$this->db->where('id_user', $values['id_user']);
+		return $this->db->update('user_account', $values);
 	}
 }
 ?>

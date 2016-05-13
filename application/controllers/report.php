@@ -1,12 +1,11 @@
 <?php defined('BASEPATH') OR exit('No direct script access allowed');
  
-class Dashboard extends CI_Controller{
+class Report extends CI_Controller{
 	
 	function __construct()
 	{
 		parent::__construct();
 		$this->load->model('user','',TRUE);
-		$this->load->model('accounts','',TRUE);
 	}
 	
 	public function index()
@@ -14,11 +13,9 @@ class Dashboard extends CI_Controller{
 		{
 			$session_data = $this->session->userdata('logged_in');
 			$data['username'] = $session_data['username'];
-			$data['nbusers'] = $this->user->getTotal();
-			$data['nbaccounts'] = $this->accounts->getTotal();
 			$data['name'] = $this->user->getInfo($session_data['id']);
 			$data['title'] = "Dashboard";
-			$this->load->view('dashboard', $data);
+			$this->load->view('report', $data);
 		}
 		else
 		{
@@ -26,12 +23,5 @@ class Dashboard extends CI_Controller{
 			redirect('login', 'refresh');
 		}
 		
-	}
-	
-	public function logout()
-	{
-		$this->session->unset_userdata('logged_in');
-		session_destroy();
-		redirect('dashboard', 'refresh');
 	}
 }
