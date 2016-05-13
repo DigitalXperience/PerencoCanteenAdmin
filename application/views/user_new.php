@@ -30,25 +30,25 @@
                           <div class="col-md-6">
                                 <div class="form-group">
                                   <label>Nom *</label>
-                                  <input type="text" name="firstname" required class="form-control" placeholder="Entez son nom ">
+                                  <input type="text" name="firstname" value="<?php if(isset($current)) echo $current->firstname; ?>" required class="form-control" placeholder="Entez son nom ">
                                 </div>
                                 <div class="form-group">
                                   <label>Prénom</label>
-                                  <input type="text" class="form-control" name="lastname" placeholder="Entez son prénom">
+                                  <input type="text" class="form-control" value="<?php if(isset($current)) echo $current->lastname; ?>" name="lastname" placeholder="Entez son prénom">
                                 </div>
                            </div>
                            <div class="col-md-6">
                                 <div class="form-group">
                                   <label>Email *</label>
-                                  <input type="email" name="email" required class="form-control" placeholder="Entrez son email">
+                                  <input type="email" name="email" value="<?php if(isset($current)) echo $current->email; ?>" required class="form-control" placeholder="Entrez son email">
                                 </div>
                                 <div class="form-group">
                                   <label for="exampleInputPassword1">Statut *</label>
                                   <select class="form-control" name="status" required>
                                     <option value="">Sélectionnez un status</option>
-                                    <option value="organic">Organic</option>
-                                    <option value="visitor">Visiteur</option>
-                                    <option value="contracted">Contractuel</option>
+                                    <option <?php if(isset($current) and ($current->status=='organic')) echo 'selected'; ?> value="organic">Organic</option>
+                                    <option <?php if(isset($current) and ($current->status=='visitor')) echo 'selected'; ?> value="visitor">Visiteur</option>
+                                    <option <?php if(isset($current) and ($current->status=='contracted')) echo 'selected'; ?> value="contracted">Contractuel</option>
                                   </select>
                                 </div>
                            </div>
@@ -56,6 +56,7 @@
                   </div><!-- /.box-body -->
 
                   <div class="box-footer">
+                    <?php if(isset($current)) echo '<input type="hidden" name="id_user" value="'.$current->id_user.'">'; ?>
                     <button type="submit" class="btn btn-primary">Enregistrer</button> <button type="reset" class="btn btn-default">Annuler</button>
                   </div>
                 </form>

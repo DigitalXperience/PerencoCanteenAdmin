@@ -52,5 +52,11 @@ Class User extends CI_Model
 	{
 		return $this->db->insert('user_info', $tab);
 	}
+    
+    function updateUser($tab){
+        $this->load->database();
+        $this->db->where('id_user', $tab['id_user']);
+        $this->db->update('user_info', $tab);
+    }
 }
 ?>
