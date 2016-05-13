@@ -322,20 +322,20 @@
 
         <!-- Main content -->
         <section class="content">
-          
+          <?php if(isset($alert)) echo $alert; ?>
 			<div class="row">
 			<div class="col-md-6">
               <!-- general form elements -->
               <div class="box box-primary">
                 <div class="box-header with-border">
-                  <h3 class="box-title">Quick Example</h3>
+                  <h3 class="box-title">Créer les comptes des utilisateurs</h3>
                 </div><!-- /.box-header -->
                 <!-- form start -->
-                <form role="form">
+                <form role="form" method="POST" action="<?php echo base_url(); ?>account/newaccount">
                   <div class="box-body">
 					<div class="form-group">
                       <label>Selectionner utilisateur</label>
-                      <select class="form-control">
+                      <select class="form-control" name="id_user">
 						<?php foreach($users as $user) { ?>
                         <option value="<?php echo $user->id_user ?>"><?php echo $user->lastname . ' ' . $user->firstname; ?></option>
                         <?php } ?>
@@ -343,13 +343,13 @@
                     </div>
                     <div class="form-group">
                       <label for="PIN">PIN</label>
-                      <input type="text" class="form-control" id="PIN" value="<?php echo $pin; ?>">
+                      <input type="text" class="form-control" id="PIN" name="PIN" value="<?php echo $pin; ?>">
                     </div>
 					<div class="form-group">
                       <label>Status</label>
-                      <select class="form-control">
-                        <option>Activé</option>
-                        <option>Bloqué</option>
+                      <select class="form-control" name="blocked">
+                        <option value="0">Activé</option>
+                        <option value="1">Bloqué</option>
                       </select>
                     </div>
                   </div><!-- /.box-body -->
