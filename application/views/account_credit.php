@@ -311,7 +311,7 @@
         <!-- Content Header (Page header) -->
         <section class="content-header">
           <h1>
-            <?php echo $title; ?>
+            Dashboard
             <small>Control panel</small>
           </h1>
           <ol class="breadcrumb">
@@ -322,62 +322,48 @@
 
         <!-- Main content -->
         <section class="content">
-          
+          <?php if(isset($alert)) echo $alert; ?>
 			<div class="row">
-            <div class="col-xs-12">
-              <div class="box">
-                <div class="box-header">
-                  <h3 class="box-title">Data Table With Full Features</h3>
+			<div class="col-md-6">
+              <!-- general form elements -->
+              <div class="box box-primary">
+                <div class="box-header with-border">
+                  <h3 class="box-title">Créer le comptes d'un utilisateur</h3>
                 </div><!-- /.box-header -->
-                <div class="box-body">
-                  <table id="example1" class="table table-bordered table-striped">
-                    <thead>
-                      <tr>
-                        <th>Noms</th>
-                        <th>Prenoms</th>
-                        <th>Entrées</th>
-                        <th>Plat Chaud</th>
-                        <th>Dessert</th>
-                        <th>Status</th>
-                        <th>PIN</th>
-                        <th>Actions</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-					<?php foreach($comptes as $compte) { ?>
-                      <tr>
-                        <td><?php echo $compte->lastname; ?></td>
-                        <td><?php echo $compte->firstname; ?></td>
-                        <td><?php echo $compte->starter; ?></td>
-                        <td><?php echo $compte->meal; ?></td>
-                        <td><?php echo $compte->dessert; ?></td>
-                        <td><?php echo $compte->status; ?></td>
-                        <td><?php echo $compte->PIN; ?></td>
-                        <td>
-							<a href="<?php echo base_url(); ?>account/resetpin/<?php echo $compte->id_user; ?>" class="btn btn-xs btn-warning" data-toggle="tooltip" title="Reinitialiser PIN"><i class="fa fa-refresh"></i></a>
-							<a href="<?php echo base_url(); ?>account/block/<?php echo $compte->id_user; ?>" class="btn btn-xs btn-warning" data-toggle="tooltip" title="Bloquer"><i class="fa fa-lock"></i></a>
-							<a href="<?php echo base_url(); ?>account/credit/<?php echo $compte->id_user; ?>" class="btn btn-xs btn-primary" data-toggle="tooltip" title="Crediter le compte"><i class="fa fa-plus-square"></i></a>
-						</td>
-                      </tr>
-					<?php } ?>
-                    </tbody>
-                    <tfoot>
-                      <tr>
-                        <th>Noms</th>
-                        <th>Prenoms</th>
-                        <th>Entrées</th>
-                        <th>Plat Chaud</th>
-                        <th>Dessert</th>
-                        <th>Status</th>
-                        <th>PIN</th>
-                        <th>Actions</th>
-                      </tr>
-                    </tfoot>
-                  </table>
-                </div><!-- /.box-body -->
-              </div><!-- /.box -->
-            </div>
-          </div>
+                <!-- form start -->
+                <form role="form" method="POST" action="<?php echo base_url(); ?>account/credit/<?php echo $user->id_user; ?>">
+                  <div class="box-body">
+					<div class="form-group">
+                      <label for="user">Utilisateur</label>
+                      <input type="text" class="form-control" value="<?php echo $user->lastname . ' ' . $user->firstname; ?>">
+                    </div>
+                    <div class="form-group">
+                      <label for="entree">Entrees (Actuellement <?php echo ($user->starter) ? : 0; ?>)</label>
+                      <input type="text" class="form-control" id="starter" name="starter" value="">
+                    </div>
+					<div class="form-group">
+                      <label for="entree">Plat chaud (Actuellement <?php echo ($user->meal) ? : 0; ?>)</label>
+                      <input type="text" class="form-control" id="meal" name="meal" value="">
+                    </div>
+					<div class="form-group">
+                      <label for="entree">Dessert (Actuellement <?php echo ($user->dessert) ? : 0; ?>)</label>
+                      <input type="text" class="form-control" id="dessert" name="dessert" value="">
+                    </div>
+					
+                  </div><!-- /.box-body -->
+                  <div class="box-footer">
+					<input type="hidden" id="id_user" name="id_user" value="<?php echo $user->id_user; ?>">
+					<input type="hidden" id="old_starter" name="old_starter" value="<?php echo $user->starter; ?>">
+					<input type="hidden" id="old_meal" name="old_meal" value="<?php echo $user->meal; ?>">
+					<input type="hidden" id="old_dessert" name="old_dessert" value="<?php echo $user->dessert; ?>">
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                  </div>
+                </form>
+              </div>
+            </div><!--/.col (left) -->
+            <!-- right column -->
+            
+		   </div>
          
 		 
 		 
@@ -561,30 +547,12 @@
    <script src="<?php echo base_url(); ?>assets/plugins/jQuery/jQuery-2.1.4.min.js"></script>
     <!-- Bootstrap 3.3.5 -->
     <script src="<?php echo base_url(); ?>assets/bootstrap/js/bootstrap.min.js"></script>
-    <!-- DataTables -->
-    <script src="<?php echo base_url(); ?>assets/plugins/datatables/jquery.dataTables.min.js"></script>
-    <script src="<?php echo base_url(); ?>assets/plugins/datatables/dataTables.bootstrap.min.js"></script>
-    <!-- SlimScroll -->
-    <script src="<?php echo base_url(); ?>assets/plugins/slimScroll/jquery.slimscroll.min.js"></script>
     <!-- FastClick -->
     <script src="<?php echo base_url(); ?>assets/plugins/fastclick/fastclick.min.js"></script>
     <!-- AdminLTE App -->
     <script src="<?php echo base_url(); ?>assets/dist/js/app.min.js"></script>
     <!-- AdminLTE for demo purposes -->
     <script src="<?php echo base_url(); ?>assets/dist/js/demo.js"></script>
-    <!-- page script -->
-    <script>
-      $(function () {
-        $("#example1").DataTable();
-        $('#example2').DataTable({
-          "paging": true,
-          "lengthChange": false,
-          "searching": false,
-          "ordering": true,
-          "info": true,
-          "autoWidth": false
-        });
-      });
-    </script>
+   
   </body>
 </html>

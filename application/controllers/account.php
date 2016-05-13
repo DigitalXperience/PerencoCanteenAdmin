@@ -61,6 +61,39 @@ class Account extends CI_Controller{
 		}
 	}
 	
+	public function credit($iduser)
+	{
+		if($this->session->userdata('logged_in'))
+		{
+			$session_data = $this->session->userdata('logged_in');
+			$data['name'] = $this->user->getInfo($session_data['id']);
+			if((!empty($this->input->post('id_user')))) {
+				$result = $this->accounts->creditAccount($this->input->post()); 
+			
+				if($result){
+					$data['alert'] = '<div class="alert alert-success alert-dismissable">
+							<button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+							<h4>	<i class="icon fa fa-check"></i> Bravo!</h4>
+							Le compte a été crédité.
+						  </div>';
+				} else {
+				   $data['alert']='<div class="alert alert-danger alert-dismissable"> <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+					<h4><i class="icon fa fa-ban"></i> Erreur !</h4> Problème survenu lors de la mise à jour. </div>'; 
+				}
+			}
+			
+			$data['user'] = $this->accounts->getAccount($iduser);
+			$data['title'] = "Créditer un compte";
+			$data['menu'] = $this->load->view('inc/menu', NULL, TRUE);
+			$this->load->view('account_credit', $data);
+		}
+		else
+		{
+			//If no session, redirect to login page
+			redirect('login', 'refresh');
+		}
+	}
+	
 	public function updateuser()
 	{
 		if($this->session->userdata('logged_in'))
