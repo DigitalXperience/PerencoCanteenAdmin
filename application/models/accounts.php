@@ -40,5 +40,21 @@ Class Accounts extends CI_Model
 		
 		return false;
 	}
+	
+	public function getUserWithoutAccount()
+	{
+		$query = $this->db->query("SELECT ui.`firstname`, ui.`lastname`, ua.PIN, ua.`id_user`   
+									FROM `user_info` AS ui 
+									LEFT JOIN `user_account` AS ua ON ua.`id_user` = ui.`id_user` 
+									WHERE ua.PIN IS NULL 
+								");
+		
+		if (!empty($query->result()))
+		{
+			return $query->result();
+		}
+		
+		return false;
+	}
 }
 ?>

@@ -33,6 +33,7 @@ class Account extends CI_Controller{
 		{
 			$session_data = $this->session->userdata('logged_in');
 			$data['name'] = $this->user->getInfo($session_data['id']);
+			$data['users'] = $this->accounts->getUserWithoutAccount();
 			$data['title'] = "Ajouter un compte";
 			$data['menu'] = $this->load->view('menu', NULL, TRUE);
 			$this->load->view('account_new', $data);
