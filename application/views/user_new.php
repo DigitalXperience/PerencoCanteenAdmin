@@ -17,38 +17,38 @@
 
         <!-- Main content -->
         <section class="content">
-          
+            <?php if(isset($alert)) echo $alert; ?>
 			<!-- general form elements -->
               <div class="box box-primary">
                 <div class="box-header with-border">
                   <h3 class="box-title">Entrez les informations de l'utilisateur</h3>
                 </div><!-- /.box-header -->
                 <!-- form start -->
-                <form role="form">
+                <form role="form" action="<?php echo base_url().'users/newuser'; ?>" method="post">
                   <div class="box-body">
                       <div class="row">
                           <div class="col-md-6">
                                 <div class="form-group">
                                   <label>Nom *</label>
-                                  <input type="text" class="form-control" placeholder="Entez le nom de l'utilisateur">
+                                  <input type="text" name="firstname" required class="form-control" placeholder="Entez son nom ">
                                 </div>
                                 <div class="form-group">
                                   <label>Prénom</label>
-                                  <input type="text" class="form-control" placeholder="Entez le prénom de l'utilisateur">
+                                  <input type="text" class="form-control" name="lastname" placeholder="Entez son prénom">
                                 </div>
                            </div>
                            <div class="col-md-6">
                                 <div class="form-group">
                                   <label>Email *</label>
-                                  <input type="email" class="form-control" placeholder="Entrer son email">
+                                  <input type="email" name="email" required class="form-control" placeholder="Entrez son email">
                                 </div>
                                 <div class="form-group">
                                   <label for="exampleInputPassword1">Statut *</label>
-                                  <select class="form-control">
-                                    <option>Sélectionnez un status</option>
-                                    <option>Organic</option>
-                                    <option>Visiteur</option>
-                                    <option>Contractuel</option>
+                                  <select class="form-control" name="status" required>
+                                    <option value="">Sélectionnez un status</option>
+                                    <option value="organic">Organic</option>
+                                    <option value="visitor">Visiteur</option>
+                                    <option value="contracted">Contractuel</option>
                                   </select>
                                 </div>
                            </div>
