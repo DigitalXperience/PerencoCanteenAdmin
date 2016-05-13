@@ -43,7 +43,7 @@ Class Accounts extends CI_Model
 	
 	public function getUserWithoutAccount()
 	{
-		$query = $this->db->query("SELECT ui.`firstname`, ui.`lastname`, ua.PIN, ua.`id_user`   
+		$query = $this->db->query("SELECT ui.`firstname`, ui.`lastname`, ua.PIN, ui.`id_user`   
 									FROM `user_info` AS ui 
 									LEFT JOIN `user_account` AS ua ON ua.`id_user` = ui.`id_user` 
 									WHERE ua.PIN IS NULL 
@@ -80,6 +80,11 @@ Class Accounts extends CI_Model
 		{
 			return $query->result();
 		}
+	}
+	
+	public function newAccount($values)
+	{
+		return $this->db->insert('user_account', $values);
 	}
 }
 ?>
