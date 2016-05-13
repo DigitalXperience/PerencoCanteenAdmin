@@ -343,7 +343,7 @@
                     </div>
                     <div class="form-group">
                       <label for="PIN">PIN</label>
-                      <input type="email" class="form-control" id="PIN">
+                      <input type="text" class="form-control" id="PIN" value="<?php echo $pin; ?>">
                     </div>
 					<div class="form-group">
                       <label>Status</label>

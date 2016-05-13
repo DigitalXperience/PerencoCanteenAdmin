@@ -56,5 +56,30 @@ Class Accounts extends CI_Model
 		
 		return false;
 	}
+	
+	public function generateNewPin()
+	{
+		$pins = $this->getAllPins();
+		$PINS = array();
+		foreach($pins as $pin)
+			$PINS[] = $pin->PIN;
+		
+		$newpin = rand(0, 9) . rand(0, 9) . rand(0, 9) . rand(0, 9);
+		while(in_array($newpin, $PINS)) {
+			$newpin = rand(0, 9) . rand(0, 9) . rand(0, 9) . rand(0, 9);
+		}
+		
+		return $newpin;
+	}
+	
+	public function getAllPins()
+	{
+		$query = $this->db->query("SELECT `PIN` FROM `user_account` WHERE 1");
+		
+		if (!empty($query->result()))
+		{
+			return $query->result();
+		}
+	}
 }
 ?>
