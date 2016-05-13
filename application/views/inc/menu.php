@@ -17,7 +17,7 @@
             <li class="header">NAVIGATION</li>
             <li class="active"> <a href="<?php echo base_url(); ?>dashboard"> <i class="fa fa-dashboard"></i> <span>Tableau de Bord</span> </a></li>
             <li><a href="<?php echo base_url(); ?>users"><i class="fa fa-users"></i> Liste Utilisateurs</a></li>
-            <li><a href="<?php echo base_url(); ?>users/newuser"><i class="fa fa-circle-o"></i> Nouvel Utilisateur</a></li>
+            <li><a href="<?php echo base_url(); ?>users/newuser"><i class="fa fa-user"></i> Nouvel Utilisateur</a></li>
             <li><a href="<?php echo base_url(); ?>account"><i class="fa fa-circle-o"></i> Solde des Comptes</a></li>
             <li><a href="<?php echo base_url(); ?>account/newaccount"><i class="fa fa-circle-o"></i> Créer Compte</a></li>
             <li><a href="<?php echo base_url(); ?>account/reset_pin"><i class="fa fa-circle-o"></i> Reset PIN</a></li>

@@ -88,4 +88,24 @@ class Users extends CI_Controller{
 			redirect('login', 'refresh');
 		}
 	}
+    public function deleteuser()
+	{
+		if($this->session->userdata('logged_in'))
+		{
+         if(empty($this->input->post('id_user'))) echo 'Id inexistant';
+         else {
+             $save=array();
+             $save['id_user']=$this->input->post('id_user');
+             $save['deleted']=date('Y-m-d h:i:s');
+             $s=$this->user->updateUser($save);
+             if($s) echo 'true';
+             else echo 'Problème lors de l\'enregistrement';
+         }
+		}
+		else
+		{
+			//If no session, redirect to login page
+			redirect('login', 'refresh');
+		}
+	}
 }

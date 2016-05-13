@@ -36,14 +36,14 @@
                      <?php if($liste){
                             foreach ($liste as $row){
                                 if(!empty($row->PIN)) $v='Oui'; else $v='Non';
-                                echo '<tr>
+                                echo '<tr id="row-'.$row->id_user.'">
                                         <td>'.$row->firstname.'</td>
                                         <td>'.$row->lastname.'</td>
                                         <td>'.$row->email.'</td>
                                         <td>'.$row->status.'</td>
                                         <td>'.$v.'</td>
                                         <td><a href="users/updateuser/'.$row->id_user.'" class="btn btn-xs btn-primary" data-toggle="tooltip" title="Modifier"><i class="fa fa-pencil"></i></a>
-                                            <a href="#" class="btn btn-xs btn-danger" data-toggle="tooltip" title="Supprimer"><i class="fa fa-trash"></i></a>
+                                            <a href="#" onclick="deleteUser('.$row->id_user.')" class="btn btn-xs btn-danger" data-toggle="tooltip" title="Supprimer"><i class="fa fa-trash"></i></a>
                                         </td>
                                       </tr>';
                             }
@@ -82,4 +82,20 @@
       "autoWidth": false
     });
   });
+    
+ function deleteUser(id){
+	var r=confirm(" Voulez vous vraiment supprimer cet utilisateur?");
+	if(r){
+		$.post( "users/deleteuser", { id_user: id }).done(function( data ) {
+            if(data == 'true') {
+                setTimeout(function(){
+                    $('#'+id).remove();
+                    return false;
+                }, 2000);
+            } else {
+                alert(data);
+            }
+        });
+	}
+}
 </script>
