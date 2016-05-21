@@ -34,8 +34,6 @@
                         <th>Entrées</th>
                         <th>Plat Chaud</th>
                         <th>Dessert</th>
-                        <th>Status</th>
-                        <th>PIN</th>
                         <th>Actions</th>
                       </tr>
                     </thead>
@@ -47,8 +45,6 @@
                         <td><?php echo $compte->starter; ?></td>
                         <td><?php echo $compte->meal; ?></td>
                         <td><?php echo $compte->dessert; ?></td>
-                        <td><?php echo $compte->status; ?></td>
-                        <td><?php echo $compte->PIN; ?></td>
                         <td>
 							<a href="<?php echo base_url(); ?>account/resetpin/<?php echo $compte->id_user; ?>" class="btn btn-xs btn-warning" data-toggle="tooltip" title="Reinitialiser PIN"><i class="fa fa-refresh"></i></a>
 							<a href="<?php echo base_url(); ?>account/block/<?php echo $compte->id_user; ?>" class="btn btn-xs btn-warning" data-toggle="tooltip" title="Bloquer"><i class="fa fa-lock"></i></a>
@@ -64,8 +60,6 @@
                         <th>Entrées</th>
                         <th>Plat Chaud</th>
                         <th>Dessert</th>
-                        <th>Status</th>
-                        <th>PIN</th>
                         <th>Actions</th>
                       </tr>
                     </tfoot>
