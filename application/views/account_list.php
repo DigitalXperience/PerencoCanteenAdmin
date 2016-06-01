@@ -38,19 +38,20 @@
                       </tr>
                     </thead>
                     <tbody>
-					<?php foreach($comptes as $compte) { ?>
-                      <tr>
-                        <td><?php echo $compte->lastname; ?></td>
-                        <td><?php echo $compte->firstname; ?></td>
-                        <td><?php echo $compte->starter; ?></td>
-                        <td><?php echo $compte->meal; ?></td>
-                        <td><?php echo $compte->dessert; ?></td>
-                        <td>
-							<a href="<?php echo base_url(); ?>account/resetpin/<?php echo $compte->id_user; ?>" class="btn btn-xs btn-warning" data-toggle="tooltip" title="Reinitialiser PIN"><i class="fa fa-refresh"></i></a>
-							<a href="<?php echo base_url(); ?>account/block/<?php echo $compte->id_user; ?>" class="btn btn-xs btn-warning" data-toggle="tooltip" title="Bloquer"><i class="fa fa-lock"></i></a>
-							<a href="<?php echo base_url(); ?>account/credit/<?php echo $compte->id_user; ?>" class="btn btn-xs btn-primary" data-toggle="tooltip" title="Crediter le compte"><i class="fa fa-plus-square"></i></a>
-						</td>
-                      </tr>
+					<?php 
+						foreach($comptes as $compte) { ?>
+						  <tr>
+							<td><?php echo $compte->lastname; ?></td>
+							<td><?php echo $compte->firstname; ?></td>
+							<td><?php echo $compte->starter; ?></td>
+							<td><?php echo $compte->meal; ?></td>
+							<td><?php echo $compte->dessert; ?></td>
+							<td>
+								<a href="<?php echo base_url(); ?>account/resetpin/<?php echo $compte->id_user; ?>" class="btn btn-xs btn-warning" data-toggle="tooltip" title="Reinitialiser PIN"><i class="fa fa-refresh"></i></a>
+								<a href="<?php echo base_url(); ?>account/block/<?php echo $compte->id_user; ?>" class="btn btn-xs btn-warning" data-toggle="tooltip" title="Bloquer"><i class="fa fa-lock"></i></a>
+								<a href="<?php echo base_url(); ?>account/credit/<?php echo $compte->id_user; ?>" class="btn btn-xs btn-primary" data-toggle="tooltip" title="Crediter le compte"><i class="fa fa-plus-square"></i></a>
+							</td>
+						  </tr>
 					<?php } ?>
                     </tbody>
                     <tfoot>

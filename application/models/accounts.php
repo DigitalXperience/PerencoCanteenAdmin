@@ -66,8 +66,9 @@ Class Accounts extends CI_Model
 	{
 		$pins = $this->getAllPins();
 		$PINS = array();
-		foreach($pins as $pin)
-			$PINS[] = $pin->PIN;
+		if(count($pins)>0)
+			foreach($pins as $pin)
+				$PINS[] = $pin->PIN;
 		
 		$newpin = rand(0, 9) . rand(0, 9) . rand(0, 9) . rand(0, 9);
 		while(in_array($newpin, $PINS)) {

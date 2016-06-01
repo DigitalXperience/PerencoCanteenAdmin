@@ -20,7 +20,20 @@
             <li><a href="<?php echo base_url(); ?>users/newuser"><i class="fa fa-user"></i> Nouvel Utilisateur</a></li>
             <li><a href="<?php echo base_url(); ?>account/newaccount"><i class="fa fa-circle-o"></i> Créer Compte</a></li>
             <li><a href="<?php echo base_url(); ?>account"><i class="fa fa-circle-o"></i> Solde des Comptes</a></li>
-            <li><a href="<?php echo base_url(); ?>report"><i class="fa fa-circle-o"></i> Statistique & Rapports</a></li>
+            <li><a href="<?php echo base_url(); ?>parameters"><i class="fa fa-circle-o"></i> Parametres</a></li>
+            
+			<li class="treeview">
+              <a href="#">
+                <i class="fa fa-files-o"></i>
+                <span>Statistique & Rapports</span>
+                <!--<span class="label label-primary pull-right">4</span>-->
+              </a>
+              <ul class="treeview-menu">
+                <li><a href="<?php echo base_url(); ?>report/filter"><i class="fa fa-circle-o"></i> Rapports</a></li>
+                <li><a href="<?php echo base_url(); ?>report/logs"><i class="fa fa-circle-o"></i> Historiques</a></li>
+                <li><a href="<?php echo base_url(); ?>report"><i class="fa fa-circle-o"></i> Statistiques</a></li>
+              </ul>
+            </li>
        </ul>
     </section>
     <!-- /.sidebar -->
