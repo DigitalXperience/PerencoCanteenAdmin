@@ -36,6 +36,10 @@
                      <?php if($liste){
                             foreach ($liste as $row){
                                 if(!empty($row->PIN)) $v='Oui'; else $v='Non';
+                                if($row->status=='visitor') $row->status='Visiteur';
+                                if($row->status=='organic') $row->status='Organique';
+                                if($row->status=='contracted') $row->status='Contractuel';
+                                if($row->status=='Contracted') $row->status='Contractuel';
                                 echo '<tr id="row-'.$row->id_user.'">
                                         <td>'.$row->firstname.'</td>
                                         <td>'.$row->lastname.'</td>
@@ -89,7 +93,7 @@
 		$.post( "users/deleteuser", { id_user: id }).done(function( data ) {
             if(data == 'true') {
                 setTimeout(function(){
-                    $('#'+id).remove();
+                    $('#row-'+id).remove();
                     return false;
                 }, 2000);
             } else {

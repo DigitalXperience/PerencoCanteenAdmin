@@ -24,7 +24,7 @@
                   <h3 class="box-title">Entrez les informations de l'utilisateur</h3>
                 </div><!-- /.box-header -->
                 <!-- form start -->
-                <form role="form" action="<?php echo base_url().'users/newuser'; ?>" method="post">
+                <form role="form" action="<?php echo base_url().'index.php/users/newuser'; ?>" method="post">
                   <div class="box-body">
                       <div class="row">
                           <div class="col-md-6">
@@ -39,14 +39,14 @@
                            </div>
                            <div class="col-md-6">
                                 <div class="form-group">
-                                  <label>Email *</label>
-                                  <input type="email" name="email" value="<?php if(isset($current)) echo $current->email; ?>" required class="form-control" placeholder="Entrez son email">
+                                  <label>Email</label>
+                                  <input type="email" name="email" value="<?php if(isset($current)) echo $current->email; ?>" class="form-control" placeholder="Entrez son email">
                                 </div>
                                 <div class="form-group">
                                   <label for="exampleInputPassword1">Statut *</label>
                                   <select class="form-control" name="status" required>
                                     <option value="">Sélectionnez un status</option>
-                                    <option <?php if(isset($current) and ($current->status=='organic')) echo 'selected'; ?> value="organic">Organic</option>
+                                    <option <?php if(isset($current) and ($current->status=='organic')) echo 'selected'; ?> value="organic">Organique</option>
                                     <option <?php if(isset($current) and ($current->status=='visitor')) echo 'selected'; ?> value="visitor">Visiteur</option>
                                     <option <?php if(isset($current) and ($current->status=='contracted')) echo 'selected'; ?> value="contracted">Contractuel</option>
                                   </select>
