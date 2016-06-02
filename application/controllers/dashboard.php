@@ -23,7 +23,7 @@ class Dashboard extends CI_Controller{
 		else
 		{
 			//If no session, redirect to login page
-			redirect('login', 'refresh');
+			redirect('/login/');
 		}
 		
 	}
@@ -32,6 +32,6 @@ class Dashboard extends CI_Controller{
 	{
 		$this->session->unset_userdata('logged_in');
 		session_destroy();
-		redirect('dashboard', 'refresh');
+		redirect('/dashboard/');
 	}
 }

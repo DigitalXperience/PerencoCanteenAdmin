@@ -51,7 +51,7 @@ $("#username, #password").keyup(function(event){
 			if(data == 'true') {
 				
 				setTimeout(function(){
-					$(location).attr('href', '<?php echo base_url(); ?>dashboard');
+					$(location).attr('href', '<?php echo base_url(); ?>index.php/dashboard');
 					return false;
 				}, 2000);
 			} else {

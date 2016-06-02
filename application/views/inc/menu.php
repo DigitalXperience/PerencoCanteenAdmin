@@ -15,12 +15,12 @@
       </div>
       <ul class="sidebar-menu">
             <li class="header">NAVIGATION</li>
-            <li class="active"> <a href="<?php echo base_url(); ?>dashboard"> <i class="fa fa-dashboard"></i> <span>Tableau de Bord</span> </a></li>
-            <li><a href="<?php echo base_url(); ?>users"><i class="fa fa-users"></i> Liste Utilisateurs</a></li>
-            <li><a href="<?php echo base_url(); ?>users/newuser"><i class="fa fa-user"></i> Nouvel Utilisateur</a></li>
-            <li><a href="<?php echo base_url(); ?>account/newaccount"><i class="fa fa-circle-o"></i> Créer Compte</a></li>
-            <li><a href="<?php echo base_url(); ?>account"><i class="fa fa-circle-o"></i> Solde des Comptes</a></li>
-            <li><a href="<?php echo base_url(); ?>parameters"><i class="fa fa-circle-o"></i> Parametres</a></li>
+            <li class="active"> <a href="<?php echo base_url(); ?>index.php/dashboard"> <i class="fa fa-dashboard"></i> <span>Tableau de Bord</span> </a></li>
+            <li><a href="<?php echo base_url(); ?>index.php/users"><i class="fa fa-users"></i> Liste Utilisateurs</a></li>
+            <li><a href="<?php echo base_url(); ?>index.php/users/newuser"><i class="fa fa-user"></i> Nouvel Utilisateur</a></li>
+            <li><a href="<?php echo base_url(); ?>index.php/account/newaccount"><i class="fa fa-circle-o"></i> Créer Compte</a></li>
+            <li><a href="<?php echo base_url(); ?>index.php/account"><i class="fa fa-circle-o"></i> Solde des Comptes</a></li>
+            <li><a href="<?php echo base_url(); ?>index.php/parameters"><i class="fa fa-circle-o"></i> Parametres</a></li>
             
 			<li class="treeview">
               <a href="#">
@@ -29,9 +29,9 @@
                 <!--<span class="label label-primary pull-right">4</span>-->
               </a>
               <ul class="treeview-menu">
-                <li><a href="<?php echo base_url(); ?>report/filter"><i class="fa fa-circle-o"></i> Rapports</a></li>
-                <li><a href="<?php echo base_url(); ?>report/logs"><i class="fa fa-circle-o"></i> Historiques</a></li>
-                <li><a href="<?php echo base_url(); ?>report"><i class="fa fa-circle-o"></i> Statistiques</a></li>
+                <li><a href="<?php echo base_url(); ?>index.php/report/filter"><i class="fa fa-circle-o"></i> Rapports</a></li>
+                <li><a href="<?php echo base_url(); ?>index.php/report/logs"><i class="fa fa-circle-o"></i> Historiques</a></li>
+                <li><a href="<?php echo base_url(); ?>index.php/report"><i class="fa fa-circle-o"></i> Statistiques</a></li>
               </ul>
             </li>
        </ul>
