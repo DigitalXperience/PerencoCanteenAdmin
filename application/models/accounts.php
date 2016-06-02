@@ -106,8 +106,10 @@ Class Accounts extends CI_Model
 		$balance['dessert'] = $values['old_dessert'] + $values['dessert']; unset($values['old_dessert']);
 		$this->db->where('id_user', $values['id_user']);
 		$this->db->update('user_balance', $balance);
+		$values['log_by'] = $this->session->userdata('logged_in')['id'];
 		
-		return $this->db->insert('logs', $values);
+		
+		return $this->db->insert('logs', $values); // Mise en log		
 	}
 	
 	public function resetPin($values)
