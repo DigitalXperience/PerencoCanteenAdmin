@@ -24,7 +24,7 @@
                   <h3 class="box-title">Entrez les informations </h3>
                 </div><!-- /.box-header -->
                 <!-- form start -->
-                <form role="form" action="<?php echo base_url().'parameters'; ?>" method="post">
+                <form role="form" action="<?php echo base_url().'index.php/parameters'; ?>" method="post">
                   <div class="box-body">
                       <div class="row">
                           <div class="col-md-6">

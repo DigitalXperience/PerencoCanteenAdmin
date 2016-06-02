@@ -17,7 +17,7 @@
 
     <!-- Main content -->
     <section class="content">
-		<form role="form" action="<?php echo base_url().'report/logs'; ?>" method="get">
+		<form role="form" action="<?php echo base_url().'index.php/report/logs'; ?>" method="get">
 		<div class="row">
 			<div class="col-sm-6">
 				<div class="dataTables_length" id="example1_length">

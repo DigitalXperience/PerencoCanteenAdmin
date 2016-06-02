@@ -26,7 +26,7 @@
                   <h3 class="box-title">Réinitialiser le PIN d'un utilisateur</h3>
                 </div><!-- /.box-header -->
                 <!-- form start -->
-                <form role="form" method="POST" action="<?php echo base_url(); ?>account/resetpin/<?php echo $user->id_user; ?>">
+                <form role="form" method="POST" action="<?php echo base_url(); ?>index.php/account/resetpin/<?php echo $user->id_user; ?>">
                   <div class="box-body">
 					<div class="form-group">
                       <label for="user">Utilisateur</label>

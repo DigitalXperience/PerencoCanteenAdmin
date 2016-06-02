@@ -26,7 +26,7 @@
                   <h3 class="box-title">Créer les comptes des utilisateurs</h3>
                 </div><!-- /.box-header -->
                 <!-- form start -->
-                <form role="form" method="POST" action="<?php echo base_url(); ?>account/newaccount">
+                <form role="form" method="POST" action="<?php echo base_url(); ?>index.php/account/newaccount">
                   <div class="box-body">
 					<div class="form-group">
                       <label>Selectionner utilisateur</label>

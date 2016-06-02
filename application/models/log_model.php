@@ -49,7 +49,7 @@ class Log_model extends CI_Model {
 				$date2 = preg_replace('#(\d{2})/(\d{2})/(\d{4})#', '$3-$1-$2', trim($dates[1]));
 				$where .= " `date` BETWEEN '$date1' AND '$date2' ";
 			}
-			//var_dump($where); die;
+			
 		}
 		$sql = "SELECT logs.*, user_info.firstname, user_info.lastname FROM logs LEFT JOIN user_info ON user_info.id_user = logs.id_user $where ;";
 		//var_dump($sql); die;
