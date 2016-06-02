@@ -25,7 +25,6 @@ class VerifyLogin extends CI_Controller {
 	else
 	{
 		//Go to private area
-		echo "true";
 		redirect('/dashboard/');
 	}
 

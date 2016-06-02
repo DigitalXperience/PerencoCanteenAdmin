@@ -44,12 +44,12 @@ $("#username, #password").keyup(function(event){
 	var login = $("#username").val();
 	
 	if(password != '' && '' != login) {
+		
 		$('form').fadeOut(500);
 		$('.wrapper').addClass('form-success');
 		$.post( "verifylogin", { username: login, password: password }).done(function( data ) {
 			//alert( "Data Loaded: " + data );
-			if(data == 'true') {
-				
+			if(data != 'false') {
 				setTimeout(function(){
 					$(location).attr('href', '<?php echo base_url(); ?>index.php/dashboard');
 					return false;
