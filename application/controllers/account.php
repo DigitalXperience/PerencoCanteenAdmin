@@ -94,6 +94,27 @@ class Account extends CI_Controller{
 		}
 	}
 	
+	public function block($iduser)
+	{
+		if($this->session->userdata('logged_in'))
+		{
+			$user_id = $this->uri->segment(3, 0);
+			
+			if($this->accounts->blockAccount($iduser)) {
+				redirect('/account/');
+			}
+			else {
+				
+			}
+			
+		}
+		else
+		{
+			//If no session, redirect to login page
+			redirect('/login/');
+		}
+	}
+	
 	public function resetPin($iduser)
 	{
 		if($this->session->userdata('logged_in'))

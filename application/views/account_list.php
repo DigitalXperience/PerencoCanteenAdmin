@@ -34,6 +34,7 @@
                         <th>Entrées</th>
                         <th>Plat Chaud</th>
                         <th>Dessert</th>
+                        <th>Bloqué</th>
                         <th>Actions</th>
                       </tr>
                     </thead>
@@ -46,9 +47,10 @@
 							<td><?php echo $compte->starter; ?></td>
 							<td><?php echo $compte->meal; ?></td>
 							<td><?php echo $compte->dessert; ?></td>
+							<td><?php echo ($compte->blocked == '0') ? "Non" : "Oui"; ?></td>
 							<td>
 								<a href="<?php echo base_url(); ?>index.php/account/resetpin/<?php echo $compte->id_user; ?>" class="btn btn-xs btn-warning" data-toggle="tooltip" title="Reinitialiser PIN"><i class="fa fa-refresh"></i></a>
-								<a href="<?php echo base_url(); ?>index.php/account/block/<?php echo $compte->id_user; ?>" class="btn btn-xs btn-warning" data-toggle="tooltip" title="Bloquer"><i class="fa fa-lock"></i></a>
+								<a href="#" class="btn btn-xs btn-warning" data-toggle="tooltip" title="Bloquer" onclick="block(<?php echo $compte->id_user; ?>);"><i class="fa fa-lock"></i></a>
 								<a href="<?php echo base_url(); ?>index.php/account/credit/<?php echo $compte->id_user; ?>" class="btn btn-xs btn-primary" data-toggle="tooltip" title="Crediter le compte"><i class="fa fa-plus-square"></i></a>
 							</td>
 						  </tr>
@@ -61,6 +63,7 @@
                         <th>Entrées</th>
                         <th>Plat Chaud</th>
                         <th>Dessert</th>
+                        <th>Bloqué</th>
                         <th>Actions</th>
                       </tr>
                     </tfoot>
@@ -265,6 +268,16 @@
     <script src="<?php echo base_url(); ?>assets/dist/js/demo.js"></script>
     <!-- page script -->
     <script>
+	function block(id) {
+		var r = confirm("Voulez vous bloquer ce compte ?");
+		if (r == true) {
+			linkblock = "<?php echo base_url(); ?>index.php/account/block/"+id;
+			$(location).attr('href', linkblock);
+			return false;
+		} else {
+			return false;
+		}
+	}
       $(function () {
         $("#example1").DataTable();
         $('#example2').DataTable({
