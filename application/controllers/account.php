@@ -106,7 +106,6 @@ class Account extends CI_Controller{
 			else {
 				
 			}
-			
 		}
 		else
 		{
@@ -115,6 +114,25 @@ class Account extends CI_Controller{
 		}
 	}
 	
+	public function unblock()
+	{
+		if($this->session->userdata('logged_in'))
+		{
+			$user_id = $this->uri->segment(3, 0);
+			
+			if($this->accounts->unblockAccount($user_id)) {
+				redirect('/account/');
+			}
+			else {
+				
+			}
+		}
+		else
+		{
+			//If no session, redirect to login page
+			redirect('/login/');
+		}
+	}
 	public function resetPin($iduser)
 	{
 		if($this->session->userdata('logged_in'))

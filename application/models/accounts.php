@@ -117,6 +117,11 @@ Class Accounts extends CI_Model
 		return $this->db->update('user_account', array('blocked' => '1'));
 	}
 	
+	public function unblockAccount($iduser) {
+		$this->db->where('id_user', $iduser);
+		return $this->db->update('user_account', array('blocked' => '0'));
+	}
+	
 	public function resetPin($values)
 	{
 		$this->db->where('id_user', $values['id_user']);

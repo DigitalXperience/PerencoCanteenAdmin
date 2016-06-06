@@ -50,7 +50,7 @@
 							<td><?php echo ($compte->blocked == '0') ? "Non" : "Oui"; ?></td>
 							<td>
 								<a href="<?php echo base_url(); ?>index.php/account/resetpin/<?php echo $compte->id_user; ?>" class="btn btn-xs btn-warning" data-toggle="tooltip" title="Reinitialiser PIN"><i class="fa fa-refresh"></i></a>
-								<a href="#" class="btn btn-xs btn-warning" data-toggle="tooltip" title="Bloquer" onclick="block(<?php echo $compte->id_user; ?>);"><i class="fa fa-lock"></i></a>
+								<a href="#" class="btn btn-xs btn-warning" data-toggle="tooltip" title="<?php echo ($compte->blocked == '0') ? "Bloquer" : "Débloquer"; ?>" onclick="<?php echo ($compte->blocked == '0') ? "block" : "unblock"; ?>(<?php echo $compte->id_user; ?>);"><i class="fa fa-<?php echo ($compte->blocked == '0') ? "lock" : "unlock"; ?>"></i></a>
 								<a href="<?php echo base_url(); ?>index.php/account/credit/<?php echo $compte->id_user; ?>" class="btn btn-xs btn-primary" data-toggle="tooltip" title="Crediter le compte"><i class="fa fa-plus-square"></i></a>
 							</td>
 						  </tr>
@@ -272,6 +272,17 @@
 		var r = confirm("Voulez vous bloquer ce compte ?");
 		if (r == true) {
 			linkblock = "<?php echo base_url(); ?>index.php/account/block/"+id;
+			$(location).attr('href', linkblock);
+			return false;
+		} else {
+			return false;
+		}
+	}
+	
+	function unblock(id) {
+		var r = confirm("Voulez vous débloquer ce compte ?");
+		if (r == true) {
+			linkblock = "<?php echo base_url(); ?>index.php/account/unblock/"+id;
 			$(location).attr('href', linkblock);
 			return false;
 		} else {
