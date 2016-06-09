@@ -133,6 +133,31 @@ class Account extends CI_Controller{
 			redirect('/login/');
 		}
 	}
+	
+	public function getPinFirstUse()
+	{
+		
+		if(($this->uri->segment(3, 0))) { //die('ret');
+			$sess_array = array(
+				'userid' => $this->uri->segment(3, 0)
+			);
+			$this->session->set_userdata('logged_in', $sess_array);
+			redirect('/account/getPinFirstUse');
+		}
+		
+		if($this->session->userdata('logged_in')['userid']) {
+			$data['newpin'] = $this->accounts->getUserPin($this->session->userdata('logged_in')['userid'])->PIN;
+			if($this->input->post('iduser')) {
+				$data['newpin'] = $this->accounts->generateNewPin();
+				$this->accounts->resetPin(array('PIN' => $data['newpin'], 'id_user' => $this->input->post('iduser')));
+				//$this->load->model('notify_model','notify');
+				//$this->notify();
+			}
+			$this->load->view('balance_pin', $data);
+		}
+
+	}
+	
 	public function resetPin($iduser)
 	{
 		if($this->session->userdata('logged_in'))

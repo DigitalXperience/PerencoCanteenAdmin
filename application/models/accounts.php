@@ -88,6 +88,18 @@ Class Accounts extends CI_Model
 		}
 	}
 	
+	public function getUserPin($id)
+	{
+		$query = $this->db->query("SELECT `PIN` FROM `user_account` WHERE id_user = '$id'");
+		
+		$row = $query->row();
+		if (isset($row)) {
+			return $row;
+		}
+		
+		return false;
+	}
+	
 	public function newAccount($values)
 	{
 		$this->db->insert('user_account', $values);
