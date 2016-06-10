@@ -46,12 +46,27 @@ Class Accounts extends CI_Model
 		return false;
 	}
 	
+	public function getBalance($id)
+	{
+		$query = $this->db->query("SELECT ub.`starter`, ub.`meal`, ub.`dessert`, ub.id_user  
+									FROM `user_balance` AS ub  
+									WHERE id_user = '$id';
+								");
+		
+		$row = $query->row();
+		if (isset($row)) {
+			return $row;
+		}
+		
+		return false;
+	}
+	
 	public function getUserWithoutAccount()
 	{
 		$query = $this->db->query("SELECT ui.`firstname`, ui.`lastname`, ua.PIN, ui.`id_user`   
 									FROM `user_info` AS ui 
 									LEFT JOIN `user_account` AS ua ON ua.`id_user` = ui.`id_user` 
-									WHERE ua.PIN IS NULL 
+									WHERE ua.PIN IS NULL ORDER BY ui.`lastname` 
 								");
 		
 		if (!empty($query->result()))
@@ -138,6 +153,30 @@ Class Accounts extends CI_Model
 	{
 		$this->db->where('id_user', $values['id_user']);
 		return $this->db->update('user_account', $values);
+	}
+
+	public function updateBalanceFromClient($value)
+	{
+		$old_data = $this->getBalance($value['id_user']);
+		//var_dump($old_data); die;
+		$value['place'] = $value['place'];;
+		$value['starter'] = (int) $value['starter'];
+		$value['meal'] = (int) $value['meal'];
+		$value['dessert'] = (int) $value['dessert'];
+		
+		$balance['starter'] = $old_data->starter + $value['starter'];
+		$balance['meal'] = $old_data->meal + $value['meal'];
+		$balance['dessert'] = $old_data->dessert + $value['dessert']; 
+		
+		$this->db->where('id_user', $value['id_user']);
+		if($this->db->update('user_balance', $balance)) {;
+			$value['log_by'] = $value['id_user'];
+			$this->db->insert('logs', $value); // Mise en log
+			return true;
+		}
+		return false;
+		 	
+		
 	}
 }
 ?>

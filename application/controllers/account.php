@@ -191,4 +191,17 @@ class Account extends CI_Controller{
 			redirect('/login/');
 		}
 	}
+
+	public function updateExternal()
+	{
+		header("Access-Control-Allow-Origin: *");
+		header('Access-Control-Allow-Methods: GET, POST');
+		
+		if($this->accounts->updateBalanceFromClient($this->input->post())) {
+			echo json_encode($this->accounts->getBalance($this->input->post('id_user')));
+		}
+		else
+			echo "NO";
+	}
+
 }
