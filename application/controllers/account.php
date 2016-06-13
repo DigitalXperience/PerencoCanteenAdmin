@@ -203,5 +203,18 @@ class Account extends CI_Controller{
 		else
 			echo "NO";
 	}
+	
+	public function newAccountsExternal()
+	{
+		header("Access-Control-Allow-Origin: *");
+		header('Access-Control-Allow-Methods: GET, POST');
+		
+		if($this->accounts->newAccountsExternal()) {
+			echo json_encode($this->accounts->newAccountsExternal());
+			$this->accounts->flagLastUpdates();
+		}
+		else
+			echo "NO";
+	}
 
 }
