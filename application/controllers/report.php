@@ -35,7 +35,7 @@ class Report extends CI_Controller{
 			$data['name'] = $this->user->getInfo($session_data['id']);
 			$data['title'] = "Report and Filters";
 			// Traitement
-			
+			$data['liste'] = $this->logs->getDaysReport($this->input->get());
 			
 			$this->load->view('report_filter', $data);
 		}

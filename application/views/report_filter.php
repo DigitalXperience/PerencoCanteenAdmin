@@ -24,26 +24,25 @@
               <table id="example1" class="table table-bordered table-striped">
                 <thead>
                   <tr>
-                    <th>Nom</th>
-                    <th>Prénom</th>
-                    <th>Email</th>
-                    <th>Statut</th>
-                    <th>Compte ?</th>
+                    <th>Date</th>
+                    <th>Entrees</th>
+                    <th>Plats Chauds</th>
+                    <th>Desserts</th>
+                    <th>Terminal</th>
                     <th>Actions</th>
                   </tr>
                 </thead>
                 <tbody>
                      <?php if($liste){
                             foreach ($liste as $row){
-                                if(!empty($row->PIN)) $v='Oui'; else $v='Non';
-                                echo '<tr id="row-'.$row->id_user.'">
-                                        <td>'.$row->firstname.'</td>
-                                        <td>'.$row->lastname.'</td>
-                                        <td>'.$row->email.'</td>
-                                        <td>'.$row->status.'</td>
-                                        <td>'.$v.'</td>
-                                        <td><a href="users/updateuser/'.$row->id_user.'" class="btn btn-xs btn-primary" data-toggle="tooltip" title="Modifier"><i class="fa fa-pencil"></i></a>
-                                            <a href="#" onclick="deleteUser('.$row->id_user.')" class="btn btn-xs btn-danger" data-toggle="tooltip" title="Supprimer"><i class="fa fa-trash"></i></a>
+                                echo '<tr id="row-'.$row->id.'">
+                                        <td>'.$row->dat.'</td>
+                                        <td>'.abs($row->starters) .'</td>
+                                        <td>'.abs($row->meals).'</td>
+                                        <td>'.abs($row->desserts).'</td>
+                                        <td>'.$row->place.'</td>
+                                        <td><a href="users/updateuser/'.$row->id.'" class="btn btn-xs btn-primary" data-toggle="tooltip" title="Modifier"><i class="fa fa-pencil"></i></a>
+                                            <a href="#" onclick="deleteUser('.$row->id.')" class="btn btn-xs btn-danger" data-toggle="tooltip" title="Supprimer"><i class="fa fa-trash"></i></a>
                                         </td>
                                       </tr>';
                             }
@@ -51,11 +50,11 @@
                 </tbody>
                 <tfoot>
                   <tr>
-                    <th>Nom</th>
-                    <th>Prénom</th>
-                    <th>Email</th>
-                    <th>Statut</th>
-                    <th>Compte ?</th>
+                     <th>Date</th>
+                    <th>Entrees</th>
+                    <th>Plats Chauds</th>
+                    <th>Desserts</th>
+                    <th>Terminal</th>
                     <th>Actions</th>
                   </tr>
                 </tfoot>
