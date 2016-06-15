@@ -48,8 +48,8 @@
               <!-- small box -->
               <div class="small-box bg-green">
                 <div class="inner">
-                  <h3>53<sup style="font-size: 20px"></sup></h3>
-                  <p>Plats chauds consommés</p>
+                  <h3><?php echo $platschauds; ?><sup style="font-size: 20px"></sup></h3>
+                  <p>Plats consommés</p>
                 </div>
                 <div class="icon">
                   <i class="ion ion-stats-bars"></i>

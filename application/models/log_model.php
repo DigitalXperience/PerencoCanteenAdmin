@@ -99,16 +99,16 @@ class Log_model extends CI_Model {
 	
 	public function getMealsOfTheDay()
 	{
-		$sql = "SELECT `id`, SUM(`starter`) AS starters, SUM(`meal`) AS meals, SUM(`dessert`) AS desserts, `date`, `place`, DATE_FORMAT(date, '%d %M') AS dat
+		$sql = "SELECT SUM(`starter`) AS starters, SUM(`meal`) AS meals, SUM(`dessert`) AS desserts, `date`, `place`, DATE_FORMAT(date, '%d %M') AS dat
 				FROM `logs` 
-				WHERE `place` = 'client1' 
+				WHERE `place` = 'client1' AND DATE_FORMAT(date, '%d %M') = DATE_FORMAT(NOW(), '%d %M') 
 				GROUP BY DATE_FORMAT(NOW(), '%d-%m-%Y');";
 		
 		$query = $this->db->query($sql);
 		$row = $query->result();
 		if (isset($row))
 		{
-			return $row[0];
+			return abs($row[0]->meals);
 		}
 		return false;
 	}
