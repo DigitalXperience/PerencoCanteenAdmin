@@ -48,8 +48,8 @@
               <!-- small box -->
               <div class="small-box bg-green">
                 <div class="inner">
-                  <h3>53<sup style="font-size: 20px">%</sup></h3>
-                  <p>Taux de consommation</p>
+                  <h3>53<sup style="font-size: 20px"></sup></h3>
+                  <p>Plats chauds consommés</p>
                 </div>
                 <div class="icon">
                   <i class="ion ion-stats-bars"></i>

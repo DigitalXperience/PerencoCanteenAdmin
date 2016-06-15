@@ -7,6 +7,8 @@ class Dashboard extends CI_Controller{
 		parent::__construct();
 		$this->load->model('user','',TRUE);
 		$this->load->model('accounts','',TRUE);
+		
+		$this->load->model('log_model','logs');
 	}
 	
 	public function index()
@@ -17,6 +19,7 @@ class Dashboard extends CI_Controller{
 			$data['nbusers'] = $this->user->getTotal();
 			$data['nbaccounts'] = $this->accounts->getTotal();
 			$data['name'] = $this->user->getInfo($session_data['id']);
+			$data['platschauds'] = $this->logs->getMealsOfTheDay();
 			$data['title'] = "Dashboard";
 			$this->load->view('dashboard', $data);
 		}

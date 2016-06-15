@@ -29,7 +29,6 @@
                     <th>Plats Chauds</th>
                     <th>Desserts</th>
                     <th>Terminal</th>
-                    <th>Actions</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -41,9 +40,6 @@
                                         <td>'.abs($row->meals).'</td>
                                         <td>'.abs($row->desserts).'</td>
                                         <td>'.$row->place.'</td>
-                                        <td><a href="users/updateuser/'.$row->id.'" class="btn btn-xs btn-primary" data-toggle="tooltip" title="Modifier"><i class="fa fa-pencil"></i></a>
-                                            <a href="#" onclick="deleteUser('.$row->id.')" class="btn btn-xs btn-danger" data-toggle="tooltip" title="Supprimer"><i class="fa fa-trash"></i></a>
-                                        </td>
                                       </tr>';
                             }
                     } ?>
@@ -55,7 +51,6 @@
                     <th>Plats Chauds</th>
                     <th>Desserts</th>
                     <th>Terminal</th>
-                    <th>Actions</th>
                   </tr>
                 </tfoot>
               </table>

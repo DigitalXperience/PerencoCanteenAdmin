@@ -97,6 +97,22 @@ class Log_model extends CI_Model {
 		return false;
 	}
 	
+	public function getMealsOfTheDay()
+	{
+		$sql = "SELECT `id`, SUM(`starter`) AS starters, SUM(`meal`) AS meals, SUM(`dessert`) AS desserts, `date`, `place`, DATE_FORMAT(date, '%d %M') AS dat
+				FROM `logs` 
+				WHERE `place` = 'client1' 
+				GROUP BY DATE_FORMAT(NOW(), '%d-%m-%Y');";
+		
+		$query = $this->db->query($sql);
+		$row = $query->result();
+		if (isset($row))
+		{
+			return $row[0];
+		}
+		return false;
+	}
+	
 }
 
 ?>
