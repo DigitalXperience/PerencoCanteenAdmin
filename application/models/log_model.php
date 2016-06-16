@@ -108,7 +108,10 @@ class Log_model extends CI_Model {
 		$row = $query->result();
 		if (isset($row))
 		{
-			return abs($row[0]->meals);
+			if(count($row) > 0) 
+				return abs($row[0]->meals);
+			else
+				return 0; 	
 		}
 		return false;
 	}
