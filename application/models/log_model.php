@@ -34,7 +34,7 @@ class Log_model extends CI_Model {
 	}
 	
 	public function getLogs($clause=null)
-	{ 
+	{ 	var_dump($clause); die;
 		$where = '';
 		if(!is_null($clause) && !empty($clause)) {
 			$where = "WHERE ";
@@ -42,7 +42,7 @@ class Log_model extends CI_Model {
 			if(array_key_exists('poste', $clause) && $clause['poste'] !== '') {
 				$where .= " `place` = '" . $clause['poste'] . "' ";
 			}
-			if(array_key_exists('dates', $clause)) {
+			if(array_key_exists('dates', $clause)) { die;
 				if(strlen($where) > 6) $where .= " AND ";
 				$dates = explode("-", $clause['dates']);
 				$date1 = preg_replace('#(\d{2})/(\d{2})/(\d{4})#', '$3-$1-$2', trim($dates[0]));
@@ -55,7 +55,7 @@ class Log_model extends CI_Model {
 				LEFT JOIN user_info ON user_info.id_user = logs.id_user 
 				$where 
 				ORDER BY id DESC ;";
-		
+		var_dump($sql); die;
 		$query = $this->db->query($sql);
 		$row = $query->result();
 		if (isset($row))

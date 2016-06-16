@@ -43,8 +43,7 @@ class Report extends CI_Controller{
 		{
 			//If no session, redirect to login page
 			redirect('/login/');
-		}
-		
+		}	
 	}
 	
 	public function logs()
@@ -57,8 +56,6 @@ class Report extends CI_Controller{
 			$data['title'] = "Logs sur les postes";
             $data['liste'] = $this->logs->getLogs($this->input->get());
 			// Traitement
-			
-			
 			$this->load->view('report_logs', $data);
 		}
 		else
@@ -66,6 +63,5 @@ class Report extends CI_Controller{
 			//If no session, redirect to login page
 			redirect('/login/');
 		}
-		
 	}
 }
