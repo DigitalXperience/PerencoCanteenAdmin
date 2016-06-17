@@ -117,6 +117,7 @@ Class Accounts extends CI_Model
 	
 	public function newAccount($values)
 	{
+		if(array_key_exists('email', $values)) unset($values['email']);
 		$this->db->insert('user_account', $values);
 		return $this->db->insert('user_balance', array('starter' => 0, 'meal' => 0, 'dessert' => 0, 'id_user' => $values['id_user']));
 	}

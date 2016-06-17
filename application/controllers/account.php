@@ -216,5 +216,10 @@ class Account extends CI_Controller{
 		else
 			echo "NO";
 	}
+	
+	public function get_email($iduser)
+	{ 
+		echo $this->accounts->getEmail($iduser);
+	}
 
 }
