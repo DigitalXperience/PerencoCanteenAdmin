@@ -6,6 +6,7 @@ class Users extends CI_Controller{
 	{
 		parent::__construct();
 		$this->load->model('user','',TRUE);
+		$this->load->model('accounts','', TRUE);
 	}
 	
 	public function index()
@@ -106,6 +107,7 @@ class Users extends CI_Controller{
              $save['id_user']=$this->input->post('id_user');
              $save['deleted']=date('Y-m-d h:i:s');
              $s=$this->user->updateUser($save);
+             $this->accounts->blockAccount($save['id_user']); // bloquer un compte aussitôt que l'utilisateur est supprimé
              if($s) echo 'true';
              else echo 'Problème lors de l\'enregistrement';
          }
