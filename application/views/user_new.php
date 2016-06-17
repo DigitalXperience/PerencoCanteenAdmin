@@ -30,11 +30,11 @@
                           <div class="col-md-6">
                                 <div class="form-group">
                                   <label>Nom *</label>
-                                  <input type="text" name="firstname" value="<?php if(isset($current)) echo $current->firstname; ?>" required class="form-control" placeholder="Entez son nom ">
+                                  <input type="text" name="lastname" value="<?php if(isset($current)) echo $current->lastname; ?>" required class="form-control" placeholder="Entez son nom ">
                                 </div>
                                 <div class="form-group">
                                   <label>Prénom</label>
-                                  <input type="text" class="form-control" value="<?php if(isset($current)) echo $current->lastname; ?>" name="lastname" placeholder="Entez son prénom">
+                                  <input type="text" class="form-control" value="<?php if(isset($current)) echo $current->firstname; ?>" name="firstname" placeholder="Entez son prénom">
                                 </div>
                            </div>
                            <div class="col-md-6">
@@ -67,4 +67,3 @@
         </section><!-- /.content -->
       </div><!-- /.content-wrapper -->
 <?php include ('inc/footer.php'); ?>
-
