@@ -197,5 +197,17 @@ Class Accounts extends CI_Model
 	{
 		$query = $this->db->query("UPDATE `user_account` SET `flag` = '1' WHERE `flag` = '0' AND `blocked` = '0'");
 	}
+	
+	public function getEmail($id)
+	{
+		$query = $this->db->query("SELECT `email` FROM `user_info` WHERE id_user = '$id';");
+		
+		$row = $query->row();
+		if (isset($row)) {
+			return $row->email;
+		}
+		
+		return '';
+	}
 }
 ?>
