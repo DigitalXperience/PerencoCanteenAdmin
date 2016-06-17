@@ -61,16 +61,22 @@
                 </thead>
                 <tbody>
                      <?php if($liste){
+							$sum_entree = 0;
+							$sum_repas = 0;
+							$sum_dessert = 0;
                             foreach ($liste as $row){
                                 echo '<tr id="row-'.$row->id_user.'">
                                         <td>'.$row->firstname.'</td>
                                         <td>'.$row->lastname.'</td>
-                                        <td>'.$row->starter.'</td>
-                                        <td>'.$row->meal.'</td>
-                                        <td>'.$row->dessert.'</td>
+                                        <td>'.abs($row->starter).'</td>
+                                        <td>'.abs($row->meal).'</td>
+                                        <td>'.abs($row->dessert).'</td>
                                         <td>'.$row->place.'</td>
                                         <td>'.$row->date.'</td>
                                       </tr>';
+								$sum_entree += abs($row->starter);
+								$sum_repas += abs($row->meal);
+								$sum_dessert += abs($row->dessert);
                             }
                     } ?>
                 </tbody>
@@ -78,9 +84,9 @@
                   <tr>
                     <th>Nom</th>
                     <th>Prénom</th>
-                    <th>Entree</th>
-                    <th>Repas</th>
-                    <th>Dessert</th>
+                    <th>Total : <?php echo $sum_entree; ?></th>
+                    <th>Total : <?php echo $sum_repas; ?></th>
+                    <th>Total : <?php echo $sum_dessert; ?></th>
                     <th>Poste</th>
                     <th>Date et Heure</th>
                   </tr>

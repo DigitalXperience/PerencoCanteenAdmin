@@ -28,28 +28,50 @@
                     <th>Entrees</th>
                     <th>Plats Chauds</th>
                     <th>Desserts</th>
+                    <th>Entrees (cfa)</th>
+                    <th>Plats (cfa)</th>
+                    <th>Desserts (cfa)</th>
                     <th>Terminal</th>
                   </tr>
                 </thead>
                 <tbody>
                      <?php if($liste){
+							$sum_entree = 0;
+							$sum_repas = 0;
+							$sum_dessert = 0;
+							$sum_entreef = 0;
+							$sum_repasf = 0;
+							$sum_dessertf = 0;
                             foreach ($liste as $row){
                                 echo '<tr id="row-'.$row->id.'">
                                         <td>'.$row->dat.'</td>
                                         <td>'.abs($row->starters) .'</td>
                                         <td>'.abs($row->meals).'</td>
                                         <td>'.abs($row->desserts).'</td>
+                                        <td>'.(abs($row->starters) * $params['starter_price']) .'</td>
+                                        <td>'.(abs($row->meals) * $params['meal_price']).'</td>
+                                        <td>'.(abs($row->desserts) * $params['dessert_price']).'</td>
                                         <td>'.$row->place.'</td>
                                       </tr>';
+								$sum_entree += abs($row->starters);
+								$sum_repas += abs($row->meals);
+								$sum_dessert += abs($row->desserts);
+								$sum_entreef += (abs($row->starters) * $params['starter_price']);
+								$sum_repasf += (abs($row->meals) * $params['meal_price']);
+								$sum_dessertf += (abs($row->desserts) * $params['dessert_price']);
                             }
                     } ?>
                 </tbody>
                 <tfoot>
                   <tr>
-                     <th>Date</th>
-                    <th>Entrees</th>
-                    <th>Plats Chauds</th>
-                    <th>Desserts</th>
+                    <th>Date</th>
+                    <th>Total : <?php echo $sum_entree; ?></th>
+                    <th>Total : <?php echo $sum_repas; ?></th>
+                    <th>Total : <?php echo $sum_dessert; ?></th>
+					 <th>Total : <?php echo $sum_entreef; ?></th>
+                    <th>Total : <?php echo $sum_repasf; ?></th>
+                    <th>Total : <?php echo $sum_dessertf; ?></th>
+					
                     <th>Terminal</th>
                   </tr>
                 </tfoot>
