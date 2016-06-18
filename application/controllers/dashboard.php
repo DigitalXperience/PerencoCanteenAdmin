@@ -19,7 +19,7 @@ class Dashboard extends CI_Controller{
 			$data['nbaccounts'] = $this->accounts->getTotal();
 			$data['name'] = $this->user->getInfo($session_data['id']);
 			$data['platschauds'] = $this->logs->getMealsOfTheDay();
-			$data['title'] = "Dashboard";
+			$data['title'] = "Tableau de bord";
 			$this->load->view('dashboard', $data);
 		}
 		else

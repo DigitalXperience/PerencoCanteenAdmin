@@ -169,7 +169,7 @@ Class Accounts extends CI_Model
 		$balance['dessert'] = $old_data->dessert + $value['dessert']; 
 		
 		$this->db->where('id_user', $value['id_user']);
-		if($this->db->update('user_balance', $balance)) {;
+		if($this->db->update('user_balance', $balance)) { //var_dump($balance); die('12');
 			$value['log_by'] = $value['id_user'];
 			$this->db->insert('logs', $value); // Mise en log
 			return true;

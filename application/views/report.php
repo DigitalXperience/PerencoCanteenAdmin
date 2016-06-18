@@ -10,9 +10,8 @@
             <!--<small>Preview sample</small>-->
           </h1>
           <ol class="breadcrumb">
-            <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-            <li><a href="#">Charts</a></li>
-            <li class="active">ChartJS</li>
+            <li><a href="#"><i class="fa fa-dashboard"></i> Accueil</a></li>
+            <li><a href="#">Statistique graphique</a></li>
           </ol>
         </section>
 
@@ -23,7 +22,7 @@
               <!-- AREA CHART -->
               <div class="box box-primary">
                 <div class="box-header with-border">
-                  <h3 class="box-title">Semaine en cours</h3>
+                  <h3 class="box-title">Couts de la semaine</h3>
                   <div class="box-tools pull-right">
                     <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
                     <button class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
@@ -55,7 +54,7 @@
               <!-- LINE CHART -->
               <div class="box box-info">
                 <div class="box-header with-border">
-                  <h3 class="box-title">Cout sur la semaine</h3>
+                  <h3 class="box-title">Consommation sur la semaine en cours</h3>
                   <div class="box-tools pull-right">
                     <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
                     <button class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
@@ -71,7 +70,7 @@
               <!-- BAR CHART -->
               <div class="box box-success">
                 <div class="box-header with-border">
-                  <h3 class="box-title">Statistique Mois par Mois</h3>
+                  <h3 class="box-title">Statistique des consommations (6 derniers mois)</h3>
                   <div class="box-tools pull-right">
                     <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
                     <button class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
@@ -108,7 +107,94 @@
         var areaChartCanvas = $("#areaChart").get(0).getContext("2d");
         // This will get the first returned node in the jQuery collection.
         var areaChart = new Chart(areaChartCanvas);
-
+		var areaChartData2 = {
+          labels: ["Lundi", "Mardi", "Mercredi", "Jeudi", "Vendredi", "Samedi", "Dimanche"],
+          datasets: [
+            {
+              label: "Entrees",
+              fillColor: "rgba(210, 214, 222, 1)",
+              strokeColor: "rgba(210, 214, 222, 1)",
+              pointColor: "rgba(210, 214, 222, 1)",
+              pointStrokeColor: "#c1c7d1",
+              pointHighlightFill: "#fff",
+              pointHighlightStroke: "rgba(220,220,220,1)",
+              data: [65, 59, 80, 81, 56, 55, 40]
+            },
+			{
+              label: "Desserts",
+              fillColor: "rgba(210, 48, 222, 1)",
+              strokeColor: "rgba(210, 48, 222, 1)",
+              pointColor: "rgba(210, 48, 222, 1)",
+              pointStrokeColor: "#c1c7d1",
+              pointHighlightFill: "#fff",
+              pointHighlightStroke: "rgba(220,20,220,1)",
+              data: [60, 70, 70, 52, 65, 44, 80]
+            },
+            {
+              label: "Plats chauds",
+              fillColor: "rgba(60,141,188,0.9)",
+              strokeColor: "rgba(60,141,188,0.8)",
+              pointColor: "#3b8bba",
+              pointStrokeColor: "rgba(60,141,188,1)",
+              pointHighlightFill: "#fff",
+              pointHighlightStroke: "rgba(60,141,188,1)",
+              data: [220, 200, 150, 160, 210, 160, 110]
+            }
+          ]
+        };
+		
+		var areaChartData4 = {
+          labels: ["Janvier", "Fevrier", "Mars", "Avril", "Mai", "Juin", "Juillet"],
+          datasets: [
+            {
+              label: "Entrees",
+              fillColor: "rgba(210, 214, 222, 1)",
+              strokeColor: "rgba(210, 214, 222, 1)",
+              pointColor: "rgba(210, 214, 222, 1)",
+              pointStrokeColor: "#c1c7d1",
+              pointHighlightFill: "#fff",
+              pointHighlightStroke: "rgba(220,220,220,1)",
+              data: [65, 59, 80, 81, 56, 55, 40]
+            },
+			{
+              label: "Desserts",
+              fillColor: "rgba(210, 48, 222, 1)",
+              strokeColor: "rgba(210, 48, 222, 1)",
+              pointColor: "rgba(210, 48, 222, 1)",
+              pointStrokeColor: "#c1c7d1",
+              pointHighlightFill: "#fff",
+              pointHighlightStroke: "rgba(220,20,220,1)",
+              data: [60, 70, 70, 52, 65, 44, 80]
+            },
+            {
+              label: "Plats chauds",
+              fillColor: "rgba(60,141,188,0.9)",
+              strokeColor: "rgba(60,141,188,0.8)",
+              pointColor: "#3b8bba",
+              pointStrokeColor: "rgba(60,141,188,1)",
+              pointHighlightFill: "#fff",
+              pointHighlightStroke: "rgba(60,141,188,1)",
+              data: [220, 200, 150, 160, 210, 160, 110]
+            }
+          ]
+        };
+		
+		var areaChartData3 = {
+          labels: ["Lundi", "Mardi", "Mercredi", "Jeudi", "Vendredi", "Samedi", "Dimanche"],
+          datasets: [
+            {
+              label: "Electronics",
+              fillColor: "rgba(210, 214, 222, 1)",
+              strokeColor: "rgba(210, 214, 222, 1)",
+              pointColor: "rgba(210, 214, 222, 1)",
+              pointStrokeColor: "#c1c7d1",
+              pointHighlightFill: "#fff",
+              pointHighlightStroke: "rgba(220,220,220,1)",
+              data: [65000, 59000, 80000, 81000, 56000, 55000, 40000]
+            }
+          ]
+        };
+		
         var areaChartData = {
           labels: ["Lundi", "Mardi", "Mercredi", "Jeudi", "Vendredi", "Samedi", "Dimanche"],
           datasets: [
@@ -175,7 +261,7 @@
         };
 
         //Create the line chart
-        areaChart.Line(areaChartData, areaChartOptions);
+        areaChart.Line(areaChartData3, areaChartOptions);
 
         //-------------
         //- LINE CHART -
@@ -184,7 +270,7 @@
         var lineChart = new Chart(lineChartCanvas);
         var lineChartOptions = areaChartOptions;
         lineChartOptions.datasetFill = false;
-        lineChart.Line(areaChartData, lineChartOptions);
+        lineChart.Line(areaChartData2, lineChartOptions);
 
         //-------------
         //- PIE CHART -
@@ -245,7 +331,7 @@
         //-------------
         var barChartCanvas = $("#barChart").get(0).getContext("2d");
         var barChart = new Chart(barChartCanvas);
-        var barChartData = areaChartData;
+        var barChartData = areaChartData4;
         barChartData.datasets[1].fillColor = "#00a65a";
         barChartData.datasets[1].strokeColor = "#00a65a";
         barChartData.datasets[1].pointColor = "#00a65a";

@@ -17,12 +17,26 @@
 
         <!-- Main content -->
         <section class="content">
+		<div class="row">
           <!-- Small boxes (Stat box) -->
 		  <div class="col-lg-3 col-xs-6">
               <!-- small box -->
-              <div class="small-box bg-aqua">
+              <div class="small-box bg-yellow">
                 <div class="inner">
                   <h3><?php echo $nbaccounts; ?></h3>
+                  <p>Comptes</p>
+                </div>
+                <div class="icon">
+                  <i class="ion ion-person-add"></i>
+                </div>
+                <a href="<?php echo base_url(); ?>index.php/account/newaccount" class="small-box-footer">Créer un nouveau compte <i class="fa fa-arrow-circle-right"></i></a>
+              </div>
+            </div>
+			<div class="col-lg-3 col-xs-6">
+              <!-- small box -->
+              <div class="small-box bg-aqua">
+                <div class="inner">
+                  <h3><?php echo $nbusers; ?></h3>
                   <p>Compte</p>
                 </div>
                 <div class="icon">
@@ -31,19 +45,7 @@
                 <a href="<?php echo base_url(); ?>account" class="small-box-footer">Plus d'info <i class="fa fa-arrow-circle-right"></i></a>
               </div>
             </div><!-- ./col -->
-		  <div class="col-lg-3 col-xs-6">
-              <!-- small box -->
-              <div class="small-box bg-yellow">
-                <div class="inner">
-                  <h3><?php echo $nbusers; ?></h3>
-                  <p>Utilisateurs</p>
-                </div>
-                <div class="icon">
-                  <i class="ion ion-person-add"></i>
-                </div>
-                <a href="<?php echo base_url(); ?>users" class="small-box-footer">Plus d'info <i class="fa fa-arrow-circle-right"></i></a>
-              </div>
-            </div>
+		  
 			<div class="col-lg-3 col-xs-6">
               <!-- small box -->
               <div class="small-box bg-green">
@@ -54,9 +56,25 @@
                 <div class="icon">
                   <i class="ion ion-stats-bars"></i>
                 </div>
-                <a href="<?php echo base_url(); ?>report" class="small-box-footer">Plus d'info <i class="fa fa-arrow-circle-right"></i></a>
+                <a href="<?php echo base_url(); ?>index.php/report/filter" class="small-box-footer">Voir les rapports <i class="fa fa-arrow-circle-right"></i></a>
               </div>
             </div><!-- ./col -->
+			
+			<div class="col-lg-3 col-xs-6">
+              <!-- small box -->
+              <div class="small-box bg-red">
+                <div class="inner">
+                  <h3>65 %</h3>
+                  <p>Dessert </p>
+                </div>
+                <div class="icon">
+                  <i class="ion ion-pie-graph"></i>
+                </div>
+                <a href="<?php echo base_url(); ?>index.php/report/stats" class="small-box-footer">Voir toutes les statistiques <i class="fa fa-arrow-circle-right"></i></a>
+              </div>
+            </div><!-- ./col -->
+			
+			</div>
           <!-- Main row -->
           <div class="row">
             <!-- Left col -->

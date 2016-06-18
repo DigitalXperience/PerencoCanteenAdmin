@@ -17,6 +17,54 @@
 
     <!-- Main content -->
     <section class="content">
+	
+		<!-- Parametre du filtre -->
+          <div class="box box-default">
+            <div class="box-header with-border">
+              <h3 class="box-title">Options de filtre</h3>
+              <div class="box-tools pull-right">
+                <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
+                <button class="btn btn-box-tool" data-widget="remove"><i class="fa fa-remove"></i></button>
+              </div>
+            </div><!-- /.box-header -->
+            <div class="box-body">
+              <div class="row">
+                <div class="col-md-6">
+                   <!-- Date and time range -->
+                  <div class="form-group">
+                    <label>Date range button:</label>
+                    <div class="input-group">
+                      <button class="btn btn-default pull-right" id="daterange-btn">
+                        <i class="fa fa-calendar"></i> Date range picker
+                        <i class="fa fa-caret-down"></i>
+                      </button>
+                    </div>
+                  </div><!-- /.form group -->
+                <!-- checkbox -->
+                  <div class="form-group">
+                    <label>
+                      <input type="checkbox" class="minimal" checked>
+					  Entrees
+                    </label>
+                    <label>
+                      <input type="checkbox" class="minimal">
+					  Dessert
+                    </label>
+                    <label>
+                      <input type="checkbox" class="minimal" disabled>
+						Plats Chauds
+                    </label>
+                  </div>
+                </div><!-- /.col -->
+                
+              </div><!-- /.row -->
+            </div><!-- /.box-body -->
+            <div class="box-footer">
+              Les parametres appliqués
+            </div>
+          </div><!-- Parametre du filtre -->
+		  
+		  
         <div class="row">
         <div class="col-xs-12">
           <div class="box">
@@ -86,6 +134,14 @@
 
 <?php include ('inc/footer.php'); ?>
 <!-- page script -->
+<!-- Select2 -->
+    <script src="<?php echo base_url(); ?>assets/plugins/select2/select2.full.min.js"></script>
+	<!-- InputMask -->
+    <script src="<?php echo base_url(); ?>assets/plugins/input-mask/jquery.inputmask.js"></script>
+    <script src="<?php echo base_url(); ?>assets/plugins/input-mask/jquery.inputmask.date.extensions.js"></script>
+    <script src="<?php echo base_url(); ?>assets/plugins/input-mask/jquery.inputmask.extensions.js"></script>
+	<!-- iCheck 1.0.1 -->
+    <script src="<?php echo base_url(); ?>assets/plugins/iCheck/icheck.min.js"></script>
 <script>
   $(function () {
     $("#example1").DataTable();
@@ -98,20 +154,54 @@
       "autoWidth": false
     });
   });
-    
- function deleteUser(id){
-	var r=confirm(" Voulez vous vraiment supprimer cet utilisateur?");
-	if(r){
-		$.post( "users/deleteuser", { id_user: id }).done(function( data ) {
-            if(data == 'true') {
-                setTimeout(function(){
-                    $('#'+id).remove();
-                    return false;
-                }, 2000);
-            } else {
-                alert(data);
-            }
+   $(function () {
+        //Initialize Select2 Elements
+        $(".select2").select2();
+
+        //Datemask dd/mm/yyyy
+        $("#datemask").inputmask("dd/mm/yyyy", {"placeholder": "dd/mm/yyyy"});
+        //Datemask2 mm/dd/yyyy
+        $("#datemask2").inputmask("mm/dd/yyyy", {"placeholder": "mm/dd/yyyy"});
+        //Money Euro
+        $("[data-mask]").inputmask();
+
+        //Date range picker
+        $('#reservation').daterangepicker();
+        //Date range picker with time picker
+        $('#reservationtime').daterangepicker({timePicker: true, timePickerIncrement: 30, format: 'MM/DD/YYYY h:mm A'});
+        //Date range as a button
+        $('#daterange-btn').daterangepicker(
+            {
+              ranges: {
+                'Today': [moment(), moment()],
+                'Yesterday': [moment().subtract(1, 'days'), moment().subtract(1, 'days')],
+                'Last 7 Days': [moment().subtract(6, 'days'), moment()],
+                'Last 30 Days': [moment().subtract(29, 'days'), moment()],
+                'This Month': [moment().startOf('month'), moment().endOf('month')],
+                'Last Month': [moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')]
+              },
+              startDate: moment().subtract(29, 'days'),
+              endDate: moment()
+            },
+        function (start, end) {
+          $('#reportrange span').html(start.format('MMMM D, YYYY') + ' - ' + end.format('MMMM D, YYYY'));
+        }
+        );
+
+        //iCheck for checkbox and radio inputs
+        $('input[type="checkbox"].minimal, input[type="radio"].minimal').iCheck({
+          checkboxClass: 'icheckbox_minimal-blue',
+          radioClass: 'iradio_minimal-blue'
         });
-	}
-}
+        //Red color scheme for iCheck
+        $('input[type="checkbox"].minimal-red, input[type="radio"].minimal-red').iCheck({
+          checkboxClass: 'icheckbox_minimal-red',
+          radioClass: 'iradio_minimal-red'
+        });
+        //Flat red color scheme for iCheck
+        $('input[type="checkbox"].flat-red, input[type="radio"].flat-red').iCheck({
+          checkboxClass: 'icheckbox_flat-green',
+          radioClass: 'iradio_flat-green'
+        });
+      });
 </script>
