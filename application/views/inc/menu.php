@@ -15,25 +15,27 @@
       </div>
       <ul class="sidebar-menu">
             <li class="header">NAVIGATION</li>
-            <li class="active"> <a href="<?php echo base_url(); ?>index.php/dashboard"> <i class="fa fa-dashboard"></i> <span>Tableau de Bord</span> </a></li>
-            <li><a href="<?php echo base_url(); ?>index.php/users"><i class="fa fa-users"></i> Liste Utilisateurs</a></li>
-            <li><a href="<?php echo base_url(); ?>index.php/users/newuser"><i class="fa fa-user"></i> Nouvel Utilisateur</a></li>
-            <li><a href="<?php echo base_url(); ?>index.php/account/newaccount"><i class="fa fa-circle-o"></i> Créer Compte</a></li>
-            <li><a href="<?php echo base_url(); ?>index.php/account"><i class="fa fa-circle-o"></i> Solde des Comptes</a></li>
-            <li><a href="<?php echo base_url(); ?>index.php/parameters"><i class="fa fa-circle-o"></i> Parametres</a></li>
             
-			<li class="treeview">
+			<li <?php if($this->uri->uri_string() == 'dashboard') { ?> class="active" <?php } ?>> <a href="<?php echo base_url(); ?>index.php/dashboard"> <i class="fa fa-dashboard"></i> <span>Tableau de Bord</span> </a></li>
+            <li class="treeview <?php if($this->uri->uri_string() == 'users' || $this->uri->uri_string() == 'account' || $this->uri->uri_string() == 'account/newaccount' || $this->uri->uri_string() == 'users/newuser') { echo "active"; } ?>">
               <a href="#">
-                <i class="fa fa-files-o"></i>
-                <span>Statistique & Rapports</span>
+                <i class="fa fa-users"></i>
+                <span>Utilisateurs & Comptes</span>
                 <!--<span class="label label-primary pull-right">4</span>-->
               </a>
-              <ul class="treeview-menu">
-                <li><a href="<?php echo base_url(); ?>index.php/report/filter"><i class="fa fa-circle-o"></i> Rapports</a></li>
-                <li><a href="<?php echo base_url(); ?>index.php/report/logs"><i class="fa fa-circle-o"></i> Historiques</a></li>
-                <li><a href="<?php echo base_url(); ?>index.php/report"><i class="fa fa-circle-o"></i> Statistiques</a></li>
+              <ul class="treeview-menu ">
+                <li <?php if($this->uri->uri_string() == 'users') { ?> class="active" <?php } ?>><a href="<?php echo base_url(); ?>index.php/users"><i class="fa fa-users"></i> Liste Utilisateurs</a></li>
+				<li <?php if($this->uri->uri_string() == 'users/newuser') { ?> class="active" <?php } ?>><a href="<?php echo base_url(); ?>index.php/users/newuser"><i class="fa fa-user-plus"></i> Nouvel Utilisateur</a></li>
+				<li <?php if($this->uri->uri_string() == 'account/newaccount') { ?> class="active" <?php } ?>><a href="<?php echo base_url(); ?>index.php/account/newaccount"><i class="fa fa-user"></i> Créer Compte</a></li>
+				<li <?php if($this->uri->uri_string() == 'account') { ?> class="active" <?php } ?>><a href="<?php echo base_url(); ?>index.php/account"><i class="fa fa-circle-o"></i> Solde des Comptes</a></li>
               </ul>
             </li>
+            <li <?php if($this->uri->uri_string() == 'parameters') { ?> class="active" <?php } ?>><a href="<?php echo base_url(); ?>index.php/parameters"><i class="fa fa-gears"></i> Parametres</a></li>
+            <li <?php if($this->uri->uri_string() == 'report/logs') { ?> class="active" <?php } ?>><a href="<?php echo base_url(); ?>index.php/report/logs"><i class="fa fa-file-text-o"></i> Historiques</a></li>
+			<li <?php if($this->uri->uri_string() == 'report/filter') { ?> class="active" <?php } ?>><a href="<?php echo base_url(); ?>index.php/report/filter"><i class="fa fa-files-o"></i> Rapports</a></li>
+			<li <?php if($this->uri->uri_string() == 'report') { ?> class="active" <?php } ?>><a href="<?php echo base_url(); ?>index.php/report"><i class="fa fa-pie-chart"></i> Statistiques</a></li>
+			
+			
        </ul>
     </section>
     <!-- /.sidebar -->
