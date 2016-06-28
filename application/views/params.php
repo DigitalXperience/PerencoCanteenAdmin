@@ -29,29 +29,33 @@
                       <div class="row">
                           <div class="col-md-6">
                                 <div class="form-group">
-                                  <label>Prix des plats de résistances *</label>
-                                  <input type="text" name="meal_price" value="<?php if(isset($params)) echo $params['meal_price']; ?>" required class="form-control" placeholder="Entez une valeur ">
+                                  <label>Prix des plats de résistances</label>
+                                  <input type="text" id="meal_price" name="meal_price" value="<?php if(isset($params)) echo $params['meal_price']; ?>" required class="form-control" placeholder="Entez une valeur ">
                                 </div>
                                 <div class="form-group">
                                   <label>Prix des entrées</label>
-                                  <input type="text" class="form-control" value="<?php if(isset($params)) echo $params['starter_price']; ?>" required name="starter_price" placeholder="Entez une valeur">
+                                  <input type="text" id="starter_price" class="form-control" value="<?php if(isset($params)) echo $params['starter_price']; ?>" required name="starter_price" placeholder="Entez une valeur">
+                                </div>
+								 <div class="form-group">
+                                  <label>Nouveau mot de passe (facultatif)</label>
+                                  <input type="password" id="password" class="form-control" value="" name="password" >
                                 </div>
                            </div>
                            <div class="col-md-6">
                                 <div class="form-group">
-                                  <label>Prix des desserts *</label>
-                                  <input type="text" name="dessert_price" value="<?php if(isset($params)) echo $params['dessert_price']; ?>" required class="form-control" placeholder="Entez une valeur">
+                                  <label>Prix des desserts</label>
+                                  <input type="text" id="dessert_price" name="dessert_price" value="<?php if(isset($params)) echo $params['dessert_price']; ?>" required class="form-control" placeholder="Entez une valeur">
                                 </div>
                                 <div class="form-group">
                                   <label>Nombre de plats chaud à créditer le mois suivant</label>
-                                    <input type="text" name="meal_to_add" value="<?php if(isset($params)) echo $params['meal_to_add']; ?>" class="form-control" placeholder="Entez une valeur">
+                                    <input type="text" id="meal_to_add" name="meal_to_add" value="<?php if(isset($params)) echo $params['meal_to_add']; ?>" class="form-control" placeholder="Entez une valeur">
                                </div>
                            </div>
                        </div>
                   </div><!-- /.box-body -->
 
                   <div class="box-footer">
-                    <button type="submit" class="btn btn-primary">Enregistrer</button> <button type="reset" class="btn btn-default">Annuler</button>
+                    <button type="submit" class="btn btn-primary" onClick="return checkValues();">Enregistrer</button> <button type="reset" class="btn btn-default">Annuler</button>
                   </div>
                 </form>
               </div><!-- /.box -->
@@ -61,4 +65,22 @@
         </section><!-- /.content -->
       </div><!-- /.content-wrapper -->
 <?php include ('inc/footer.php'); ?>
+<script>
+function checkValues() {
+	if($("#meal_price").val() < 0 || $("#starter_price").val() < 0 || $("#dessert_price").val() < 0 || $("#meal_to_add").val() < 0) {
+		alert("Aucune valeur négative s.v.p.");
+		return false;
+	} else {
+		if($("#password").val() != '')
+			if($("#password").val().length < 5) {
+				alert('Le mot de passe doit avoir au moins 5 caractères!');
+				return false;
+			}
+		return true;
+	}
+	
+	
+		
+}
+</script>
 
