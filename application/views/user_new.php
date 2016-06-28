@@ -29,11 +29,11 @@
                       <div class="row">
                           <div class="col-md-6">
                                 <div class="form-group">
-                                  <label>Nom *</label>
+                                  <label>Nom </label>
                                   <input type="text" name="lastname" value="<?php if(isset($current)) echo $current->lastname; ?>" required class="form-control" placeholder="Entrez son nom ">
                                 </div>
                                 <div class="form-group">
-                                  <label>Prénom</label>
+                                  <label>Prénom (falcutatif)</label>
                                   <input type="text" class="form-control" value="<?php if(isset($current)) echo $current->firstname; ?>" name="firstname" placeholder="Entrez son prénom">
                                 </div>
                            </div>
@@ -43,7 +43,7 @@
                                   <input type="email" name="email" value="<?php if(isset($current)) echo $current->email; ?>" class="form-control" placeholder="Entrez son email">
                                 </div>
                                 <div class="form-group">
-                                  <label for="exampleInputPassword1">Statut *</label>
+                                  <label for="exampleInputPassword1">Statut </label>
                                   <select class="form-control" name="status" required>
                                     <option value="">Sélectionnez un status</option>
                                     <option <?php if(isset($current) and ($current->status=='organic')) echo 'selected'; ?> value="organic">Organique</option>
