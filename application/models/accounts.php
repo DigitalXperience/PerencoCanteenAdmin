@@ -193,6 +193,22 @@ Class Accounts extends CI_Model
 			return false; 	
 	}
 	
+	public function AccountsExternal()
+	{
+		$query = $this->db->query("SELECT ua.`PIN`, ua.`id_user`, ua.`date_exp`, ua.`created`, ua.`blocked`, ub.`starter`, ub.`meal`, ub.`dessert` 
+									FROM `user_account` ua 
+									LEFT JOIN  `user_balance` ub ON ub.`id_user` = ua.`id_user`
+								");
+		
+		if (!empty($query->result()))
+		{
+			
+			return $query->result();
+		
+		} else
+			return false; 	
+	}
+	
 	public function flagLastUpdates()
 	{
 		$query = $this->db->query("UPDATE `user_account` SET `flag` = '1' WHERE `flag` = '0' AND `blocked` = '0'");

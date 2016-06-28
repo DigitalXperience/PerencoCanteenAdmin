@@ -67,6 +67,7 @@ class Account extends CI_Controller{
 		{
 			$session_data = $this->session->userdata('logged_in');
 			$data['name'] = $this->user->getInfo($session_data['id']);
+			$data['pers'] = $this->user->getInfo($iduser);
 			if((!empty($this->input->post('id_user')))) {
 				$result = $this->accounts->creditAccount($this->input->post()); 
 			
@@ -212,6 +213,19 @@ class Account extends CI_Controller{
 		if($this->accounts->newAccountsExternal()) {
 			echo json_encode($this->accounts->newAccountsExternal());
 			$this->accounts->flagLastUpdates();
+		}
+		else
+			echo "NO";
+	}
+	
+	public function AccountsExternal()
+	{
+		header("Access-Control-Allow-Origin: *");
+		header('Access-Control-Allow-Methods: GET, POST');
+		
+		if($this->accounts->AccountsExternal()) {
+			echo json_encode($this->accounts->AccountsExternal());
+			//$this->accounts->flagLastUpdates();
 		}
 		else
 			echo "NO";
