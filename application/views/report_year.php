@@ -1,3 +1,4 @@
+<?php //var_dump($liste); die; ?>
 <?php defined('BASEPATH') OR exit('No direct script access allowed'); ?>
 <?php include ('inc/head.php'); ?>
 <?php include ('inc/menu.php'); ?> 
@@ -6,23 +7,25 @@
         <!-- Content Header (Page header) -->
         <section class="content-header">
           <h1>
-            Statistiques graphiques
+            <?php echo $title; ?>
             <!--<small>Preview sample</small>-->
           </h1>
           <ol class="breadcrumb">
             <li><a href="#"><i class="fa fa-dashboard"></i> Accueil</a></li>
-            <li><a href="#">Statistique graphique</a></li>
+            <li><a href="#"><?php echo $title; ?></a></li>
           </ol>
         </section>
 
         <!-- Main content -->
         <section class="content">
 		<div class="callout callout-info">
+            <h4>Selectionner une periode définie</h4>
             <p><a href="<?php echo base_url().'index.php/report/weekstats'; ?>">Graphes semaine en cours</a> | 
 				<a href="<?php echo base_url().'index.php/report/monthstats'; ?>">Graphes mois en cours</a> | 
-				<a href="<?php echo base_url().'index.php/report/yearstats'; ?>">Graphes année en cours</a></p>   </div>
+				<a href="<?php echo base_url().'index.php/report/yearstats'; ?>">Graphes année en cours</a></p>
+          </div>
           <div class="row">
-            <div class="col-md-6">
+            <div class="col-md-12">
               <!-- AREA CHART -->
               <div class="box box-primary">
                 <div class="box-header with-border">
@@ -39,23 +42,14 @@
                 </div><!-- /.box-body -->
               </div><!-- /.box -->
 
-              <!-- DONUT CHART -->
-              <div class="box box-danger">
-                <div class="box-header with-border">
-                  <h3 class="box-title">Consommation par type</h3>
-                  <div class="box-tools pull-right">
-                    <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
-                    <button class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
-                  </div>
-                </div>
-                <div class="box-body">
-                    <canvas id="pieChart" style="height:250px"></canvas>
-                </div><!-- /.box-body -->
-              </div><!-- /.box -->
+              
 
             </div><!-- /.col (LEFT) -->
-            <div class="col-md-6">
-              <!-- LINE CHART -->
+			
+		
+			
+			<div class="col-md-12">
+			 <!-- LINE CHART -->
               <div class="box box-info">
                 <div class="box-header with-border">
                   <h3 class="box-title">Consommation sur la semaine en cours</h3>
@@ -70,11 +64,15 @@
                   </div>
                 </div><!-- /.box-body -->
               </div><!-- /.box -->
+			 </div><!-- /.box -->
+			 
+            <div class="col-md-12">
+             
 
               <!-- BAR CHART -->
               <div class="box box-success">
                 <div class="box-header with-border">
-                  <h3 class="box-title">Statistique des consommations (6 derniers mois)</h3>
+                  <h3 class="box-title">Statistique Graphique en bare</h3>
                   <div class="box-tools pull-right">
                     <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
                     <button class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
@@ -112,7 +110,7 @@
         // This will get the first returned node in the jQuery collection.
         var areaChart = new Chart(areaChartCanvas);
 		var areaChartData2 = {
-          labels: ["Lundi", "Mardi", "Mercredi", "Jeudi", "Vendredi", "Samedi", "Dimanche"],
+          labels: ["Janvier", "Fevrier", "Mars", "Avril", "Mai", "Juin", "Juillet", "Aout", "Septembre", "Octobre", "Novembre", "Decembre"],
           datasets: [
             {
               label: "Entrees",
@@ -122,7 +120,7 @@
               pointStrokeColor: "#c1c7d1",
               pointHighlightFill: "#fff",
               pointHighlightStroke: "rgba(220,220,220,1)",
-              data: [65, 59, 80, 81, 56, 55, 40]
+              data: [200, 240, 200, 88, 160, 170, 190, 100, 160, 130, 90, 160]
             },
 			{
               label: "Desserts",
@@ -132,7 +130,7 @@
               pointStrokeColor: "#c1c7d1",
               pointHighlightFill: "#fff",
               pointHighlightStroke: "rgba(220,20,220,1)",
-              data: [60, 70, 70, 52, 65, 44, 80]
+               data: [250, 240, 200, 58, 150, 100, 100, 200, 180, 130, 49, 168]
             },
             {
               label: "Plats chauds",
@@ -142,13 +140,13 @@
               pointStrokeColor: "rgba(60,141,188,1)",
               pointHighlightFill: "#fff",
               pointHighlightStroke: "rgba(60,141,188,1)",
-              data: [220, 200, 150, 160, 210, 160, 110]
+               data: [2500, 2400, 2000, 858, 1650, 1700, 1900, 1000, 1680, 1300, 490, 1688]
             }
           ]
         };
 		
 		var areaChartData4 = {
-          labels: ["Janvier", "Fevrier", "Mars", "Avril", "Mai", "Juin", "Juillet"],
+          labels: ["Janvier", "Fevrier", "Mars", "Avril", "Mai", "Juin", "Juillet", "Aout", "Septembre", "Octobre", "Novembre", "Decembre"],
           datasets: [
             {
               label: "Entrees",
@@ -158,7 +156,7 @@
               pointStrokeColor: "#c1c7d1",
               pointHighlightFill: "#fff",
               pointHighlightStroke: "rgba(220,220,220,1)",
-              data: [65, 59, 80, 81, 56, 55, 40]
+              data: [200, 240, 200, 88, 160, 170, 190, 100, 160, 130, 90, 160]
             },
 			{
               label: "Desserts",
@@ -168,7 +166,7 @@
               pointStrokeColor: "#c1c7d1",
               pointHighlightFill: "#fff",
               pointHighlightStroke: "rgba(220,20,220,1)",
-              data: [60, 70, 70, 52, 65, 44, 80]
+               data: [250, 240, 200, 58, 150, 100, 100, 200, 180, 130, 49, 168]
             },
             {
               label: "Plats chauds",
@@ -178,13 +176,13 @@
               pointStrokeColor: "rgba(60,141,188,1)",
               pointHighlightFill: "#fff",
               pointHighlightStroke: "rgba(60,141,188,1)",
-              data: [220, 200, 150, 160, 210, 160, 110]
+               data: [2500, 2400, 2000, 858, 1650, 1700, 1900, 1000, 1680, 1300, 490, 1688]
             }
           ]
         };
 		
 		var areaChartData3 = {
-          labels: ["Lundi", "Mardi", "Mercredi", "Jeudi", "Vendredi", "Samedi", "Dimanche"],
+          labels: ["Janvier", "Fevrier", "Mars", "Avril", "Mai", "Juin", "Juillet", "Aout", "Septembre", "Octobre", "Novembre", "Decembre"],
           datasets: [
             {
               label: "Electronics",
@@ -194,13 +192,13 @@
               pointStrokeColor: "#c1c7d1",
               pointHighlightFill: "#fff",
               pointHighlightStroke: "rgba(220,220,220,1)",
-              data: [65000, 59000, 80000, 81000, 56000, 55000, 40000]
+              data: [650000, 590000, 800000, 810000, 560000, 550000, 400000, 590000, 800000, 810000, 560000, 550000]
             }
           ]
         };
 		
         var areaChartData = {
-          labels: ["Lundi", "Mardi", "Mercredi", "Jeudi", "Vendredi", "Samedi", "Dimanche"],
+          labels: ["Janvier", "Fevrier", "Mars", "Avril", "Mai", "Juin", "Juillet", "Aout", "Septembre", "Octobre", "Novembre", "Decembre"],
           datasets: [
             {
               label: "Electronics",
@@ -210,7 +208,7 @@
               pointStrokeColor: "#c1c7d1",
               pointHighlightFill: "#fff",
               pointHighlightStroke: "rgba(220,220,220,1)",
-              data: [65, 59, 80, 81, 56, 55, 40]
+              data: [65, 59, 80, 81, 56, 55, 40, 80, 60, 46, 50, 37]
             },
             {
               label: "Digital Goods",
@@ -220,7 +218,7 @@
               pointStrokeColor: "rgba(60,141,188,1)",
               pointHighlightFill: "#fff",
               pointHighlightStroke: "rgba(60,141,188,1)",
-              data: [28, 48, 40, 19, 86, 27, 90]
+              data: [280, 408, 400, 190, 860, 270, 490, 280, 408, 400, 190, 86]
             }
           ]
         };
@@ -276,59 +274,7 @@
         lineChartOptions.datasetFill = false;
         lineChart.Line(areaChartData2, lineChartOptions);
 
-        //-------------
-        //- PIE CHART -
-        //-------------
-        // Get context with jQuery - using jQuery's .get() method.
-        var pieChartCanvas = $("#pieChart").get(0).getContext("2d");
-        var pieChart = new Chart(pieChartCanvas);
-        var PieData = [
-          {
-            value: 700,
-            color: "#f56954",
-            highlight: "#f56954",
-            label: "Plats Chauds"
-          },
-          {
-            value: 500,
-            color: "#00a65a",
-            highlight: "#00a65a",
-            label: "Dessert"
-          },
-          {
-            value: 400,
-            color: "#f39c12",
-            highlight: "#f39c12",
-            label: "Entrees"
-          }
-        ];
-        var pieOptions = {
-          //Boolean - Whether we should show a stroke on each segment
-          segmentShowStroke: true,
-          //String - The colour of each segment stroke
-          segmentStrokeColor: "#fff",
-          //Number - The width of each segment stroke
-          segmentStrokeWidth: 2,
-          //Number - The percentage of the chart that we cut out of the middle
-          percentageInnerCutout: 50, // This is 0 for Pie charts
-          //Number - Amount of animation steps
-          animationSteps: 100,
-          //String - Animation easing effect
-          animationEasing: "easeOutBounce",
-          //Boolean - Whether we animate the rotation of the Doughnut
-          animateRotate: true,
-          //Boolean - Whether we animate scaling the Doughnut from the centre
-          animateScale: false,
-          //Boolean - whether to make the chart responsive to window resizing
-          responsive: true,
-          // Boolean - whether to maintain the starting aspect ratio or not when responsive, if set to false, will take up entire container
-          maintainAspectRatio: true,
-          //String - A legend template
-          legendTemplate: "<ul class=\"<%=name.toLowerCase()%>-legend\"><% for (var i=0; i<segments.length; i++){%><li><span style=\"background-color:<%=segments[i].fillColor%>\"></span><%if(segments[i].label){%><%=segments[i].label%><%}%></li><%}%></ul>"
-        };
-        //Create pie or douhnut chart
-        // You can switch between pie and douhnut using the method below.
-        pieChart.Doughnut(PieData, pieOptions);
+        
 
         //-------------
         //- BAR CHART -

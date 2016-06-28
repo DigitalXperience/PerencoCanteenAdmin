@@ -1,3 +1,4 @@
+<?php //var_dump($liste); die; ?>
 <?php defined('BASEPATH') OR exit('No direct script access allowed'); ?>
 <?php include ('inc/head.php'); ?>
 <?php include ('inc/menu.php'); ?> 
@@ -6,21 +7,23 @@
         <!-- Content Header (Page header) -->
         <section class="content-header">
           <h1>
-            Statistiques graphiques
+            <?php echo $title; ?>
             <!--<small>Preview sample</small>-->
           </h1>
           <ol class="breadcrumb">
             <li><a href="#"><i class="fa fa-dashboard"></i> Accueil</a></li>
-            <li><a href="#">Statistique graphique</a></li>
+            <li><a href="#"><?php echo $title; ?></a></li>
           </ol>
         </section>
 
         <!-- Main content -->
         <section class="content">
 		<div class="callout callout-info">
+            <h4>Selectionner une periode définie</h4>
             <p><a href="<?php echo base_url().'index.php/report/weekstats'; ?>">Graphes semaine en cours</a> | 
 				<a href="<?php echo base_url().'index.php/report/monthstats'; ?>">Graphes mois en cours</a> | 
-				<a href="<?php echo base_url().'index.php/report/yearstats'; ?>">Graphes année en cours</a></p>   </div>
+				<a href="<?php echo base_url().'index.php/report/yearstats'; ?>">Graphes année en cours</a></p>
+          </div>
           <div class="row">
             <div class="col-md-6">
               <!-- AREA CHART -->
@@ -42,7 +45,7 @@
               <!-- DONUT CHART -->
               <div class="box box-danger">
                 <div class="box-header with-border">
-                  <h3 class="box-title">Consommation par type</h3>
+                  <h3 class="box-title">Consommation par type de la semaine</h3>
                   <div class="box-tools pull-right">
                     <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
                     <button class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
@@ -74,7 +77,7 @@
               <!-- BAR CHART -->
               <div class="box box-success">
                 <div class="box-header with-border">
-                  <h3 class="box-title">Statistique des consommations (6 derniers mois)</h3>
+                  <h3 class="box-title">Statistique Graphique en barre</h3>
                   <div class="box-tools pull-right">
                     <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
                     <button class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
@@ -122,7 +125,27 @@
               pointStrokeColor: "#c1c7d1",
               pointHighlightFill: "#fff",
               pointHighlightStroke: "rgba(220,220,220,1)",
-              data: [65, 59, 80, 81, 56, 55, 40]
+              data: [<?php
+				$begin = new DateTime( date( 'Y-m-d', strtotime( 'monday this week' ) ) );
+				$end = new DateTime( date( 'Y-m-d', strtotime( 'sunday this week' ) ) );
+				$end = $end->modify( '+1 day' ); 
+
+				$interval = new DateInterval('P1D');
+				$daterange = new DatePeriod($begin, $interval ,$end);
+
+				foreach($daterange as $date){
+					//$dates[$date->format("Y-m-d")] = '';
+					foreach($liste as $day) {
+						if($day->fdate == $date->format("Y-m-d"))
+							echo abs($day->starters) . ',';
+						else
+							echo "0" . ',';
+					}
+				}
+				
+				
+				
+			  ?>]
             },
 			{
               label: "Desserts",
@@ -148,7 +171,7 @@
         };
 		
 		var areaChartData4 = {
-          labels: ["Janvier", "Fevrier", "Mars", "Avril", "Mai", "Juin", "Juillet"],
+          labels: ["Lundi", "Mardi", "Mercredi", "Jeudi", "Vendredi", "Samedi", "Dimanche"],
           datasets: [
             {
               label: "Entrees",
@@ -284,19 +307,19 @@
         var pieChart = new Chart(pieChartCanvas);
         var PieData = [
           {
-            value: 700,
+            value: 1200,
             color: "#f56954",
             highlight: "#f56954",
             label: "Plats Chauds"
           },
           {
-            value: 500,
+            value: 250,
             color: "#00a65a",
             highlight: "#00a65a",
             label: "Dessert"
           },
           {
-            value: 400,
+            value: 120,
             color: "#f39c12",
             highlight: "#f39c12",
             label: "Entrees"

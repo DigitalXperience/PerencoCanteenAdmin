@@ -6,27 +6,29 @@
         <!-- Content Header (Page header) -->
         <section class="content-header">
           <h1>
-            Statistiques graphiques
+            <?php echo $title; ?>
             <!--<small>Preview sample</small>-->
           </h1>
           <ol class="breadcrumb">
             <li><a href="#"><i class="fa fa-dashboard"></i> Accueil</a></li>
-            <li><a href="#">Statistique graphique</a></li>
+            <li><a href="#"><?php echo $title; ?></a></li>
           </ol>
         </section>
 
         <!-- Main content -->
         <section class="content">
 		<div class="callout callout-info">
+            <h4>Selectionner une periode définie</h4>
             <p><a href="<?php echo base_url().'index.php/report/weekstats'; ?>">Graphes semaine en cours</a> | 
 				<a href="<?php echo base_url().'index.php/report/monthstats'; ?>">Graphes mois en cours</a> | 
-				<a href="<?php echo base_url().'index.php/report/yearstats'; ?>">Graphes année en cours</a></p>   </div>
+				<a href="<?php echo base_url().'index.php/report/yearstats'; ?>">Graphes année en cours</a></p>  
+		</div>
           <div class="row">
             <div class="col-md-6">
               <!-- AREA CHART -->
               <div class="box box-primary">
                 <div class="box-header with-border">
-                  <h3 class="box-title">Couts de la semaine</h3>
+                  <h3 class="box-title">Dépenses sur le mois</h3>
                   <div class="box-tools pull-right">
                     <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
                     <button class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
@@ -42,7 +44,7 @@
               <!-- DONUT CHART -->
               <div class="box box-danger">
                 <div class="box-header with-border">
-                  <h3 class="box-title">Consommation par type</h3>
+                  <h3 class="box-title">Consommation par type du mois</h3>
                   <div class="box-tools pull-right">
                     <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
                     <button class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
@@ -58,7 +60,7 @@
               <!-- LINE CHART -->
               <div class="box box-info">
                 <div class="box-header with-border">
-                  <h3 class="box-title">Consommation sur la semaine en cours</h3>
+                  <h3 class="box-title">Consommation sur le mois en cours</h3>
                   <div class="box-tools pull-right">
                     <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
                     <button class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
@@ -74,7 +76,7 @@
               <!-- BAR CHART -->
               <div class="box box-success">
                 <div class="box-header with-border">
-                  <h3 class="box-title">Statistique des consommations (6 derniers mois)</h3>
+                  <h3 class="box-title">Statistique Graphique en barre</h3>
                   <div class="box-tools pull-right">
                     <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
                     <button class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
@@ -112,7 +114,7 @@
         // This will get the first returned node in the jQuery collection.
         var areaChart = new Chart(areaChartCanvas);
 		var areaChartData2 = {
-          labels: ["Lundi", "Mardi", "Mercredi", "Jeudi", "Vendredi", "Samedi", "Dimanche"],
+          labels: ["Semaine 1", "Semaine 2", "Semaine 3", "Semaine 4"],
           datasets: [
             {
               label: "Entrees",
@@ -122,7 +124,7 @@
               pointStrokeColor: "#c1c7d1",
               pointHighlightFill: "#fff",
               pointHighlightStroke: "rgba(220,220,220,1)",
-              data: [65, 59, 80, 81, 56, 55, 40]
+              data: [100, 130, 95, 89]
             },
 			{
               label: "Desserts",
@@ -132,7 +134,7 @@
               pointStrokeColor: "#c1c7d1",
               pointHighlightFill: "#fff",
               pointHighlightStroke: "rgba(220,20,220,1)",
-              data: [60, 70, 70, 52, 65, 44, 80]
+              data: [60, 70, 70, 52]
             },
             {
               label: "Plats chauds",
@@ -142,13 +144,13 @@
               pointStrokeColor: "rgba(60,141,188,1)",
               pointHighlightFill: "#fff",
               pointHighlightStroke: "rgba(60,141,188,1)",
-              data: [220, 200, 150, 160, 210, 160, 110]
+              data: [1220, 1200, 1150, 1060]
             }
           ]
         };
 		
 		var areaChartData4 = {
-          labels: ["Janvier", "Fevrier", "Mars", "Avril", "Mai", "Juin", "Juillet"],
+          labels: ["Semaine 1", "Semaine 2", "Semaine 3", "Semaine 4"],
           datasets: [
             {
               label: "Entrees",
@@ -158,7 +160,7 @@
               pointStrokeColor: "#c1c7d1",
               pointHighlightFill: "#fff",
               pointHighlightStroke: "rgba(220,220,220,1)",
-              data: [65, 59, 80, 81, 56, 55, 40]
+              data: [65, 59, 80, 81]
             },
 			{
               label: "Desserts",
@@ -168,7 +170,7 @@
               pointStrokeColor: "#c1c7d1",
               pointHighlightFill: "#fff",
               pointHighlightStroke: "rgba(220,20,220,1)",
-              data: [60, 70, 70, 52, 65, 44, 80]
+              data: [60, 70, 70, 52]
             },
             {
               label: "Plats chauds",
@@ -178,13 +180,13 @@
               pointStrokeColor: "rgba(60,141,188,1)",
               pointHighlightFill: "#fff",
               pointHighlightStroke: "rgba(60,141,188,1)",
-              data: [220, 200, 150, 160, 210, 160, 110]
+              data: [220, 200, 150, 160]
             }
           ]
         };
 		
 		var areaChartData3 = {
-          labels: ["Lundi", "Mardi", "Mercredi", "Jeudi", "Vendredi", "Samedi", "Dimanche"],
+          labels: ["Semaine 1", "Semaine 2", "Semaine 3", "Semaine 4"],
           datasets: [
             {
               label: "Electronics",
@@ -194,7 +196,7 @@
               pointStrokeColor: "#c1c7d1",
               pointHighlightFill: "#fff",
               pointHighlightStroke: "rgba(220,220,220,1)",
-              data: [65000, 59000, 80000, 81000, 56000, 55000, 40000]
+              data: [65000, 59000, 80000, 81000]
             }
           ]
         };

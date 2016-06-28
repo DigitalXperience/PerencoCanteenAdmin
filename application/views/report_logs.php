@@ -1,7 +1,9 @@
 <?php defined('BASEPATH') OR exit('No direct script access allowed'); ?>
 <?php include ('inc/head.php'); ?>
 <?php include ('inc/menu.php'); ?>
-
+<?php 
+$dates = $this->input->get('dates');
+?>
 <!-- Content Wrapper. Contains page content -->
     <div class="content-wrapper">
     <!-- Content Header (Page header) -->
@@ -16,33 +18,50 @@
     </section>
 
     <!-- Main content -->
-    <section class="content">
+    <section class="content">		
 		<form role="form" action="<?php echo base_url().'index.php/report/logs'; ?>" method="get">
-		<div class="row">
-			<div class="col-sm-6">
-				<div class="dataTables_length" id="example1_length">
-					<label>Poste </label>
-					<select name="poste" aria-controls="example1" class="">
-						<option value="">Tous</option>
-						<option value="client1">Client 1</option>
-						<option value="server">Serveur</option>
-					</select> 
-					<div class="form-group">
+		<!-- Parametre du filtre -->
+          <div class="box box-default">
+            <div class="box-header with-border">
+              <h3 class="box-title">Options de filtre</h3>
+              <div class="box-tools pull-right">
+                <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
+                <button class="btn btn-box-tool" data-widget="remove"><i class="fa fa-remove"></i></button>
+              </div>
+            </div><!-- /.box-header -->
+            <div class="box-body">
+              <div class="row">
+                <div class="col-md-6">
+                   <div class="form-group">
 						<label>Dates:</label>
 						<div class="input-group">
 						  <div class="input-group-addon">
 							<i class="fa fa-calendar"></i>
 						  </div>
-						  <input type="text" class="form-control pull-right" id="reservation" name="dates">
+						  <input type="text" class="form-control pull-right" id="reservation" name="dates" value="<?php echo $dates; ?>">
 						</div><!-- /.input group -->
 					</div><!-- /.form group -->
-					<button type="submit" class="btn btn-primary">Afficher</button> 
-				</div>
-			</div>
-			<div class="col-sm-6">
-			</div>
-		</div>
+                <!-- checkbox -->
+					<div class="form-group">
+						<label>Terminal</label>
+						<select name="poste" aria-controls="example1" class="form-control">
+							<option value="">Tous</option>
+							<option value="client1">TPV</option>
+							<option value="server">Serveur</option>
+						</select>
+					</div>
+                </div><!-- /.col -->
+                
+              </div><!-- /.row -->
+            </div><!-- /.box-body -->
+            <div class="box-footer">
+              <button type="submit" class="btn btn-primary" style="float:right;margin-left:10px" onClick="window.location.href = '<?php echo base_url('index.php/report/logs'); ?>'; return false;">Affichage par défaut</button>
+		  
+			  <button type="submit" class="btn btn-primary" style="float:right;">Appliquer les parametres</button>  
+            </div>
+          </div><!-- Parametre du filtre -->
 		</form>
+		
         <div class="row">
         <div class="col-xs-12">
           <div class="box">
@@ -55,30 +74,38 @@
                     <th>Entree</th>
                     <th>Repas</th>
                     <th>Dessert</th>
-                    <th>Poste</th>
+                    <th>Transaction</th>
                     <th>Date et Heure</th>
                   </tr>
                 </thead>
                 <tbody>
-                     <?php if($liste){
+                     <?php if(!empty($liste)){
 							$sum_entree = 0;
 							$sum_repas = 0;
 							$sum_dessert = 0;
+							
                             foreach ($liste as $row){
+								if($row->place == 'client1') $trans = 'Débit'; else $trans = 'Crédit';
                                 echo '<tr id="row-'.$row->id_user.'">
                                         <td>'.$row->firstname.'</td>
                                         <td>'.$row->lastname.'</td>
                                         <td>'.abs($row->starter).'</td>
                                         <td>'.abs($row->meal).'</td>
                                         <td>'.abs($row->dessert).'</td>
-                                        <td>'.$row->place.'</td>
+                                        <td>'.$trans.'</td>
                                         <td>'.$row->date.'</td>
                                       </tr>';
 								$sum_entree += abs($row->starter);
 								$sum_repas += abs($row->meal);
 								$sum_dessert += abs($row->dessert);
                             }
-                    } ?>
+                    }
+						else {
+							$sum_entree = 0;
+							$sum_repas = 0;
+							$sum_dessert = 0;
+						}
+					?>
                 </tbody>
                 <tfoot>
                   <tr>

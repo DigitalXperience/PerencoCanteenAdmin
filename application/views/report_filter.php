@@ -1,7 +1,9 @@
 <?php defined('BASEPATH') OR exit('No direct script access allowed'); ?>
 <?php include ('inc/head.php'); ?>
 <?php include ('inc/menu.php'); ?>
-
+<?php 
+$dates = $this->input->get('dates');
+?>
 <!-- Content Wrapper. Contains page content -->
     <div class="content-wrapper">
     <!-- Content Header (Page header) -->
@@ -17,7 +19,7 @@
 
     <!-- Main content -->
     <section class="content">
-	
+		<form role="form" action="<?php echo base_url().'index.php/report/filter'; ?>" method="get">
 		<!-- Parametre du filtre -->
           <div class="box box-default">
             <div class="box-header with-border">
@@ -31,39 +33,84 @@
               <div class="row">
                 <div class="col-md-6">
                    <!-- Date and time range -->
-                  <div class="form-group">
-                    <label>Date range button:</label>
-                    <div class="input-group">
-                      <button class="btn btn-default pull-right" id="daterange-btn">
-                        <i class="fa fa-calendar"></i> Date range picker
-                        <i class="fa fa-caret-down"></i>
-                      </button>
-                    </div>
-                  </div><!-- /.form group -->
+					<div class="form-group">
+						<label>Dates:</label>
+						<div class="input-group">
+						  <div class="input-group-addon">
+							<i class="fa fa-calendar"></i>
+						  </div>
+						  <input type="text" class="form-control pull-right" value="<?php echo $dates; ?>" placeholder="MOIS EN COURS PAR DEFAUT" id="reservation" name="dates">
+						</div><!-- /.input group -->
+					</div><!-- /.form group -->
                 <!-- checkbox -->
-                  <div class="form-group">
-                    <label>
-                      <input type="checkbox" class="minimal" checked>
-					  Entrees
-                    </label>
-                    <label>
-                      <input type="checkbox" class="minimal">
-					  Dessert
-                    </label>
-                    <label>
-                      <input type="checkbox" class="minimal" disabled>
-						Plats Chauds
-                    </label>
-                  </div>
-                </div><!-- /.col -->
+                  <div class="form-group" style="width:49%; float:left">
+                      <div class="checkbox">
+                        <label>
+                          <input type="checkbox" name="starter" value="yes" id="starter" <?php if($this->input->get('starter')) echo "checked"; ?>>
+                          Entrées
+                        </label>
+                      </div>
+
+                      <div class="checkbox">
+                        <label>
+                          <input type="checkbox" name="meal" value="yes" id="meal" <?php if($this->input->get('meal')) echo "checked"; ?>>
+                          Plats chauds
+                        </label>
+                      </div>
+
+                      <div class="checkbox">
+                        <label>
+                          <input type="checkbox" name="dessert" value="yes" id="dessert" <?php if($this->input->get('dessert')) echo "checked"; ?>>
+                          Desserts
+                        </label>
+                      </div>
+					  <div class="checkbox">
+                        <label>
+                          <input type="checkbox" name="pdf" value="yes" id="pdf" />
+                          Exporter le résultat en PDF
+                        </label>
+                      </div>
+                    </div>
+					<div class="form-group" style="width:49%; float:right">
+                      <div class="checkbox">
+                        <label>
+                          <input type="checkbox" name="sstarter" value="yes" id="starter" <?php if($this->input->get('starter')) echo "checked"; ?>>
+                          Somme des entrées
+                        </label>
+                      </div>
+
+                      <div class="checkbox">
+                        <label>
+                          <input type="checkbox" name="smeal" value="yes" id="meal" <?php if($this->input->get('meal')) echo "checked"; ?>>
+                          Somme des plats chauds
+                        </label>
+                      </div>
+
+                      <div class="checkbox">
+                        <label>
+                          <input type="checkbox" name="sdessert" value="yes" id="dessert" <?php if($this->input->get('dessert')) echo "checked"; ?>>
+                          Somme des desserts
+                        </label>
+                      </div>
+                    </div>
+                
+              </div><!-- /.row -->
+			  <div class="col-md-6">
+                   <!-- Date and time range -->
+					
+                
                 
               </div><!-- /.row -->
             </div><!-- /.box-body -->
-            <div class="box-footer">
-              Les parametres appliqués
+            <div class="box-footer" style="padding-bottom:0">
+              
+			   <button type="submit" class="btn btn-primary" style="float:right;margin-left:10px" onClick="window.location.href = '<?php echo base_url('index.php/report/filter'); ?>'; return false;">Affichage par défaut</button>
+		  
+			  <button type="submit" class="btn btn-primary" style="float:right;">Appliquer les parametres</button>  
             </div>
           </div><!-- Parametre du filtre -->
-		  
+		  </div><!-- /.content-wrapper -->
+		</form>
 		  
         <div class="row">
         <div class="col-xs-12">
@@ -73,54 +120,58 @@
                 <thead>
                   <tr>
                     <th>Date</th>
-                    <th>Entrees</th>
-                    <th>Plats Chauds</th>
-                    <th>Desserts</th>
-                    <th>Entrees (cfa)</th>
-                    <th>Plats (cfa)</th>
-                    <th>Desserts (cfa)</th>
-                    <th>Terminal</th>
+                    <?php if($this->input->get('starter')) { ?><th>Entrees</th><?php } ?>
+                    <?php if($this->input->get('meal')) { ?><th>Plats Chauds</th><?php } ?>
+                    <?php if($this->input->get('dessert')) { ?><th>Desserts</th><?php } ?>
+                    <?php if($this->input->get('sstarter')) { ?> <th>Entrees (cfa)</th><?php } ?>
+                     <?php if($this->input->get('smeal')) { ?><th>Plats (cfa)</th><?php } ?>
+                    <?php if($this->input->get('sdessert')) { ?><th>Desserts (cfa)</th><?php } ?>
+                    <th>Total (cfa)</th>
                   </tr>
                 </thead>
                 <tbody>
                      <?php if($liste){
-							$sum_entree = 0;
-							$sum_repas = 0;
-							$sum_dessert = 0;
-							$sum_entreef = 0;
-							$sum_repasf = 0;
-							$sum_dessertf = 0;
+							if($this->input->get('starter')) { $sum_entree = 0; }
+							if($this->input->get('meal')) { $sum_repas = 0; }
+							if($this->input->get('dessert')) { $sum_dessert = 0; }
+							if($this->input->get('sstarter')) { $sum_entreef = 0; }
+							if($this->input->get('smeal')) { $sum_repasf = 0; }
+							if($this->input->get('sdessert')) { $sum_dessertf = 0; }
                             foreach ($liste as $row){
-                                echo '<tr id="row-'.$row->id.'">
-                                        <td>'.$row->dat.'</td>
-                                        <td>'.abs($row->starters) .'</td>
-                                        <td>'.abs($row->meals).'</td>
-                                        <td>'.abs($row->desserts).'</td>
-                                        <td>'.(abs($row->starters) * $params['starter_price']) .'</td>
-                                        <td>'.(abs($row->meals) * $params['meal_price']).'</td>
-                                        <td>'.(abs($row->desserts) * $params['dessert_price']).'</td>
-                                        <td>'.$row->place.'</td>
-                                      </tr>';
-								$sum_entree += abs($row->starters);
-								$sum_repas += abs($row->meals);
-								$sum_dessert += abs($row->desserts);
-								$sum_entreef += (abs($row->starters) * $params['starter_price']);
-								$sum_repasf += (abs($row->meals) * $params['meal_price']);
-								$sum_dessertf += (abs($row->desserts) * $params['dessert_price']);
+								$sumday = 0;
+								if($this->input->get('starter') && $this->input->get('sstarter')) $sumday += (abs($row->starters) * $params['starter_price']);
+								if($this->input->get('meal') && $this->input->get('smeal')) $sumday += (abs($row->meals) * $params['meal_price']);
+								if($this->input->get('dessert') && $this->input->get('sdessert')) $sumday += (abs($row->desserts) * $params['dessert_price']);
+                                echo '<tr>
+                                        <td>'.$row->dat.'</td>';
+                                        if($this->input->get('starter')) {  echo '<td>'.abs($row->starters) .'</td>'; }
+                                        if($this->input->get('meal')) { echo '<td>'.abs($row->meals).'</td>'; }
+                                        if($this->input->get('dessert')) { echo '<td>'.abs($row->desserts).'</td>'; }
+                                       if($this->input->get('sstarter')) {  echo '<td>'.(abs($row->starters) * $params['starter_price']) .'</td>'; }
+                                        if($this->input->get('smeal')) { echo '<td>'.(abs($row->meals) * $params['meal_price']).'</td>'; }
+                                        if($this->input->get('sdessert')) { echo '<td>'.(abs($row->desserts) * $params['dessert_price']).'</td>'; }
+                                        echo '<td>'.$sumday.'</td>';
+                                      echo '</tr>';
+								if($this->input->get('starter')) { $sum_entree += abs($row->starters); }
+								if($this->input->get('meal')) { $sum_repas += abs($row->meals); }
+								if($this->input->get('dessert')) { $sum_dessert += abs($row->desserts); }
+								if($this->input->get('sstarter')) { $sum_entreef += (abs($row->starters) * $params['starter_price']); }
+								if($this->input->get('smeal')) { $sum_repasf += (abs($row->meals) * $params['meal_price']); }
+								if($this->input->get('sdessert')) { $sum_dessertf += (abs($row->desserts) * $params['dessert_price']); }
                             }
                     } ?>
                 </tbody>
                 <tfoot>
                   <tr>
                     <th>Date</th>
-                    <th>Total : <?php echo $sum_entree; ?></th>
-                    <th>Total : <?php echo $sum_repas; ?></th>
-                    <th>Total : <?php echo $sum_dessert; ?></th>
-					 <th>Total : <?php echo $sum_entreef; ?></th>
-                    <th>Total : <?php echo $sum_repasf; ?></th>
-                    <th>Total : <?php echo $sum_dessertf; ?></th>
+                    <?php if($this->input->get('starter') && $liste) { ?> <th>Total : <?php echo $sum_entree; ?></th><?php } ?>
+                   <?php if($this->input->get('meal') && $liste) { ?> <th>Total : <?php echo $sum_repas; ?></th><?php } ?>
+                    <?php if($this->input->get('dessert') && $liste) { ?><th>Total : <?php echo $sum_dessert; ?></th><?php } ?>
+					 <?php if($this->input->get('sstarter') && $liste) { ?><th>Total : <?php echo $sum_entreef; ?></th><?php } ?>
+                    <?php if($this->input->get('smeal') && $liste) { ?><th>Total : <?php echo $sum_repasf; ?></th><?php } ?>
+                    <?php if($this->input->get('sdessert') && $liste) { ?><th>Total : <?php echo $sum_dessertf; ?></th><?php } ?>
 					
-                    <th>Terminal</th>
+                    <th>Total cfa</th>
                   </tr>
                 </tfoot>
               </table>
@@ -129,9 +180,9 @@
         </div>
       </div>
 
-    </section><!-- /.content -->
-</div><!-- /.content-wrapper -->
 
+    </section><!-- /.content -->
+</div>
 <?php include ('inc/footer.php'); ?>
 <!-- page script -->
 <!-- Select2 -->
@@ -169,24 +220,6 @@
         $('#reservation').daterangepicker();
         //Date range picker with time picker
         $('#reservationtime').daterangepicker({timePicker: true, timePickerIncrement: 30, format: 'MM/DD/YYYY h:mm A'});
-        //Date range as a button
-        $('#daterange-btn').daterangepicker(
-            {
-              ranges: {
-                'Today': [moment(), moment()],
-                'Yesterday': [moment().subtract(1, 'days'), moment().subtract(1, 'days')],
-                'Last 7 Days': [moment().subtract(6, 'days'), moment()],
-                'Last 30 Days': [moment().subtract(29, 'days'), moment()],
-                'This Month': [moment().startOf('month'), moment().endOf('month')],
-                'Last Month': [moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')]
-              },
-              startDate: moment().subtract(29, 'days'),
-              endDate: moment()
-            },
-        function (start, end) {
-          $('#reportrange span').html(start.format('MMMM D, YYYY') + ' - ' + end.format('MMMM D, YYYY'));
-        }
-        );
 
         //iCheck for checkbox and radio inputs
         $('input[type="checkbox"].minimal, input[type="radio"].minimal').iCheck({
