@@ -126,11 +126,12 @@ Class Accounts extends CI_Model
 	{
 		$values['place'] = 'server';
 		$values['starter'] = (int) $values['starter'];
-		$values['meal'] = (int) $values['meal'];
+		if(isset($values['meal'])) $values['meal'] = (int) $values['meal'];
+		//(isset($values['meal'])) ? $values['meal'] = (int) $values['meal'] : ;
 		$values['dessert'] = (int) $values['dessert'];
 		
 		$balance['starter'] = $values['old_starter'] + $values['starter']; unset($values['old_starter']);
-		$balance['meal'] = $values['old_meal'] + $values['meal']; unset($values['old_meal']);
+		if(isset($values['meal'])) { $balance['meal'] = $values['old_meal'] + $values['meal']; unset($values['old_meal']); }
 		$balance['dessert'] = $values['old_dessert'] + $values['dessert']; unset($values['old_dessert']);
 		$this->db->where('id_user', $values['id_user']);
 		$this->db->update('user_balance', $balance);
