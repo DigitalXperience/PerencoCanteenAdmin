@@ -48,7 +48,7 @@ class Users extends CI_Controller{
                     }
                 }
                 
-                if(empty($this->input->post('firstname')) or empty($this->input->post('status'))){
+                if(empty($this->input->post('status'))){
                     $data['alert']='<div class="alert alert-danger alert-dismissable"> <button type="button" class="close" data-       dismiss="alert" aria-hidden="true">×</button>
                      <h4><i class="icon fa fa-ban"></i> Erreur !</h4> Veuillez entrer les informations obligatoires </div>';
                     $error=true;
