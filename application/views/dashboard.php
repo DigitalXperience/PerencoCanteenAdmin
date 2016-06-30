@@ -37,12 +37,12 @@
               <div class="small-box bg-aqua">
                 <div class="inner">
                   <h3><?php echo $nbusers; ?></h3>
-                  <p>Compte</p>
+                  <p>Utilisateurs</p>
                 </div>
                 <div class="icon">
-                  <i class="ion ion-bag"></i>
+                  <i class="ion ion-person"></i>
                 </div>
-                <a href="<?php echo base_url(); ?>account" class="small-box-footer">Plus d'info <i class="fa fa-arrow-circle-right"></i></a>
+                <a href="<?php echo base_url(); ?>index.php/users" class="small-box-footer">Plus d'info <i class="fa fa-arrow-circle-right"></i></a>
               </div>
             </div><!-- ./col -->
 		  
@@ -51,7 +51,7 @@
               <div class="small-box bg-green">
                 <div class="inner">
                   <h3><?php echo $platschauds; ?><sup style="font-size: 20px"></sup></h3>
-                  <p>Plats consommés</p>
+                  <p>Plats consommés ce jour</p>
                 </div>
                 <div class="icon">
                   <i class="ion ion-stats-bars"></i>
@@ -62,10 +62,10 @@
 			
 			<div class="col-lg-3 col-xs-6">
               <!-- small box -->
-              <div class="small-box bg-red">
+              <div class="small-box bg-blue">
                 <div class="inner">
-                  <h3>65 %</h3>
-                  <p>Dessert </p>
+                  <h3>&nbsp;</h3>
+                  <p>Statistiques </p>
                 </div>
                 <div class="icon">
                   <i class="ion ion-pie-graph"></i>
@@ -83,14 +83,14 @@
               <div class="nav-tabs-custom">
                 <!-- Tabs within a box -->
                 <ul class="nav nav-tabs pull-right">
-                  <li class="active"><a href="#revenue-chart" data-toggle="tab">Area</a></li>
-                  <li><a href="#sales-chart" data-toggle="tab">Donut</a></li>
+                  <li class=""><a href="#sales-chart" data-toggle="tab">Donut</a></li>
+                  <li class="active"><a href="#revenue-chart" data-toggle="tab">Ligne</a></li>
                   <li class="pull-left header"><i class="fa fa-inbox"></i> Consommations hebdomadaires</li>
                 </ul>
                 <div class="tab-content no-padding">
                   <!-- Morris chart - Sales -->
+                  <div class="chart tab-pane " id="sales-chart" style="position: relative; height: 300px;"></div>
                   <div class="chart tab-pane active" id="revenue-chart" style="position: relative; height: 300px;"></div>
-                  <div class="chart tab-pane" id="sales-chart" style="position: relative; height: 300px;"></div>
                 </div>
               </div><!-- /.nav-tabs-custom -->
 
@@ -130,16 +130,16 @@
                     <div class="col-sm-6">
                       <!-- Progress bars -->
                       <div class="clearfix">
-                        <span class="pull-left">Task #1</span>
-                        <small class="pull-right">90%</small>
+                        <span class="pull-left">Plats chauds</span>
+                        <small class="pull-right">450</small>
                       </div>
                       <div class="progress xs">
                         <div class="progress-bar progress-bar-green" style="width: 90%;"></div>
                       </div>
 
                       <div class="clearfix">
-                        <span class="pull-left">Task #2</span>
-                        <small class="pull-right">70%</small>
+                        <span class="pull-left">Entrées</span>
+                        <small class="pull-right">120</small>
                       </div>
                       <div class="progress xs">
                         <div class="progress-bar progress-bar-green" style="width: 70%;"></div>
@@ -147,20 +147,14 @@
                     </div><!-- /.col -->
                     <div class="col-sm-6">
                       <div class="clearfix">
-                        <span class="pull-left">Task #3</span>
-                        <small class="pull-right">60%</small>
+                        <span class="pull-left">Desserts</span>
+                        <small class="pull-right">90</small>
                       </div>
                       <div class="progress xs">
                         <div class="progress-bar progress-bar-green" style="width: 60%;"></div>
                       </div>
 
-                      <div class="clearfix">
-                        <span class="pull-left">Task #4</span>
-                        <small class="pull-right">40%</small>
-                      </div>
-                      <div class="progress xs">
-                        <div class="progress-bar progress-bar-green" style="width: 40%;"></div>
-                      </div>
+                      
                     </div><!-- /.col -->
                   </div><!-- /.row -->
                 </div>
