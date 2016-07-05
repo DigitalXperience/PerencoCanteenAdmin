@@ -27,7 +27,7 @@
                   <h3 class="box-title">Reset par email</h3>
                 </div><!-- /.box-header -->
                 <!-- form start -->
-                <form role="form" method="POST" action="<?php echo base_url(); ?>index.php/account">
+                <form role="form" method="POST" action="">
                   <div class="box-body">
 					<div class="form-group">
                       <label for="user">Utilisateur</label>
