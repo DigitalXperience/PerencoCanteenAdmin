@@ -35,15 +35,13 @@
                     </div>
                     <div class="form-group">
                       <label for="entree">Email</label>
-                      <input type="text" class="form-control" id="starter" name="starter" value="<?php echo $user->email; ?>">
+                      <input type="text" class="form-control" id="PIN" name="PIN" value="<?php echo $user->email; ?>">
                     </div>
 					
                   </div><!-- /.box-body -->
                   <div class="box-footer">
 					<input type="hidden" id="id_user" name="id_user" value="<?php echo $user->id_user; ?>">
-					<input type="hidden" id="old_starter" name="old_starter" value="<?php echo $user->starter; ?>">
-					<input type="hidden" id="old_meal" name="old_meal" value="<?php echo $user->meal; ?>">
-					<input type="hidden" id="old_dessert" name="old_dessert" value="<?php echo $user->dessert; ?>">
+          <input type="hidden" id="PIN" name="PIN" value="<?php echo $newpin; ?>">
                     <button type="submit" class="btn btn-primary">Envoyer email</button>
                   </div>
                 </form>

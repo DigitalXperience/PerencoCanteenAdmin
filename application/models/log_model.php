@@ -52,13 +52,12 @@ class Log_model extends CI_Model {
 		if(!is_null($clause) && !empty($clause)) {
 			$where = "WHERE ";
 			
-			if(array_key_exists('poste', $clause) && $clause['poste'] !== '') {
-				$where .= " `place` = '" . $clause['poste'] . "' ";
-			}
+			$where .= " `place` = 'client1' AND ";
+			
 			if(array_key_exists('dates', $clause)) {
 				
 				if($clause['dates'] !== '') {
-					if(strlen($where) > 6) $where .= " AND ";
+					if(strlen($where) > 6) $where .= " ";
 					$dates = explode("-", $clause['dates']);
 					$date1 = preg_replace('#(\d{2})/(\d{2})/(\d{4})#', '$3-$1-$2', trim($dates[0]));
 					$date2 = preg_replace('#(\d{2})/(\d{2})/(\d{4})#', '$3-$1-$2', trim($dates[1]));
