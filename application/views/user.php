@@ -24,6 +24,7 @@
               <table id="example1" class="table table-bordered table-striped">
                 <thead>
                   <tr>
+                    <th>#</th>
                     <th>Nom</th>
                     <th>Prénom</th>
                     <th>Email</th>
@@ -41,6 +42,7 @@
                                 if($row->status=='contracted') $row->status='Contractuel';
                                 if($row->status=='Contracted') $row->status='Contractuel';
                                 echo '<tr id="row-'.$row->id_user.'">
+                                        <td>'.$row->id_user.'</td>
                                         <td>'.$row->firstname.'</td>
                                         <td>'.$row->lastname.'</td>
                                         <td>'.$row->email.'</td>
@@ -55,6 +57,7 @@
                 </tbody>
                 <tfoot>
                   <tr>
+                    <th>#</th>
                     <th>Nom</th>
                     <th>Prénom</th>
                     <th>Email</th>
