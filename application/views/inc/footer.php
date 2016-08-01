@@ -39,6 +39,8 @@
 <script src="<?php echo base_url(); ?>assets/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.all.min.js"></script>
 <!-- Slimscroll -->
 <script src="<?php echo base_url(); ?>assets/plugins/slimScroll/jquery.slimscroll.min.js"></script>
+<!-- ChartJS 1.0.1 -->
+<script src="<?php echo base_url(); ?>assets/plugins/chartjs/Chart.min.js"></script>
 <!-- FastClick -->
 <script src="<?php echo base_url(); ?>assets/plugins/fastclick/fastclick.min.js"></script>
 <!-- AdminLTE App -->

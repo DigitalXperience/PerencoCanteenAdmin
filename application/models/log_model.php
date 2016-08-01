@@ -119,6 +119,41 @@ class Log_model extends CI_Model {
 		return false;
 	}
 	
+	public function getConsumptionOfTheWeek()
+	{
+		$sql = "SELECT SUM(`starter`) AS starters, SUM(`meal`) AS meals, SUM(`dessert`) AS desserts 
+				FROM `logs` 
+				WHERE `place` = 'client1' AND week(DATE_FORMAT(date, '%Y-%m-%d')) = week(curdate(),1) 
+				GROUP BY DATE_FORMAT(date, '%m-%Y');";
+		
+		$query = $this->db->query($sql);
+		$row = $query->result();
+		if (isset($row))
+		{
+			if(count($row) > 0) 
+				return $row[0];
+			else
+				return false; 	
+		}
+		return false;	
+	}
+	
+	public function getConsumptionOfTheWeekDayByDay()
+	{
+		$sql = "SELECT SUM(`starter`) AS starters, SUM(`meal`) AS meals, SUM(`dessert`) AS desserts, DAYOFWEEK(date) as daynum
+				FROM `logs` 
+				WHERE `place` = 'client1' AND week(DATE_FORMAT(date, '%Y-%m-%d')) = week(curdate(),1) 
+				GROUP BY DATE_FORMAT(date, '%d-%m-%Y');";
+		
+		$query = $this->db->query($sql);
+		$row = $query->result();
+		if (isset($row))
+		{
+			return $row;
+		}
+		return false;	
+	}
+	
 }
 
 ?>
