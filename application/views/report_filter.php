@@ -66,7 +66,7 @@ $dates = $this->input->get('dates');
                       </div>
 					  <div class="checkbox">
                         <label>
-                          <input type="checkbox" name="pdf" value="yes" id="pdf" />
+                          <input type="checkbox" name="pdf" value="yes" id="pdf" target="" />
                           Exporter le résultat en PDF
                         </label>
                       </div>
@@ -195,14 +195,8 @@ $dates = $this->input->get('dates');
     <script src="<?php echo base_url(); ?>assets/plugins/iCheck/icheck.min.js"></script>
 <script>
   $(function () {
-    $("#example1").DataTable();
-    $('#example2').DataTable({
-      "paging": true,
-      "lengthChange": false,
-      "searching": false,
-      "ordering": true,
-      "info": true,
-      "autoWidth": false
+    $("#example1").DataTable({
+	  "order": [[ 0, "desc" ]]
     });
   });
    $(function () {
@@ -231,6 +225,7 @@ $dates = $this->input->get('dates');
           checkboxClass: 'icheckbox_minimal-red',
           radioClass: 'iradio_minimal-red'
         });
+		
         //Flat red color scheme for iCheck
         $('input[type="checkbox"].flat-red, input[type="radio"].flat-red').iCheck({
           checkboxClass: 'icheckbox_flat-green',

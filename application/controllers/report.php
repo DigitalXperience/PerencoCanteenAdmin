@@ -120,6 +120,8 @@ class Report extends CI_Controller{
 			$data['title'] = "Statistiques Hebdomadaire";
 			// Traitement
 			$data['liste'] = $this->logs->getWeekReport();
+			$data['conso'] = $this->logs->getConsumptionOfTheWeek();
+			$data['consoweek'] = $this->logs->getConsumptionOfTheWeekDayByDay();
 			$data['params'] = $this->params->getParams();
 			$this->load->view('report_week', $data);
 		}
@@ -134,9 +136,15 @@ class Report extends CI_Controller{
 	{	
 		if($this->session->userdata('logged_in'))
 		{
+			// var_dump(date('d-m-Y',strtotime('first day of this month')));
+			// var_dump(date('d-m-Y', strtotime('last day of this month')));
+			// die;
+			
 			$session_data = $this->session->userdata('logged_in');
 			$data['username'] = $session_data['username'];
 			$data['name'] = $this->user->getInfo($session_data['id']);
+			$data['conso'] = $this->logs->getConsumptionOfTheMonth();
+			$data['consomonth'] = $this->logs->getConsumptionOfTheMonthWeekByWeek();
 			$data['title'] = "Statistiques Mensuelle";
 			// Traitement
 			$data['liste'] = $this->logs->getWeekReport();

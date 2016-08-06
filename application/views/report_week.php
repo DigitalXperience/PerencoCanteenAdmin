@@ -101,12 +101,7 @@
   
     <script>
       $(function () {
-        /* ChartJS
-         * -------
-         * Here we will create a few charts using ChartJS
-         */
-
-        //--------------
+       //--------------
         //- AREA CHART -
         //--------------
 
@@ -115,99 +110,97 @@
         // This will get the first returned node in the jQuery collection.
         var areaChart = new Chart(areaChartCanvas);
 		var areaChartData2 = {
-          labels: ["Lundi", "Mardi", "Mercredi", "Jeudi", "Vendredi", "Samedi", "Dimanche"],
+          labels: ["Lundi", "Mardi", "Mercredi", "Jeudi", "Vendredi"],
           datasets: [
             {
-              label: "Entrees",
-              fillColor: "rgba(210, 214, 222, 1)",
-              strokeColor: "rgba(210, 214, 222, 1)",
-              pointColor: "rgba(210, 214, 222, 1)",
-              pointStrokeColor: "#c1c7d1",
-              pointHighlightFill: "#fff",
-              pointHighlightStroke: "rgba(220,220,220,1)",
-              data: [<?php
-				$begin = new DateTime( date( 'Y-m-d', strtotime( 'monday this week' ) ) );
-				$end = new DateTime( date( 'Y-m-d', strtotime( 'sunday this week' ) ) );
-				$end = $end->modify( '+1 day' ); 
-
-				$interval = new DateInterval('P1D');
-				$daterange = new DatePeriod($begin, $interval ,$end);
-
-				foreach($daterange as $date){
-					//$dates[$date->format("Y-m-d")] = '';
-					foreach($liste as $day) {
-						if($day->fdate == $date->format("Y-m-d"))
-							echo abs($day->starters) . ',';
-						else
-							echo "0" . ',';
-					}
-				}
-				
-				
-				
-			  ?>]
-            },
-			{
-              label: "Desserts",
-              fillColor: "rgba(210, 48, 222, 1)",
-              strokeColor: "rgba(210, 48, 222, 1)",
-              pointColor: "rgba(210, 48, 222, 1)",
-              pointStrokeColor: "#c1c7d1",
-              pointHighlightFill: "#fff",
-              pointHighlightStroke: "rgba(220,20,220,1)",
-              data: [60, 70, 70, 52, 65, 44, 80]
-            },
-            {
-              label: "Plats chauds",
-              fillColor: "rgba(60,141,188,0.9)",
-              strokeColor: "rgba(60,141,188,0.8)",
-              pointColor: "#3b8bba",
-              pointStrokeColor: "rgba(60,141,188,1)",
-              pointHighlightFill: "#fff",
-              pointHighlightStroke: "rgba(60,141,188,1)",
-              data: [220, 200, 150, 160, 210, 160, 110]
-            }
+        label: "Entrees",
+        fillColor: "rgba(243, 156, 18, 0.9)",
+        strokeColor: "rgba(243, 156, 18, 0.8)",
+        pointColor: "rgba(243, 156, 18,1)",
+        pointStrokeColor: "#c1c7d1",
+        pointHighlightFill: "#fff",
+        pointHighlightStroke: "rgba(243, 156, 18,1)",
+        data: [<?php 
+			foreach($consoweek as $c)
+				echo abs($c->starters) .',';
+		?>]
+      },
+      {
+        label: "Plats chauds",
+        fillColor: "rgba(60,141,188,0.9)",
+        strokeColor: "rgba(60,141,188,0.8)",
+        pointColor: "#3b8bba",
+        pointStrokeColor: "rgba(60,141,188,1)",
+        pointHighlightFill: "#fff",
+        pointHighlightStroke: "rgba(60,141,188,1)",
+        data: [<?php 
+			foreach($consoweek as $c)
+				echo abs($c->meals) .',';
+		?>]
+      },
+      {
+        label: "Desserts",
+        fillColor: "rgba(0, 166, 90,0.9)",
+        strokeColor: "rgba(0, 166, 90,0.8)",
+        pointColor: "#00A65A",
+        pointStrokeColor: "rgba(0, 166, 90,1)",
+        pointHighlightFill: "#fff",
+        pointHighlightStroke: "rgba(0, 166, 90,1)",
+        data: [<?php 
+			foreach($consoweek as $c)
+				echo abs($c->desserts) .',';
+		?>]
+      }
           ]
         };
 		
 		var areaChartData4 = {
-          labels: ["Lundi", "Mardi", "Mercredi", "Jeudi", "Vendredi", "Samedi", "Dimanche"],
+          labels: ["Lundi", "Mardi", "Mercredi", "Jeudi", "Vendredi"],
           datasets: [
             {
-              label: "Entrees",
-              fillColor: "rgba(210, 214, 222, 1)",
-              strokeColor: "rgba(210, 214, 222, 1)",
-              pointColor: "rgba(210, 214, 222, 1)",
-              pointStrokeColor: "#c1c7d1",
-              pointHighlightFill: "#fff",
-              pointHighlightStroke: "rgba(220,220,220,1)",
-              data: [65, 59, 80, 81, 56, 55, 40]
-            },
-			{
-              label: "Desserts",
-              fillColor: "rgba(210, 48, 222, 1)",
-              strokeColor: "rgba(210, 48, 222, 1)",
-              pointColor: "rgba(210, 48, 222, 1)",
-              pointStrokeColor: "#c1c7d1",
-              pointHighlightFill: "#fff",
-              pointHighlightStroke: "rgba(220,20,220,1)",
-              data: [60, 70, 70, 52, 65, 44, 80]
-            },
-            {
-              label: "Plats chauds",
-              fillColor: "rgba(60,141,188,0.9)",
-              strokeColor: "rgba(60,141,188,0.8)",
-              pointColor: "#3b8bba",
-              pointStrokeColor: "rgba(60,141,188,1)",
-              pointHighlightFill: "#fff",
-              pointHighlightStroke: "rgba(60,141,188,1)",
-              data: [220, 200, 150, 160, 210, 160, 110]
-            }
+				label: "Entrees",
+				fillColor: "rgba(244, 166, 41, 0.9)",
+				strokeColor: "rgba(244, 166, 41, 0.8)",
+				pointColor: "rgba(244, 166, 41,1)",
+				pointStrokeColor: "#F4A629",
+				pointHighlightFill: "#fff",
+				pointHighlightStroke: "rgba(244, 166, 41,1)",
+				data: [<?php 
+					foreach($consoweek as $c)
+						echo abs($c->starters) .',';
+				?>]
+			  },
+			  {
+				label: "Plats chauds",
+				fillColor: "rgba(0, 192, 239,0.9)",
+				strokeColor: "rgba(0, 192, 239),0.8)",
+				pointColor: "#00C0EF",
+				pointStrokeColor: "rgba(0, 192, 239),1)",
+				pointHighlightFill: "#fff",
+				pointHighlightStroke: "rgba(0, 192, 239),1)",
+				data: [<?php 
+					foreach($consoweek as $c)
+						echo abs($c->meals) .',';
+				?>]
+			  },
+			  {
+				label: "Desserts",
+				fillColor: "rgba(0, 166, 90, 0.9)",
+				strokeColor: "rgba(0, 166, 90,0.8)",
+				pointColor: "#00A65A",
+				pointStrokeColor: "rgba(0, 166, 90,1)",
+				pointHighlightFill: "#fff",
+				pointHighlightStroke: "rgba(0, 166, 90,1)",
+				data: [<?php 
+					foreach($consoweek as $c)
+						echo abs($c->desserts) .',';
+				?>]
+			  }
           ]
         };
 		
 		var areaChartData3 = {
-          labels: ["Lundi", "Mardi", "Mercredi", "Jeudi", "Vendredi", "Samedi", "Dimanche"],
+          labels: ["Lundi", "Mardi", "Mercredi", "Jeudi", "Vendredi"],
           datasets: [
             {
               label: "Electronics",
@@ -217,7 +210,10 @@
               pointStrokeColor: "#c1c7d1",
               pointHighlightFill: "#fff",
               pointHighlightStroke: "rgba(220,220,220,1)",
-              data: [65000, 59000, 80000, 81000, 56000, 55000, 40000]
+              data: [<?php 
+			foreach($consoweek as $c)
+				echo abs($c->starters*500)+abs($c->meals*2000)+abs($c->desserts*500) .',';
+		?>]
             }
           ]
         };
@@ -307,19 +303,19 @@
         var pieChart = new Chart(pieChartCanvas);
         var PieData = [
           {
-            value: 1200,
-            color: "#f56954",
-            highlight: "#f56954",
+            value: <?php echo abs($conso->meals); ?>,
+            color: "#00C0EF",
+            highlight: "#00C0EF",
             label: "Plats Chauds"
           },
           {
-            value: 250,
+            value: <?php echo abs($conso->desserts); ?>,
             color: "#00a65a",
             highlight: "#00a65a",
             label: "Dessert"
           },
           {
-            value: 120,
+            value: <?php echo abs($conso->starters); ?>,
             color: "#f39c12",
             highlight: "#f39c12",
             label: "Entrees"
@@ -359,9 +355,9 @@
         var barChartCanvas = $("#barChart").get(0).getContext("2d");
         var barChart = new Chart(barChartCanvas);
         var barChartData = areaChartData4;
-        barChartData.datasets[1].fillColor = "#00a65a";
-        barChartData.datasets[1].strokeColor = "#00a65a";
-        barChartData.datasets[1].pointColor = "#00a65a";
+        barChartData.datasets[1].fillColor = "#00C0EF";
+        barChartData.datasets[1].strokeColor = "#00C0EF";
+        barChartData.datasets[1].pointColor = "#00C0EF";
         var barChartOptions = {
           //Boolean - Whether the scale should start at zero, or an order of magnitude down from the lowest value
           scaleBeginAtZero: true,

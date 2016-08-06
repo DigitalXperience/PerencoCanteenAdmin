@@ -28,6 +28,7 @@
                   <table id="example1" class="table table-bordered table-striped">
                     <thead>
                       <tr>
+                        <th>#</th>
                         <th>Noms</th>
                         <th>Prenoms</th>
                         <th>Entrées</th>
@@ -41,6 +42,7 @@
 					<?php 
 						foreach($comptes as $compte) { ?>
 						  <tr>
+							<td><?php echo $compte->id_user; ?></td>
 							<td><?php echo $compte->lastname; ?></td>
 							<td><?php echo $compte->firstname; ?></td>
 							<td><?php echo $compte->starter; ?></td>
@@ -57,6 +59,7 @@
                     </tbody>
                     <tfoot>
                       <tr>
+                        <th>#</th>
                         <th>Noms</th>
                         <th>Prenoms</th>
                         <th>Entrées</th>

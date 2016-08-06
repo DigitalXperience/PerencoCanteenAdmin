@@ -35,8 +35,10 @@ class Log_model extends CI_Model {
 				FROM logs 
 				LEFT JOIN user_info ON user_info.id_user = logs.id_user 
 				$where 
-				ORDER BY id DESC ;";
+				ORDER BY id DESC 
+				LIMIT 600;";
 		//var_dump($sql); die;
+		$query = $this->db->query("SET lc_time_names = 'fr_FR'");
 		$query = $this->db->query($sql);
 		$row = $query->result();
 		if (isset($row))
@@ -72,8 +74,9 @@ class Log_model extends CI_Model {
 				FROM `logs` 
 				 $where 
 				GROUP BY DATE_FORMAT(date, '%d-%m')
-				ORDER BY dat DESC ;";
+				ORDER BY date ASC ;";
 		//var_dump($sql); die;
+		$query = $this->db->query("SET lc_time_names = 'fr_FR'");
 		$query = $this->db->query($sql);
 		$row = $query->result();
 		if (isset($row))
@@ -138,6 +141,40 @@ class Log_model extends CI_Model {
 		return false;	
 	}
 	
+	public function getConsumptionOfTheMonth()
+	{
+		$sql = "SELECT SUM(`starter`) AS starters, SUM(`meal`) AS meals, SUM(`dessert`) AS desserts 
+				FROM `logs` 
+				WHERE `place` = 'client1' AND DATE_FORMAT(date, '%m-%Y') = DATE_FORMAT(curdate(), '%m-%Y') 
+				GROUP BY DATE_FORMAT(date, '%m-%Y');";
+		
+		$query = $this->db->query($sql);
+		$row = $query->result();
+		if (isset($row))
+		{
+			if(count($row) > 0) 
+				return $row[0];
+			else
+				return false; 	
+		}
+		return false;	
+	}
+	
+	public function getConsumptionOfTheMonthWeekByWeek()
+	{
+		$sql = "SELECT SUM(`starter`) AS starters, SUM(`meal`) AS meals, SUM(`dessert`) AS desserts 
+				FROM `logs` 
+				WHERE `place` = 'client1' AND DATE_FORMAT(date, '%m-%Y') = DATE_FORMAT(curdate(), '%m-%Y') 
+				GROUP BY week(date,1);";
+		
+		$query = $this->db->query($sql);
+		$row = $query->result();
+		if (isset($row))
+		{
+			return $row;
+		}
+		return false;	
+	}
 	public function getConsumptionOfTheWeekDayByDay()
 	{
 		$sql = "SELECT SUM(`starter`) AS starters, SUM(`meal`) AS meals, SUM(`dessert`) AS desserts, DAYOFWEEK(date) as daynum

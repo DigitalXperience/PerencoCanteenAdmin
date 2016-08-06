@@ -69,8 +69,9 @@ $dates = $this->input->get('dates');
               <table id="example1" class="table table-bordered table-striped">
                 <thead>
                   <tr>
-                    <th>Nom</th>
+					<th>#</th>
                     <th>Prénom</th>
+                    <th>Nom</th>
                     <th>Entree</th>
                     <th>Repas</th>
                     <th>Dessert</th>
@@ -87,6 +88,7 @@ $dates = $this->input->get('dates');
                             foreach ($liste as $row){
 								if($row->place == 'client1') $trans = 'Débit'; else $trans = 'Crédit';
                                 echo '<tr id="row-'.$row->id_user.'">
+                                        <td>'.$row->id_user.'</td>
                                         <td>'.$row->firstname.'</td>
                                         <td>'.$row->lastname.'</td>
                                         <td>'.abs($row->starter).'</td>
@@ -109,12 +111,13 @@ $dates = $this->input->get('dates');
                 </tbody>
                 <tfoot>
                   <tr>
+                     <th>#</th>
+                     <th>Prénom</th>
                     <th>Nom</th>
-                    <th>Prénom</th>
-                    <th>Total : <?php echo $sum_entree; ?></th>
-                    <th>Total : <?php echo $sum_repas; ?></th>
-                    <th>Total : <?php echo $sum_dessert; ?></th>
-                    <th>Poste</th>
+                    <th>Entree</th>
+                    <th>Repas</th>
+                    <th>Dessert</th>
+                    <th>Transaction</th>
                     <th>Date et Heure</th>
                   </tr>
                 </tfoot>
@@ -130,30 +133,19 @@ $dates = $this->input->get('dates');
 <?php include ('inc/footer.php'); ?>
 <!-- page script -->
 <script>
-      $(function () {
+ $(function () {
+   $("#example1").DataTable(
+   {
+	  "order": [[ 7, "desc" ]]
+    });
+    
+  });
+ $(function () {
 
         //Date range picker
         $('#reservation').daterangepicker();
         //Date range picker with time picker
         $('#reservationtime').daterangepicker({timePicker: true, timePickerIncrement: 30, format: 'MM/DD/YYYY h:mm A'});
-    
-
-        //iCheck for checkbox and radio inputs
-        $('input[type="checkbox"].minimal, input[type="radio"].minimal').iCheck({
-          checkboxClass: 'icheckbox_minimal-blue',
-          radioClass: 'iradio_minimal-blue'
-        });
-        //Red color scheme for iCheck
-        $('input[type="checkbox"].minimal-red, input[type="radio"].minimal-red').iCheck({
-          checkboxClass: 'icheckbox_minimal-red',
-          radioClass: 'iradio_minimal-red'
-        });
-        //Flat red color scheme for iCheck
-        $('input[type="checkbox"].flat-red, input[type="radio"].flat-red').iCheck({
-          checkboxClass: 'icheckbox_flat-green',
-          radioClass: 'iradio_flat-green'
-        });
-
       
       });
     </script>
