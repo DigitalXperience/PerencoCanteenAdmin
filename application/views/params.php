@@ -36,21 +36,47 @@
                                   <label>Prix des entrées</label>
                                   <input type="text" id="starter_price" class="form-control" value="<?php if(isset($params)) echo $params['starter_price']; ?>" required name="starter_price" placeholder="Entez une valeur">
                                 </div>
-								 <div class="form-group">
-                                  <label>Nouveau mot de passe (facultatif)</label>
-                                  <input type="password" id="password" class="form-control" value="" name="password" >
-                                </div>
+								<div class="bootstrap-timepicker">
+									<div class="form-group">
+										<label>Heure d'ouverture de la cantine :</label>
+										<div class="input-group">
+											<input type="text" name="opening_time" value="<?php if(isset($params)) echo $params['opening_time']; ?>" class="form-control timepicker">
+											<div class="input-group-addon">
+											<i class="fa fa-clock-o"></i>
+											</div>
+										</div><!-- /.input group -->
+									</div><!-- /.form group -->
+								</div>
+								<div class="bootstrap-timepicker">
+									<div class="form-group">
+										<label>Heure de fermeture de la cantine :</label>
+										<div class="input-group">
+											<input type="text" name="closing_time" value="<?php if(isset($params)) echo $params['closing_time']; ?>" class="form-control timepicker">
+											<div class="input-group-addon">
+											<i class="fa fa-clock-o"></i>
+											</div>
+										</div><!-- /.input group -->
+									</div><!-- /.form group -->
+								</div>
+								<div class="checkbox">
+								  <label>
+									<input type="checkbox" name="juice_management" value="yes" <?php if(isset($params)) if($params['juice_management'] == 'yes') echo "checked"; ?> > Activer la gestion de la Boisson sur les TPV
+								  </label>
+								</div>
+								 
                            </div>
                            <div class="col-md-6">
                                 <div class="form-group">
                                   <label>Prix des desserts</label>
                                   <input type="text" id="dessert_price" name="dessert_price" value="<?php if(isset($params)) echo $params['dessert_price']; ?>" required class="form-control" placeholder="Entez une valeur">
                                 </div>
+								
                                 <div class="form-group">
-                                  <label>Nombre de plats chaud à créditer le mois suivant</label>
-                                    <input type="text" id="meal_to_add" name="meal_to_add" value="<?php if(isset($params)) echo $params['meal_to_add']; ?>" class="form-control" placeholder="Entez une valeur">
-                               </div>
+                                  <label>Nouveau mot de passe (facultatif)</label>
+                                  <input type="password" id="password" class="form-control" value="" name="password" >
+                                </div>
                            </div>
+						   
                        </div>
                   </div><!-- /.box-body -->
 
@@ -83,4 +109,7 @@ function checkValues() {
 		
 }
 </script>
-
+<!-- Bootstrap time Picker -->
+<link rel="stylesheet" href="<?php echo base_url(); ?>assets/plugins/timepicker/bootstrap-timepicker.min.css">
+<!-- bootstrap time picker -->
+<script src="<?php echo base_url(); ?>assets/plugins/timepicker/bootstrap-timepicker.min.js"></script>
