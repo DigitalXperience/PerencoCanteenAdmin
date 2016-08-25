@@ -14,7 +14,7 @@ Class Accounts extends CI_Model
 	
 	public function getAccounts()
 	{
-		$query = $this->db->query("SELECT ua.`PIN`, ua.`blocked`, ui.`firstname`, ui.`lastname`, ui.`status`, ub.`starter`, ub.`meal`, ub.`dessert`, ua.id_user, ub.balance   
+		$query = $this->db->query("SELECT ua.`PIN`, ua.`blocked`, ui.`firstname`, ui.`lastname`, ui.`status`, ub.`starter`, ub.`meal`, ub.`dessert`, ua.id_user  
 									FROM `user_account` AS ua 
 									LEFT JOIN `user_info` AS ui ON ua.`id_user` = ui.`id_user` 
 									LEFT JOIN `user_balance` AS ub ON ub.`id_user` = ua.`id_user` 
@@ -31,7 +31,7 @@ Class Accounts extends CI_Model
 	
 	public function getAccount($id)
 	{
-		$query = $this->db->query("SELECT ua.`PIN`, ua.`blocked`, ui.`firstname`, ui.`lastname`, ui.`status`, ub.`starter`, ub.`meal`, ub.`dessert`, ua.id_user, ui.email, ub.balance 
+		$query = $this->db->query("SELECT ua.`PIN`, ua.`blocked`, ui.`firstname`, ui.`lastname`, ui.`status`, ub.`starter`, ub.`meal`, ub.`dessert`, ua.id_user, ui.email 
 									FROM `user_account` AS ua 
 									LEFT JOIN `user_info` AS ui ON ua.`id_user` = ui.`id_user` 
 									LEFT JOIN `user_balance` AS ub ON ub.`id_user` = ua.`id_user` 
@@ -48,7 +48,7 @@ Class Accounts extends CI_Model
 	
 	public function getBalance($id)
 	{
-		$query = $this->db->query("SELECT ub.`starter`, ub.`meal`, ub.`dessert`, ub.id_user , ub.balance 
+		$query = $this->db->query("SELECT ub.`starter`, ub.`meal`, ub.`dessert`, ub.id_user  
 									FROM `user_balance` AS ub  
 									WHERE id_user = '$id';
 								");
@@ -119,24 +119,19 @@ Class Accounts extends CI_Model
 	{
 		if(array_key_exists('email', $values)) unset($values['email']);
 		$this->db->insert('user_account', $values);
-		return $this->db->insert('user_balance', array('starter' => 0, 'meal' => 0, 'dessert' => 0, 'balance' => 0, 'id_user' => $values['id_user']));
+		return $this->db->insert('user_balance', array('starter' => 0, 'meal' => 0, 'dessert' => 0, 'id_user' => $values['id_user']));
 	}
 	
 	public function creditAccount($values)
 	{
-		//var_dump($values);
 		$values['place'] = 'server';
 		$values['starter'] = (int) $values['starter'];
 		$values['meal'] = (int) $values['meal'];
 		$values['dessert'] = (int) $values['dessert'];
-		$values['balance'] = (int) $values['balance'];
 		
 		$balance['starter'] = $values['old_starter'] + $values['starter']; unset($values['old_starter']);
 		$balance['meal'] = $values['old_meal'] + $values['meal']; unset($values['old_meal']);
 		$balance['dessert'] = $values['old_dessert'] + $values['dessert']; unset($values['old_dessert']);
-		$balance['balance'] = $values['old_balance'] + $values['balance']; unset($values['old_balance']);
-		//var_dump($values); 
-		//var_dump($balance); die;
 		$this->db->where('id_user', $values['id_user']);
 		$this->db->update('user_balance', $balance);
 		$values['log_by'] = $this->session->userdata('logged_in')['id'];
@@ -156,8 +151,6 @@ Class Accounts extends CI_Model
 	
 	public function resetPin($values)
 	{
-		if(array_key_exists('email', $values))
-			unset($values['email']);
 		$this->db->where('id_user', $values['id_user']);
 		return $this->db->update('user_account', $values);
 	}

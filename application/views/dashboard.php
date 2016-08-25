@@ -1,8 +1,6 @@
 <?php 
-setlocale(LC_TIME, 'fr_FR.utf8','fra');
-$monday = utf8_encode(strftime("%d %B, %Y", strtotime("monday this week")));
-$friday = utf8_encode(strftime("%d %B, %Y", strtotime("friday this week")));
-//var_dump($conso);
+$monday = date("d M, Y", strtotime("monday this week"));
+$friday = date("d M, Y", strtotime("friday this week"));
 //var_dump($consoweek);
 //var_dump($friday);
 //die;
@@ -122,28 +120,28 @@ $friday = utf8_encode(strftime("%d %B, %Y", strtotime("friday this week")));
                       </p>
                       <div class="progress-group">
                         <span class="progress-text">Plat chauds</span>
-                        <span class="progress-number"><b><?php if($conso) echo abs($conso->meals); else echo "0"; ?></b>/5</span>
+                        <span class="progress-number"><b><?php echo abs($conso->meals); ?></b>/5</span>
                         <div class="progress sm">
                           <div class="progress-bar progress-bar-aqua" style="width: 80%"></div>
                         </div>
                       </div><!-- /.progress-group -->
                       <!--<div class="progress-group">
                         <span class="progress-text"></span>
-                        <span class="progress-number"><b><?php if($conso) echo abs($conso->meals); else echo "0";  ?></b>/5</span>
+                        <span class="progress-number"><b><?php echo abs($conso->meals); ?></b>/5</span>
                         <div class="progress sm">
                           <div class="progress-bar progress-bar-red" style="width: 80%"></div>
                         </div>
                       </div> /.progress-group -->
                       <div class="progress-group">
                         <span class="progress-text">Dessert</span>
-                        <span class="progress-number"><b><?php if($conso) echo abs($conso->desserts); else echo "0"; ?></b>/5</span>
+                        <span class="progress-number"><b><?php echo abs($conso->desserts); ?></b>/5</span>
                         <div class="progress sm">
                           <div class="progress-bar progress-bar-green" style="width: 80%"></div>
                         </div>
                       </div><!-- /.progress-group -->
                       <div class="progress-group">
                         <span class="progress-text">Entrees</span>
-                        <span class="progress-number"><b><?php if($conso) echo abs($conso->starters); else echo "0"; ?></b>/5</span>
+                        <span class="progress-number"><b><?php echo abs($conso->starters); ?></b>/5</span>
                         <div class="progress sm">
                           <div class="progress-bar progress-bar-yellow" style="width: 80%"></div>
                         </div>
@@ -155,29 +153,29 @@ $friday = utf8_encode(strftime("%d %B, %Y", strtotime("friday this week")));
                   <div class="row">
                     <div class="col-sm-3 col-xs-6">
                       <div class="description-block border-right">
-                       <!-- <span class="description-percentage text-green"><i class="fa fa-caret-up"></i> 17%</span>-->
-                        <h5 class="description-header"><?php if($conso) echo abs($conso->starters*500); else echo "0";  ?> Fcfa</h5>
+                        <span class="description-percentage text-green"><i class="fa fa-caret-up"></i> 17%</span>
+                        <h5 class="description-header"><?php echo abs($conso->starters*500); ?>Fcfa</h5>
                         <span class="description-text">TOTAL ENTREES</span>
                       </div><!-- /.description-block -->
                     </div><!-- /.col -->
                     <div class="col-sm-3 col-xs-6">
                       <div class="description-block border-right">
-                        <!--<span class="description-percentage text-yellow"><i class="fa fa-caret-left"></i> 0%</span>-->
-                        <h5 class="description-header"><?php if($conso) echo abs($conso->meals*2000); else echo "0"; ?> Fcfa</h5>
+                        <span class="description-percentage text-yellow"><i class="fa fa-caret-left"></i> 0%</span>
+                        <h5 class="description-header"><?php echo abs($conso->meals*2000); ?> Fcfa</h5>
                         <span class="description-text">TOTAL PLATS CHAUDS</span>
                       </div><!-- /.description-block -->
                     </div><!-- /.col -->
                     <div class="col-sm-3 col-xs-6">
                       <div class="description-block border-right">
-                        <!--<span class="description-percentage text-green"><i class="fa fa-caret-up"></i> 20%</span>-->
-                        <h5 class="description-header"><?php if($conso) echo abs($conso->desserts*500); else echo "0"; ?> Fcfa</h5>
+                        <span class="description-percentage text-green"><i class="fa fa-caret-up"></i> 20%</span>
+                        <h5 class="description-header"><?php echo abs($conso->desserts*500); ?> Fcfa</h5>
                         <span class="description-text">TOTAL DESSERTS</span>
                       </div><!-- /.description-block -->
                     </div><!-- /.col -->
                     <div class="col-sm-3 col-xs-6">
                       <div class="description-block">
-                        <!--<span class="description-percentage text-red"><i class="fa fa-caret-down"></i> 18%</span>-->
-                        <h5 class="description-header"><?php if($conso) echo abs($conso->desserts*500)+abs($conso->meals*2000)+abs($conso->starters*500); else echo "0"; ?> Fcfa</h5>
+                        <span class="description-percentage text-red"><i class="fa fa-caret-down"></i> 18%</span>
+                        <h5 class="description-header"><?php echo abs($conso->desserts*500)+abs($conso->meals*2000)+abs($conso->starters*500); ?> Fcfa</h5>
                         <span class="description-text">TOTAL CANTINE</span>
                       </div><!-- /.description-block -->
                     </div>
