@@ -34,6 +34,7 @@
                         <th>Entrées</th>
                         <th>Plat Chaud</th>
                         <th>Dessert</th>
+                        <th>Solde</th>
                         <th>Bloqué</th>
                         <th>Actions</th>
                       </tr>
@@ -48,6 +49,7 @@
 							<td><?php echo $compte->starter; ?></td>
 							<td><?php echo $compte->meal; ?></td>
 							<td><?php echo $compte->dessert; ?></td>
+							<td><?php echo $compte->balance; ?></td>
 							<td><?php echo ($compte->blocked == '0') ? "Non" : "Oui"; ?></td>
 							<td>
 								<a href="<?php echo base_url(); ?>index.php/account/resetpin/<?php echo $compte->id_user; ?>" class="btn btn-xs btn-warning" data-toggle="tooltip" title="Reinitialiser PIN"><i class="fa fa-refresh"></i></a>
@@ -65,6 +67,7 @@
                         <th>Entrées</th>
                         <th>Plat Chaud</th>
                         <th>Dessert</th>
+                        <th>Solde</th>
                         <th>Bloqué</th>
                         <th>Actions</th>
                       </tr>

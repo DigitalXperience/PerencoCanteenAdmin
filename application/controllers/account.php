@@ -38,7 +38,8 @@ class Account extends CI_Controller{
 			
 				if($result){
 					$this->load->model('notify_model', 'notify');
-					$this->notify->compte_cree($this->input->post('id_user'), $this->input->post('PIN'));
+					$email = ($this->input->post('email')) ? $this->input->post('email') : false;
+					$this->notify->compte_cree($this->input->post('id_user'), $this->input->post('PIN'), $email);
 					$data['alert'] = '<div class="alert alert-success alert-dismissable">
 							<button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
 							<h4>	<i class="icon fa fa-check"></i> Bravo!</h4>
@@ -171,8 +172,12 @@ class Account extends CI_Controller{
 				$result = $this->accounts->resetPin($this->input->post()); 
 			
 				if($result){
+					
 					$this->load->model('notify_model', 'notify');
-					$this->notify->pin_recree($this->input->post('id_user'), $this->input->post('PIN'));
+					$email = ($this->input->post('email')) ? $this->input->post('email') : false;
+					//var_dump($this->input->post); 
+					//var_dump($email); die;
+					$this->notify->pin_recree($this->input->post('id_user'), $this->input->post('PIN'), $email);
 					$data['alert'] = '<div class="alert alert-success alert-dismissable">
 							<button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
 							<h4>	<i class="icon fa fa-check"></i> Bravo!</h4>
