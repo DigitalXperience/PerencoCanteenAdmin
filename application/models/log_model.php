@@ -38,7 +38,6 @@ class Log_model extends CI_Model {
 				ORDER BY id DESC 
 				LIMIT 600;";
 		//var_dump($sql); die;
-		$query = $this->db->query("SET lc_time_names = 'fr_FR'");
 		$query = $this->db->query($sql);
 		$row = $query->result();
 		if (isset($row))
