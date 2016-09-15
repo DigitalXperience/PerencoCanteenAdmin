@@ -165,7 +165,10 @@ class Report extends CI_Controller{
 			$session_data = $this->session->userdata('logged_in');
 			$data['username'] = $session_data['username'];
 			$data['name'] = $this->user->getInfo($session_data['id']);
-			$data['title'] = "Statistiques Annuelle";
+			$data['conso'] = $this->logs->getConsumptionOfTheYear();
+			$data['consoyear'] = $this->logs->getConsumptionOfTheYearMonthByMonth();
+			//var_dump($data['consoyear']); die;
+			$data['title'] = "Statistiques Mensuelle";
 			// Traitement
 			$data['liste'] = $this->logs->getWeekReport();
 			$data['params'] = $this->params->getParams();

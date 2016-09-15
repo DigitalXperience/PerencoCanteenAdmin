@@ -29,7 +29,7 @@
               <!-- AREA CHART -->
               <div class="box box-primary">
                 <div class="box-header with-border">
-                  <h3 class="box-title">Couts de la semaine</h3>
+                  <h3 class="box-title">Couts de l'année</h3>
                   <div class="box-tools pull-right">
                     <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
                     <button class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
@@ -52,7 +52,7 @@
 			 <!-- LINE CHART -->
               <div class="box box-info">
                 <div class="box-header with-border">
-                  <h3 class="box-title">Consommation sur la semaine en cours</h3>
+                  <h3 class="box-title">Consommation sur l'année en cours</h3>
                   <div class="box-tools pull-right">
                     <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
                     <button class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
@@ -72,7 +72,7 @@
               <!-- BAR CHART -->
               <div class="box box-success">
                 <div class="box-header with-border">
-                  <h3 class="box-title">Statistique Graphique en bare</h3>
+                  <h3 class="box-title">Statistique Graphique en bare (Consommation annuelle)</h3>
                   <div class="box-tools pull-right">
                     <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
                     <button class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
@@ -120,7 +120,16 @@
               pointStrokeColor: "#c1c7d1",
               pointHighlightFill: "#fff",
               pointHighlightStroke: "rgba(220,220,220,1)",
-              data: [200, 240, 200, 88, 160, 170, 190, 100, 160, 130, 90, 160]
+              data: [<?php 
+					for($i = 0; $i <= 12; $i++) {
+						$conso = "0";
+						foreach($consoyear as $c) {
+							if((int) $c->month == $i)
+								$conso = $c->starters;
+						}
+						echo abs($conso) . ",";
+					}
+				?>]
             },
 			{
               label: "Desserts",
@@ -130,7 +139,16 @@
               pointStrokeColor: "#c1c7d1",
               pointHighlightFill: "#fff",
               pointHighlightStroke: "rgba(220,20,220,1)",
-               data: [250, 240, 200, 58, 150, 100, 100, 200, 180, 130, 49, 168]
+              data: [<?php 
+					for($i = 0; $i <= 12; $i++) {
+						$conso = "0";
+						foreach($consoyear as $c) {
+							if((int) $c->month == $i)
+								$conso = $c->desserts;
+						}
+						echo abs($conso) . ",";
+					}
+				?>]
             },
             {
               label: "Plats chauds",
@@ -140,7 +158,16 @@
               pointStrokeColor: "rgba(60,141,188,1)",
               pointHighlightFill: "#fff",
               pointHighlightStroke: "rgba(60,141,188,1)",
-               data: [2500, 2400, 2000, 858, 1650, 1700, 1900, 1000, 1680, 1300, 490, 1688]
+              data: [<?php 
+					for($i = 0; $i <= 12; $i++) {
+						$conso = "0";
+						foreach($consoyear as $c) {
+							if((int) $c->month == $i)
+								$conso = $c->meals;
+						}
+						echo abs($conso) . ",";
+					}
+				?>]
             }
           ]
         };
@@ -156,7 +183,16 @@
               pointStrokeColor: "#c1c7d1",
               pointHighlightFill: "#fff",
               pointHighlightStroke: "rgba(220,220,220,1)",
-              data: [200, 240, 200, 88, 160, 170, 190, 100, 160, 130, 90, 160]
+              data: [<?php 
+					for($i = 0; $i <= 12; $i++) {
+						$conso = "0";
+						foreach($consoyear as $c) {
+							if((int) $c->month == $i)
+								$conso = $c->starters;
+						}
+						echo abs($conso) . ",";
+					}
+				?>]
             },
 			{
               label: "Desserts",
@@ -166,7 +202,16 @@
               pointStrokeColor: "#c1c7d1",
               pointHighlightFill: "#fff",
               pointHighlightStroke: "rgba(220,20,220,1)",
-               data: [250, 240, 200, 58, 150, 100, 100, 200, 180, 130, 49, 168]
+              data: [<?php 
+					for($i = 0; $i <= 12; $i++) {
+						$conso = "0";
+						foreach($consoyear as $c) {
+							if((int) $c->month == $i)
+								$conso = $c->desserts;
+						}
+						echo abs($conso) . ",";
+					}
+				?>]
             },
             {
               label: "Plats chauds",
@@ -176,7 +221,16 @@
               pointStrokeColor: "rgba(60,141,188,1)",
               pointHighlightFill: "#fff",
               pointHighlightStroke: "rgba(60,141,188,1)",
-               data: [2500, 2400, 2000, 858, 1650, 1700, 1900, 1000, 1680, 1300, 490, 1688]
+              data: [<?php 
+					for($i = 0; $i <= 12; $i++) {
+						$conso = "0";
+						foreach($consoyear as $c) {
+							if((int) $c->month == $i)
+								$conso = $c->meals;
+						}
+						echo abs($conso) . ",";
+					}
+				?>]
             }
           ]
         };
@@ -192,7 +246,16 @@
               pointStrokeColor: "#c1c7d1",
               pointHighlightFill: "#fff",
               pointHighlightStroke: "rgba(220,220,220,1)",
-              data: [650000, 590000, 800000, 810000, 560000, 550000, 400000, 590000, 800000, 810000, 560000, 550000]
+              data: [<?php 
+					for($i = 0; $i <= 12; $i++) {
+						$conso = "0";
+						foreach($consoyear as $c) {
+							if((int) $c->month == $i)
+								$conso = $c->starters*500 + $c->meals*2000 + $c->desserts*500;
+						}
+						echo abs($conso) . ",";
+					}
+				?>]
             }
           ]
         };
@@ -259,7 +322,8 @@
           //Boolean - whether to maintain the starting aspect ratio or not when responsive, if set to false, will take up entire container
           maintainAspectRatio: true,
           //Boolean - whether to make the chart responsive to window resizing
-          responsive: true
+          responsive: true,
+		  multiTooltipTemplate: "<%= datasetLabel %> - <%= value %>"
         };
 
         //Create the line chart
@@ -310,7 +374,8 @@
           legendTemplate: "<ul class=\"<%=name.toLowerCase()%>-legend\"><% for (var i=0; i<datasets.length; i++){%><li><span style=\"background-color:<%=datasets[i].fillColor%>\"></span><%if(datasets[i].label){%><%=datasets[i].label%><%}%></li><%}%></ul>",
           //Boolean - whether to make the chart responsive
           responsive: true,
-          maintainAspectRatio: true
+          maintainAspectRatio: true,
+		  multiTooltipTemplate: "<%= datasetLabel %> - <%= value %>"
         };
 
         barChartOptions.datasetFill = false;

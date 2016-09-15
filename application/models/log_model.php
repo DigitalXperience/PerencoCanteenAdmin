@@ -159,12 +159,47 @@ class Log_model extends CI_Model {
 		return false;	
 	}
 	
+	public function getConsumptionOfTheYear()
+	{
+		$sql = "SELECT SUM(`starter`) AS starters, SUM(`meal`) AS meals, SUM(`dessert`) AS desserts 
+				FROM `logs` 
+				WHERE `place` = 'client1' AND DATE_FORMAT(date, '%Y') = DATE_FORMAT(curdate(), '%Y') 
+				GROUP BY DATE_FORMAT(date, '%Y');";
+		
+		$query = $this->db->query($sql);
+		$row = $query->result();
+		if (isset($row))
+		{
+			if(count($row) > 0) 
+				return $row[0];
+			else
+				return false; 	
+		}
+		return false;	
+	}
+	
 	public function getConsumptionOfTheMonthWeekByWeek()
 	{
 		$sql = "SELECT SUM(`starter`) AS starters, SUM(`meal`) AS meals, SUM(`dessert`) AS desserts 
 				FROM `logs` 
 				WHERE `place` = 'client1' AND DATE_FORMAT(date, '%m-%Y') = DATE_FORMAT(curdate(), '%m-%Y') 
 				GROUP BY week(date,1);";
+		
+		$query = $this->db->query($sql);
+		$row = $query->result();
+		if (isset($row))
+		{
+			return $row;
+		}
+		return false;	
+	}
+	
+	public function getConsumptionOfTheYearMonthByMonth()
+	{
+		$sql = "SELECT SUM(`starter`) AS starters, SUM(`meal`) AS meals, SUM(`dessert`) AS desserts, DATE_FORMAT(date, '%m') as month  
+				FROM `logs` 
+				WHERE `place` = 'client1' AND DATE_FORMAT(date, '%Y') = DATE_FORMAT(curdate(), '%Y') 
+				GROUP BY month(date);";
 		
 		$query = $this->db->query($sql);
 		$row = $query->result();
