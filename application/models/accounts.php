@@ -232,5 +232,27 @@ Class Accounts extends CI_Model
 		
 		return '';
 	}
+	
+	public function getWorkingDays()
+	{
+		$m = date('m');
+		$y = date('y');
+		$lastday = date("t",mktime(0,0,0,$m,1,$y));
+		$weekdays=0;
+		for($d=29;$d<=$lastday;$d++) {
+			$wd = date("w",mktime(0,0,0,$m,$d,$y));
+			if($wd > 0 && $wd < 6) $weekdays++;
+		}
+		return $weekdays+20;
+	}
+	
+	public function resetAllMeals()
+	{
+		if(date('d') == "01") { // Si nous sommes le 1er jour du mois, alors on execute
+			$wd = $this->getWorkingDays();
+			$this->db->set('meal', "$wd");
+			$this->db->update('user_balance');
+		}
+	}
 }
 ?>
