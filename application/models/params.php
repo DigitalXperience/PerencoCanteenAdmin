@@ -15,11 +15,11 @@ Class Params extends CI_Model
 		
 		if (!empty($query->result()))
 		{
-			// foreach($query->result() as $param) {
-				// $parametres[$param->param_name] = $param->param_value;
-			// }
-			//return $parametres;
-			return $query->result();
+			foreach($query->result() as $param) {
+				$parametres[$param->param_name] = $param->param_value;
+			}
+			return $parametres;
+			//return $query->result();
 		}
 		
 		return false;

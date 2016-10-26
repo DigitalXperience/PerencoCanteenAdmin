@@ -25,6 +25,7 @@ class Parameters extends CI_Controller{
             $session_data = $this->session->userdata('logged_in');
 			$data['name'] = $this->user->getInfo($session_data['id']);
 			$data['params'] = $this->params->getParams();
+			//var_dump($data['params']); die;
 			$data['title'] = "Modifier les paramètres de l'application";
 			$this->load->view('params', $data);
 		}
