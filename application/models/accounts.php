@@ -186,10 +186,10 @@ Class Accounts extends CI_Model
 	
 	public function newAccountsExternal()
 	{
-		$query = $this->db->query("SELECT ua.`PIN`, ua.`id_user`, ua.`date_exp`, ua.`created`, ua.`blocked`, ub.`starter`, ub.`meal`, ub.`dessert` 
+		$query = $this->db->query("SELECT ua.`PIN`, ua.`id_user`, ua.`date_exp`, ua.`created`, ua.`blocked`, ub.`starter`, ub.`meal`, ub.`dessert`, ub.balance  
 									FROM `user_account` ua 
 									LEFT JOIN  `user_balance` ub ON ub.`id_user` = ua.`id_user`
-									WHERE ua.`flag` = '0' AND `blocked` = '0'");
+									WHERE `blocked` = '0'");
 		
 		if (!empty($query->result()))
 		{
@@ -202,7 +202,7 @@ Class Accounts extends CI_Model
 	
 	public function AccountsExternal()
 	{
-		$query = $this->db->query("SELECT ua.`PIN`, ua.`id_user`, ua.`date_exp`, ua.`created`, ua.`blocked`, ub.`starter`, ub.`meal`, ub.`dessert` 
+		$query = $this->db->query("SELECT ua.`PIN`, ua.`id_user`, ua.`date_exp`, ua.`created`, ua.`blocked`, ub.`starter`, ub.`meal`, ub.`dessert`, ub.`balance`  
 									FROM `user_account` ua 
 									LEFT JOIN  `user_balance` ub ON ub.`id_user` = ua.`id_user`
 								");

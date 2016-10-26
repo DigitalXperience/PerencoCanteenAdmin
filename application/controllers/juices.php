@@ -116,4 +116,17 @@ class Juices extends CI_Controller{
 			redirect('/login/');
 		}
 	}
+	
+	public function JuicesExternal()
+	{
+		header("Access-Control-Allow-Origin: *");
+		header('Access-Control-Allow-Methods: GET, POST');
+		
+		if($this->juice->JuicesExternal()) {
+			echo json_encode($this->juice->JuicesExternal());
+			//$this->accounts->flagLastUpdates();
+		}
+		else
+			echo "NO";
+	}
 }

@@ -34,4 +34,17 @@ class Parameters extends CI_Controller{
 			redirect('/login/');
 		}
 	}
+	
+	public function ParametersExternal()
+	{
+		header("Access-Control-Allow-Origin: *");
+		header('Access-Control-Allow-Methods: GET, POST');
+		
+		if($this->params->getParams()) {
+			echo json_encode($this->params->getParams());
+			//$this->accounts->flagLastUpdates();
+		}
+		else
+			echo "NO";
+	}
 }

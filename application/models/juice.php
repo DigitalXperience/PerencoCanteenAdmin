@@ -60,5 +60,19 @@ Class Juice extends CI_Model
         $this->db->where('id', $tab['id']);
         return $this->db->delete('juice_info', $tab);
 	}
+	
+	public function JuicesExternal()
+	{
+		$query = $this->db->query("SELECT juice_info.id, juice_info.name, juice_info.price FROM juice_info WHERE status='actif' ;");
+		
+		if (!empty($query->result()))
+		{
+			
+			return $query->result();
+		
+		} else
+			return false; 	
+	}
+	
 }
 ?>
