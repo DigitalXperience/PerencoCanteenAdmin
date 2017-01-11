@@ -10,14 +10,21 @@ class Log_model extends CI_Model {
 	public function getLogs($clause=null)
 	{ 	
 		//var_dump($clause); 
-		//var_dump($clause); //die;
+		//var_dump($clause); die;
 		$where = '';
+		$limit = '';
 		if(!is_null($clause) && !empty($clause)) {
 			$where = "WHERE ";
 			
-			if(array_key_exists('poste', $clause) && $clause['poste'] !== '') {
-				$where .= " `place` = '" . $clause['poste'] . "' ";
+			if(array_key_exists('poste', $clause) && $clause['poste'] === 'client') {
+				$where .= " `place` IN ('client1', 'client2') ";
 			}
+			if(array_key_exists('poste', $clause) && $clause['poste'] === 'server') {
+				$where .= " `place` IN ('server') ";
+			}
+			if(array_key_exists('dates', $clause) && $clause['dates'] === '')
+				$limit = ' LIMIT 1600 ';
+			
 			if(array_key_exists('dates', $clause) && $clause['dates'] !== '') { 
 				if(strlen($where) > 6) 
 					$where .= " AND ";
@@ -36,7 +43,7 @@ class Log_model extends CI_Model {
 				LEFT JOIN user_info ON user_info.id_user = logs.id_user 
 				$where 
 				ORDER BY id DESC 
-				LIMIT 600;";
+				$limit;";
 		//var_dump($sql); die;
 		$query = $this->db->query($sql);
 		$row = $query->result();
@@ -53,7 +60,7 @@ class Log_model extends CI_Model {
 		if(!is_null($clause) && !empty($clause)) {
 			$where = "WHERE ";
 			
-			$where .= " `place` = 'client1' AND ";
+			$where .= " `place` <> 'server' AND ";
 			
 			if(array_key_exists('dates', $clause)) {
 				
@@ -62,14 +69,14 @@ class Log_model extends CI_Model {
 					$dates = explode("-", $clause['dates']);
 					$date1 = preg_replace('#(\d{2})/(\d{2})/(\d{4})#', '$3-$1-$2', trim($dates[0]));
 					$date2 = preg_replace('#(\d{2})/(\d{2})/(\d{4})#', '$3-$1-$2', trim($dates[1]));
-					$where .= " `date` BETWEEN '$date1' AND '$date2' ";
+					$where .= " `date` BETWEEN '$date1 00:00:00' AND '$date2 23:59:59' ";
 				}
 				else {
 					$where .= " `date` BETWEEN DATE_FORMAT(NOW() ,'%Y-%m-01') AND LAST_DAY(CURDATE()) ";
 				}
 			}
 		}
-		$sql = "SELECT SUM(`starter`) AS starters, SUM(`meal`) AS meals, SUM(`dessert`) AS desserts, `date`, `place`, DATE_FORMAT(date, '%d %M') AS dat
+		$sql = "SELECT SUM(`starter`) AS starters, SUM(`meal`) AS meals, SUM(`dessert`) AS desserts, SUM(`balance`) as balance, `date`, `place`, DATE_FORMAT(date, '%d %M') AS dat
 				FROM `logs` 
 				 $where 
 				GROUP BY DATE_FORMAT(date, '%d-%m')
@@ -89,7 +96,7 @@ class Log_model extends CI_Model {
 	{
 		$sql = "SELECT SUM(`starter`) AS starters, SUM(`meal`) AS meals, SUM(`dessert`) AS desserts, DATE_FORMAT(date, '%Y-%m-%d') AS fdate, `date`, DATE_FORMAT(date, '%d %M') AS dat
 				FROM `logs` 
-				WHERE `date` BETWEEN adddate(curdate(), INTERVAL 2-DAYOFWEEK(curdate()) DAY) AND adddate(curdate(), INTERVAL 8-DAYOFWEEK(curdate()) DAY) AND  `place` = 'client1' 
+				WHERE `date` BETWEEN adddate(curdate(), INTERVAL 2-DAYOFWEEK(curdate()) DAY) AND adddate(curdate(), INTERVAL 8-DAYOFWEEK(curdate()) DAY) AND  `place` <> 'server' 
 				GROUP BY DATE_FORMAT(date, '%d-%m')
 				ORDER BY dat DESC ;";
 		//var_dump($sql); die;
@@ -104,10 +111,12 @@ class Log_model extends CI_Model {
 	
 	public function getMealsOfTheDay()
 	{
-		$sql = "SELECT SUM(`starter`) AS starters, SUM(`meal`) AS meals, SUM(`dessert`) AS desserts, `date`, `place`, DATE_FORMAT(date, '%d %M') AS dat
-				FROM `logs` 
-				WHERE `place` = 'client1' AND DATE_FORMAT(date, '%d %M') = DATE_FORMAT(NOW(), '%d %M') 
-				GROUP BY DATE_FORMAT(NOW(), '%d-%m-%Y');";
+		$sql = "SELECT *, SUM(`starter`) AS starters, SUM(`meal`) AS meals, SUM(`dessert`) AS desserts  FROM 
+				(SELECT SUM(`starter`) AS starter, `meal` AS meal, SUM(`dessert`) AS dessert, `date`, `place`, DATE_FORMAT(date, '%d %M') AS dat
+								FROM `logs` 
+								WHERE `place` <> 'server' AND DATE_FORMAT(date, '%d %M') = DATE_FORMAT(NOW(), '%d %M') 
+								GROUP BY DATE_FORMAT(date, '%H-%i-%s'), DATE_FORMAT(NOW(), '%d-%m-%Y')) tmp 
+				GROUP BY dat";
 		
 		$query = $this->db->query($sql);
 		$row = $query->result();
@@ -123,10 +132,12 @@ class Log_model extends CI_Model {
 	
 	public function getConsumptionOfTheWeek()
 	{
-		$sql = "SELECT SUM(`starter`) AS starters, SUM(`meal`) AS meals, SUM(`dessert`) AS desserts 
-				FROM `logs` 
-				WHERE `place` = 'client1' AND week(DATE_FORMAT(date, '%Y-%m-%d')) = week(curdate(),1) 
-				GROUP BY DATE_FORMAT(date, '%m-%Y');";
+		$sql = "SELECT *, SUM(`starter`) AS starters, SUM(`meal`) AS meals, SUM(`dessert`) AS desserts  FROM 
+				(SELECT SUM(`starter`) AS starter, -1 AS meal, SUM(`dessert`) AS dessert, week(DATE_FORMAT(date, '%Y-%m-%d')) as semaine    
+								FROM `logs` 
+								WHERE `place` <> 'server' AND week(DATE_FORMAT(date, '%Y-%m-%d')) = week(curdate(),1) 
+								GROUP BY DATE_FORMAT(date, '%H-%i-%s'), DATE_FORMAT(NOW(), '%d-%m-%Y')) tmp 
+				GROUP BY semaine";
 		
 		$query = $this->db->query($sql);
 		$row = $query->result();
@@ -144,27 +155,8 @@ class Log_model extends CI_Model {
 	{
 		$sql = "SELECT SUM(`starter`) AS starters, SUM(`meal`) AS meals, SUM(`dessert`) AS desserts 
 				FROM `logs` 
-				WHERE `place` = 'client1' AND DATE_FORMAT(date, '%m-%Y') = DATE_FORMAT(curdate(), '%m-%Y') 
+				WHERE `place` <> 'server' AND DATE_FORMAT(date, '%m-%Y') = DATE_FORMAT(curdate(), '%m-%Y') 
 				GROUP BY DATE_FORMAT(date, '%m-%Y');";
-		
-		$query = $this->db->query($sql);
-		$row = $query->result();
-		if (isset($row))
-		{
-			if(count($row) > 0) 
-				return $row[0];
-			else
-				return false; 	
-		}
-		return false;	
-	}
-	
-	public function getConsumptionOfTheYear()
-	{
-		$sql = "SELECT SUM(`starter`) AS starters, SUM(`meal`) AS meals, SUM(`dessert`) AS desserts 
-				FROM `logs` 
-				WHERE `place` = 'client1' AND DATE_FORMAT(date, '%Y') = DATE_FORMAT(curdate(), '%Y') 
-				GROUP BY DATE_FORMAT(date, '%Y');";
 		
 		$query = $this->db->query($sql);
 		$row = $query->result();
@@ -182,24 +174,8 @@ class Log_model extends CI_Model {
 	{
 		$sql = "SELECT SUM(`starter`) AS starters, SUM(`meal`) AS meals, SUM(`dessert`) AS desserts 
 				FROM `logs` 
-				WHERE `place` = 'client1' AND DATE_FORMAT(date, '%m-%Y') = DATE_FORMAT(curdate(), '%m-%Y') 
+				WHERE `place` <> 'server' AND DATE_FORMAT(date, '%m-%Y') = DATE_FORMAT(curdate(), '%m-%Y') 
 				GROUP BY week(date,1);";
-		
-		$query = $this->db->query($sql);
-		$row = $query->result();
-		if (isset($row))
-		{
-			return $row;
-		}
-		return false;	
-	}
-	
-	public function getConsumptionOfTheYearMonthByMonth()
-	{
-		$sql = "SELECT SUM(`starter`) AS starters, SUM(`meal`) AS meals, SUM(`dessert`) AS desserts, DATE_FORMAT(date, '%m') as month  
-				FROM `logs` 
-				WHERE `place` = 'client1' AND DATE_FORMAT(date, '%Y') = DATE_FORMAT(curdate(), '%Y') 
-				GROUP BY month(date);";
 		
 		$query = $this->db->query($sql);
 		$row = $query->result();
@@ -213,8 +189,43 @@ class Log_model extends CI_Model {
 	{
 		$sql = "SELECT SUM(`starter`) AS starters, SUM(`meal`) AS meals, SUM(`dessert`) AS desserts, DAYOFWEEK(date) as daynum
 				FROM `logs` 
-				WHERE `place` = 'client1' AND week(DATE_FORMAT(date, '%Y-%m-%d')) = week(curdate(),1) 
+				WHERE `place` <> 'server' AND week(DATE_FORMAT(date, '%Y-%m-%d')) = week(curdate(),1) 
 				GROUP BY DATE_FORMAT(date, '%d-%m-%Y');";
+		
+		$query = $this->db->query($sql);
+		$row = $query->result();
+		if (isset($row))
+		{
+			return $row;
+		}
+		return false;	
+	}
+	
+	public function getConsumptionOfTheYear()
+	{
+		$sql = "SELECT SUM(`starter`) AS starters, SUM(`meal`) AS meals, SUM(`dessert`) AS desserts 
+				FROM `logs` 
+				WHERE `place` IN ('client1', 'client2') AND DATE_FORMAT(date, '%Y') = DATE_FORMAT(curdate(), '%Y') 
+				GROUP BY DATE_FORMAT(date, '%Y');";
+		
+		$query = $this->db->query($sql);
+		$row = $query->result();
+		if (isset($row))
+		{
+			if(count($row) > 0) 
+				return $row[0];
+			else
+				return false; 	
+		}
+		return false;	
+	}
+	
+	public function getConsumptionOfTheYearMonthByMonth()
+	{
+		$sql = "SELECT SUM(`starter`) AS starters, SUM(`meal`) AS meals, SUM(`dessert`) AS desserts, DATE_FORMAT(date, '%m') as month  
+				FROM `logs` 
+				WHERE `place` IN ('client1', 'client2') AND DATE_FORMAT(date, '%Y') = DATE_FORMAT(curdate(), '%Y') 
+				GROUP BY month(date);";
 		
 		$query = $this->db->query($sql);
 		$row = $query->result();
