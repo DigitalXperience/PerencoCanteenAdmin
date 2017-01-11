@@ -44,7 +44,7 @@
             </li>
 			<li <?php if($this->uri->uri_string() == 'report/logs') { ?> class="active" <?php } ?>><a href="<?php echo base_url(); ?>index.php/report/logs"><i class="fa fa-file-text-o"></i> Historiques</a></li>
 			<li <?php if($this->uri->uri_string() == 'report/filter') { ?> class="active" <?php } ?>><a href="<?php echo base_url(); ?>index.php/report/filter"><i class="fa fa-files-o"></i> Rapports</a></li>
-			<li <?php if($this->uri->uri_string() == 'report') { ?> class="active" <?php } ?>><a href="<?php echo base_url(); ?>index.php/report"><i class="fa fa-pie-chart"></i> Statistiques</a></li>
+			<li <?php if($this->uri->uri_string() == 'report') { ?> class="active" <?php } ?>><a href="<?php echo base_url(); ?>index.php/report/weekstats"><i class="fa fa-pie-chart"></i> Statistiques</a></li>
 			
 			
        </ul>
