@@ -65,7 +65,7 @@ $friday = utf8_encode(strftime("%d %B, %Y", strtotime("friday this week")));
                 <div class="icon">
                   <i class="ion ion-stats-bars"></i>
                 </div>
-                <a href="<?php echo base_url(); ?>index.php/report/filter" class="small-box-footer">Voir les rapports <i class="fa fa-arrow-circle-right"></i></a>
+                <a href="<?php echo base_url(); ?>index.php/report/logs" class="small-box-footer">Voir les rapports <i class="fa fa-arrow-circle-right"></i></a>
               </div>
             </div><!-- ./col -->
 			
