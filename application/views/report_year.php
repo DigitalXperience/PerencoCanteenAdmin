@@ -121,7 +121,7 @@
               pointHighlightFill: "#fff",
               pointHighlightStroke: "rgba(220,220,220,1)",
               data: [<?php 
-					for($i = 0; $i <= 12; $i++) {
+					for($i = 1; $i <= 12; $i++) {
 						$conso = "0";
 						foreach($consoyear as $c) {
 							if((int) $c->month == $i)
@@ -140,7 +140,7 @@
               pointHighlightFill: "#fff",
               pointHighlightStroke: "rgba(220,20,220,1)",
               data: [<?php 
-					for($i = 0; $i <= 12; $i++) {
+					for($i = 1; $i <= 12; $i++) {
 						$conso = "0";
 						foreach($consoyear as $c) {
 							if((int) $c->month == $i)
@@ -159,7 +159,7 @@
               pointHighlightFill: "#fff",
               pointHighlightStroke: "rgba(60,141,188,1)",
               data: [<?php 
-					for($i = 0; $i <= 12; $i++) {
+					for($i = 1; $i <= 12; $i++) {
 						$conso = "0";
 						foreach($consoyear as $c) {
 							if((int) $c->month == $i)
@@ -184,7 +184,7 @@
               pointHighlightFill: "#fff",
               pointHighlightStroke: "rgba(220,220,220,1)",
               data: [<?php 
-					for($i = 0; $i <= 12; $i++) {
+					for($i = 1; $i <= 12; $i++) {
 						$conso = "0";
 						foreach($consoyear as $c) {
 							if((int) $c->month == $i)
@@ -203,7 +203,7 @@
               pointHighlightFill: "#fff",
               pointHighlightStroke: "rgba(220,20,220,1)",
               data: [<?php 
-					for($i = 0; $i <= 12; $i++) {
+					for($i = 1; $i <= 12; $i++) {
 						$conso = "0";
 						foreach($consoyear as $c) {
 							if((int) $c->month == $i)
@@ -222,7 +222,7 @@
               pointHighlightFill: "#fff",
               pointHighlightStroke: "rgba(60,141,188,1)",
               data: [<?php 
-					for($i = 0; $i <= 12; $i++) {
+					for($i = 1; $i <= 12; $i++) {
 						$conso = "0";
 						foreach($consoyear as $c) {
 							if((int) $c->month == $i)
@@ -247,7 +247,7 @@
               pointHighlightFill: "#fff",
               pointHighlightStroke: "rgba(220,220,220,1)",
               data: [<?php 
-					for($i = 0; $i <= 12; $i++) {
+					for($i = 1; $i <= 12; $i++) {
 						$conso = "0";
 						foreach($consoyear as $c) {
 							if((int) $c->month == $i)
