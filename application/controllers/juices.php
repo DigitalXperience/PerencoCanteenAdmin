@@ -8,6 +8,7 @@ class Juices extends CI_Controller{
 		$this->load->model('user','',TRUE);
 		$this->load->model('juice','',TRUE);
 		$this->load->model('accounts','', TRUE);
+		$this->load->model('log_model','logs');
 	}
 	
 	public function index()
@@ -129,4 +130,26 @@ class Juices extends CI_Controller{
 		else
 			echo "NO";
 	}
+	
+	public function report()
+	{
+		if($this->session->userdata('logged_in'))
+		{
+			$session_data = $this->session->userdata('logged_in');
+			$data['username'] = $session_data['username'];
+			$data['name'] = $this->user->getInfo($session_data['id']);
+			$data['title'] = "Logs sur les postes";
+			$data['listeboissons'] = $this->juice->getActiveList();
+			
+            $data['liste'] = $this->logs->getLogsJuices($this->input->get());
+			//echo "<pre>"; var_dump($data['liste']); die;
+			$this->load->view('report_juices', $data);
+		}
+		else
+		{
+			//If no session, redirect to login page
+			redirect('/login/');
+		}
+	}
+	
 }

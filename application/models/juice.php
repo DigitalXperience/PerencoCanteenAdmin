@@ -25,6 +25,16 @@ Class Juice extends CI_Model
 		}
 		return false;
 	}
+	public function getActiveList($clause=null)
+	{
+		$query = $this->db->query("SELECT juice_info.id, juice_info.name, juice_info.status, juice_info.price FROM juice_info WHERE juice_info.status <> 'non-actif';");
+		$row = $query->result();
+		if (isset($row))
+		{
+			return $row;
+		}
+		return false;
+	}
     public function getJuiceById($id)
 	{
 		$query = $this->db->query("SELECT * FROM juice_info WHERE id = '".$id."' LIMIT 1;");

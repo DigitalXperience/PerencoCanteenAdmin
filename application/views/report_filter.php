@@ -64,9 +64,10 @@ $dates = $this->input->get('dates');
                           Desserts
                         </label>
                       </div>
+					  
 					  <div class="checkbox">
                         <label>
-                          <input type="checkbox" name="pdf" value="yes" id="pdf" target="" />
+                          <input type="checkbox" name="pdf" value="yes" id="pdf" />
                           Exporter le résultat en PDF
                         </label>
                       </div>
@@ -74,22 +75,28 @@ $dates = $this->input->get('dates');
 					<div class="form-group" style="width:49%; float:right">
                       <div class="checkbox">
                         <label>
-                          <input type="checkbox" name="sstarter" value="yes" id="starter" <?php if($this->input->get('starter')) echo "checked"; ?>>
+                          <input type="checkbox" name="sstarter" value="yes" id="sstarter" <?php if($this->input->get('sstarter')) echo "checked"; ?>>
                           Somme des entrées
                         </label>
                       </div>
 
                       <div class="checkbox">
                         <label>
-                          <input type="checkbox" name="smeal" value="yes" id="meal" <?php if($this->input->get('meal')) echo "checked"; ?>>
+                          <input type="checkbox" name="smeal" value="yes" id="smeal" <?php if($this->input->get('smeal')) echo "checked"; ?>>
                           Somme des plats chauds
                         </label>
                       </div>
 
                       <div class="checkbox">
                         <label>
-                          <input type="checkbox" name="sdessert" value="yes" id="dessert" <?php if($this->input->get('dessert')) echo "checked"; ?>>
+                          <input type="checkbox" name="sdessert" value="yes" id="sdessert" <?php if($this->input->get('sdessert')) echo "checked"; ?>>
                           Somme des desserts
+                        </label>
+                      </div>
+					  <div class="checkbox">
+                        <label>
+                          <input type="checkbox" name="sboisson" value="yes" id="sboisson" <?php if($this->input->get('sboisson')) echo "checked"; ?>>
+                          Somme des boissons
                         </label>
                       </div>
                     </div>
@@ -126,17 +133,21 @@ $dates = $this->input->get('dates');
                     <?php if($this->input->get('sstarter')) { ?> <th>Entrees (cfa)</th><?php } ?>
                      <?php if($this->input->get('smeal')) { ?><th>Plats (cfa)</th><?php } ?>
                     <?php if($this->input->get('sdessert')) { ?><th>Desserts (cfa)</th><?php } ?>
+                    <?php if($this->input->get('sboisson')) { ?><th>Boissons (cfa)</th><?php } ?>
                     <th>Total (cfa)</th>
                   </tr>
                 </thead>
                 <tbody>
-                     <?php if($liste){
+                     <?php 
+					 $total_sums = 0;
+					 if($liste){
 							if($this->input->get('starter')) { $sum_entree = 0; }
 							if($this->input->get('meal')) { $sum_repas = 0; }
 							if($this->input->get('dessert')) { $sum_dessert = 0; }
 							if($this->input->get('sstarter')) { $sum_entreef = 0; }
 							if($this->input->get('smeal')) { $sum_repasf = 0; }
 							if($this->input->get('sdessert')) { $sum_dessertf = 0; }
+							if($this->input->get('sboisson')) { $sum_boissonf = 0; }
                             foreach ($liste as $row){
 								$sumday = 0;
 								if($this->input->get('starter') && $this->input->get('sstarter')) $sumday += (abs($row->starters) * $params['starter_price']);
@@ -150,6 +161,7 @@ $dates = $this->input->get('dates');
                                        if($this->input->get('sstarter')) {  echo '<td>'.(abs($row->starters) * $params['starter_price']) .'</td>'; }
                                         if($this->input->get('smeal')) { echo '<td>'.(abs($row->meals) * $params['meal_price']).'</td>'; }
                                         if($this->input->get('sdessert')) { echo '<td>'.(abs($row->desserts) * $params['dessert_price']).'</td>'; }
+                                        if($this->input->get('sboisson')) { echo '<td>'.(abs($row->balance)).'</td>'; }
                                         echo '<td>'.$sumday.'</td>';
                                       echo '</tr>';
 								if($this->input->get('starter')) { $sum_entree += abs($row->starters); }
@@ -158,6 +170,7 @@ $dates = $this->input->get('dates');
 								if($this->input->get('sstarter')) { $sum_entreef += (abs($row->starters) * $params['starter_price']); }
 								if($this->input->get('smeal')) { $sum_repasf += (abs($row->meals) * $params['meal_price']); }
 								if($this->input->get('sdessert')) { $sum_dessertf += (abs($row->desserts) * $params['dessert_price']); }
+								if($this->input->get('sboisson')) { $sum_boissonf += (abs($row->balance)); }
                             }
                     } ?>
                 </tbody>
@@ -170,6 +183,7 @@ $dates = $this->input->get('dates');
 					 <?php if($this->input->get('sstarter') && $liste) { ?><th>Total : <?php echo $sum_entreef; ?></th><?php } ?>
                     <?php if($this->input->get('smeal') && $liste) { ?><th>Total : <?php echo $sum_repasf; ?></th><?php } ?>
                     <?php if($this->input->get('sdessert') && $liste) { ?><th>Total : <?php echo $sum_dessertf; ?></th><?php } ?>
+                    <?php if($this->input->get('sboisson') && $liste) { ?><th>Total : <?php echo $sum_boissonf; ?></th><?php } ?>
 					
                     <th>Total cfa</th>
                   </tr>
@@ -196,7 +210,7 @@ $dates = $this->input->get('dates');
 <script>
   $(function () {
     $("#example1").DataTable({
-	  "order": [[ 0, "desc" ]]
+      "order": [[ 0, "desc"]]
     });
   });
    $(function () {
@@ -225,7 +239,6 @@ $dates = $this->input->get('dates');
           checkboxClass: 'icheckbox_minimal-red',
           radioClass: 'iradio_minimal-red'
         });
-		
         //Flat red color scheme for iCheck
         $('input[type="checkbox"].flat-red, input[type="radio"].flat-red').iCheck({
           checkboxClass: 'icheckbox_flat-green',

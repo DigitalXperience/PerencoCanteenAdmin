@@ -3,6 +3,7 @@
 <?php include ('inc/menu.php'); ?>
 <?php 
 $dates = $this->input->get('dates');
+$poste = $this->input->get('poste');
 ?>
 <!-- Content Wrapper. Contains page content -->
     <div class="content-wrapper">
@@ -46,8 +47,8 @@ $dates = $this->input->get('dates');
 						<label>Terminal</label>
 						<select name="poste" aria-controls="example1" class="form-control">
 							<option value="">Tous</option>
-							<option value="client1">TPV</option>
-							<option value="server">Serveur</option>
+							<option value="client" <?php if($poste=="client") echo "selected"; ?>>TPV</option>
+							<option value="server" <?php if($poste=="server") echo "selected"; ?>>Serveur</option>
 						</select>
 					</div>
                 </div><!-- /.col -->
@@ -75,6 +76,8 @@ $dates = $this->input->get('dates');
                     <th>Entree</th>
                     <th>Repas</th>
                     <th>Dessert</th>
+                    <th>Boisson</th>
+                    <th>Solde</th>
                     <th>Transaction</th>
                     <th>Date et Heure</th>
                   </tr>
@@ -86,7 +89,7 @@ $dates = $this->input->get('dates');
 							$sum_dessert = 0;
 							
                             foreach ($liste as $row){
-								if($row->place == 'client1') $trans = 'Débit'; else $trans = 'Crédit';
+								if($row->place == 'client1' || $row->place == 'client2') $trans = 'Débit'; else $trans = 'Crédit';
                                 echo '<tr id="row-'.$row->id_user.'">
                                         <td>'.$row->id_user.'</td>
                                         <td>'.$row->firstname.'</td>
@@ -94,6 +97,8 @@ $dates = $this->input->get('dates');
                                         <td>'.abs($row->starter).'</td>
                                         <td>'.abs($row->meal).'</td>
                                         <td>'.abs($row->dessert).'</td>
+                                        <td>'.abs($row->expenses).'</td>
+                                        <td>'.$row->balance.'</td>
                                         <td>'.$trans.'</td>
                                         <td>'.$row->date.'</td>
                                       </tr>';
@@ -117,6 +122,8 @@ $dates = $this->input->get('dates');
                     <th>Entree</th>
                     <th>Repas</th>
                     <th>Dessert</th>
+                    <th>Boisson</th>
+                    <th>Solde</th>
                     <th>Transaction</th>
                     <th>Date et Heure</th>
                   </tr>
@@ -136,7 +143,7 @@ $dates = $this->input->get('dates');
  $(function () {
    $("#example1").DataTable(
    {
-	  "order": [[ 7, "desc" ]]
+      "order": [[ 9, "desc" ]]
     });
     
   });

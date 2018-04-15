@@ -37,9 +37,9 @@
 						  </select>
 						</div>
 					
-						<div class="form-group">
+						<div class="form-group" style="display:none">
 						  <label for="PIN">PIN</label>
-						  <input type="password" class="form-control" id="PIN" name="PIN" value="<?php echo $pin; ?>">
+						  <input type="text" class="form-control" id="PIN" name="PIN" value="<?php echo $pin; ?>">
 						</div>
 					</div>
 					<div class="col-md-6">

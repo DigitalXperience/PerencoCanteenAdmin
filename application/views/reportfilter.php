@@ -1,14 +1,16 @@
 <?php 
 //tcpdf();
+setlocale(LC_TIME, 'fr_FR.utf8','fra');
 $this->load->helper('date');
-$datestring = 'Year: %Y Month: %m Day: %d - %h:%i %a';
+$datestring = strftime('%A %d  %Y, %H:%M');
+//var_dump($datestring);die;
 $time = time();
 
 $obj_pdf = new TCPDF('P', PDF_UNIT, PDF_PAGE_FORMAT, true, 'UTF-8', false);
 $obj_pdf->SetCreator(PDF_CREATOR);
 $title = "Rapport des consommations de la cantine";
 $obj_pdf->SetTitle($title);
-$obj_pdf->SetHeaderData(PDF_HEADER_LOGO, PDF_HEADER_LOGO_WIDTH, $title, 'Imprimé le '.date(DATE_COOKIE, time()));
+$obj_pdf->SetHeaderData(PDF_HEADER_LOGO, PDF_HEADER_LOGO_WIDTH, $title, "Imprimé le $datestring");
 $obj_pdf->setHeaderFont(Array(PDF_FONT_NAME_MAIN, '', PDF_FONT_SIZE_MAIN));
 $obj_pdf->setFooterFont(Array(PDF_FONT_NAME_DATA, '', PDF_FONT_SIZE_DATA));
 $obj_pdf->SetDefaultMonospacedFont('helvetica');

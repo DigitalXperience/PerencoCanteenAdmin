@@ -21,6 +21,7 @@ class Dashboard extends CI_Controller{
 			$data['platschauds'] = $this->logs->getMealsOfTheDay();
 			$data['conso'] = $this->logs->getConsumptionOfTheWeek();
 			$data['consoweek'] = $this->logs->getConsumptionOfTheWeekDayByDay();
+			//echo "<pre>"; var_dump($data['consoweek']); die;
 			$data['title'] = "Tableau de bord journalier";
 			$this->load->view('dashboard', $data);
 		}

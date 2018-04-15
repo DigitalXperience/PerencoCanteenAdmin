@@ -31,9 +31,9 @@
                         <th>#</th>
                         <th>Noms</th>
                         <th>Prenoms</th>
-                        <th>Entrées</th>
+                        <!--<th>Entrées</th>-->
                         <th>Plat Chaud</th>
-                        <th>Dessert</th>
+                        <!--<th>Dessert</th>-->
                         <th>Solde</th>
                         <th>Bloqué</th>
                         <th>Actions</th>
@@ -46,9 +46,9 @@
 							<td><?php echo $compte->id_user; ?></td>
 							<td><?php echo $compte->lastname; ?></td>
 							<td><?php echo $compte->firstname; ?></td>
-							<td><?php echo $compte->starter; ?></td>
+							<!--<td><?php echo $compte->starter; ?></td>-->
 							<td><?php echo $compte->meal; ?></td>
-							<td><?php echo $compte->dessert; ?></td>
+							<!--<td><?php echo $compte->dessert; ?></td>-->
 							<td><?php echo $compte->balance; ?></td>
 							<td><?php echo ($compte->blocked == '0') ? "Non" : "Oui"; ?></td>
 							<td>
@@ -64,9 +64,9 @@
                         <th>#</th>
                         <th>Noms</th>
                         <th>Prenoms</th>
-                        <th>Entrées</th>
+                        <!--<th>Entrées</th>-->
                         <th>Plat Chaud</th>
-                        <th>Dessert</th>
+                        <!--<th>Dessert</th>-->
                         <th>Solde</th>
                         <th>Bloqué</th>
                         <th>Actions</th>

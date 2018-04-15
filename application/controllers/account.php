@@ -207,7 +207,19 @@ class Account extends CI_Controller{
 		header("Access-Control-Allow-Origin: *");
 		header('Access-Control-Allow-Methods: GET, POST');
 		
-		if($this->accounts->updateBalanceFromClient($this->input->post())) {
+		if($this->accounts->updateBalanceFromTerminal($this->input->post())) {
+			echo json_encode($this->accounts->getBalance($this->input->post('id_user')));
+		}
+		else
+			echo "NO";
+	}
+	
+	public function updateAccountExternal()
+	{
+		header("Access-Control-Allow-Origin: *");
+		header('Access-Control-Allow-Methods: GET, POST');
+		
+		if($this->accounts->updateBalanceFromTerminal($this->input->post())) {
 			echo json_encode($this->accounts->getBalance($this->input->post('id_user')));
 		}
 		else

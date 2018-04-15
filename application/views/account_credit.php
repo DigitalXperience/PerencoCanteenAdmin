@@ -33,6 +33,7 @@
                       <label for="user">Utilisateur</label>
                       <input type="text" disabled class="form-control" value="<?php echo $user->lastname . ' ' . $user->firstname; ?>">
                     </div>
+					<!--
                     <div class="form-group">
                       <label for="entree">Entrees (Actuellement <?php echo ($user->starter) ? : 0; ?>)</label>
                       <input type="text" class="form-control" id="starter" name="starter" value="">
@@ -43,11 +44,12 @@
                           Payé
                         </label>
                       </div>
-                    </div>
+                    </div>-->
 					<div class="form-group">
                       <label for="entree">Plat chaud (Actuellement <?php echo ($user->meal) ? : 0; ?>)</label>
                       <input type="text" class="form-control" id="meal" name="meal" value="">
                     </div>
+					<!--
 					<div class="form-group">
                       <label for="entree">Dessert (Actuellement <?php echo ($user->dessert) ? : 0; ?>)</label>
                       <input type="text" class="form-control" id="dessert" name="dessert" value="">
@@ -58,7 +60,7 @@
                           Payé
                         </label>
                       </div>
-                    </div>
+                    </div>-->
 					<div class="form-group">
                       <label for="entree">Solde (Actuellement <?php echo ($user->balance) ? : 0; ?>)</label>
                       <input type="text" class="form-control" id="balance" name="balance" value="">
@@ -67,9 +69,9 @@
                   </div><!-- /.box-body -->
                   <div class="box-footer">
 					<input type="hidden" id="id_user" name="id_user" value="<?php echo $user->id_user; ?>">
-					<input type="hidden" id="old_starter" name="old_starter" value="<?php echo $user->starter; ?>">
+					<!--<input type="hidden" id="old_starter" name="old_starter" value="<?php echo $user->starter; ?>">-->
 					<input type="hidden" id="old_meal" name="old_meal" value="<?php echo $user->meal; ?>">
-					<input type="hidden" id="old_dessert" name="old_dessert" value="<?php echo $user->dessert; ?>">
+					<!--<input type="hidden" id="old_dessert" name="old_dessert" value="<?php echo $user->dessert; ?>">-->
 					<input type="hidden" id="old_balance" name="old_balance" value="<?php echo $user->balance; ?>">
                     <button type="submit" class="btn btn-primary">Submit</button>
                   </div>

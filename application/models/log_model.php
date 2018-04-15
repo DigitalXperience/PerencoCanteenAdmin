@@ -12,15 +12,17 @@ class Log_model extends CI_Model {
 		//var_dump($clause); 
 		//var_dump($clause); die;
 		$where = '';
-		$limit = '';
+		$limit = ' LIMIT 4000 ';
 		if(!is_null($clause) && !empty($clause)) {
 			$where = "WHERE ";
 			
 			if(array_key_exists('poste', $clause) && $clause['poste'] === 'client') {
 				$where .= " `place` IN ('client1', 'client2') ";
+				$limit = '';
 			}
 			if(array_key_exists('poste', $clause) && $clause['poste'] === 'server') {
 				$where .= " `place` IN ('server') ";
+				$limit = '';
 			}
 			if(array_key_exists('dates', $clause) && $clause['dates'] === '')
 				$limit = ' LIMIT 1600 ';
@@ -35,6 +37,7 @@ class Log_model extends CI_Model {
 					$where .= " DATE_FORMAT(`date`, '%Y-%m-%d') = '$date2' ";
 				else
 					$where .= " DATE_FORMAT(`date`, '%Y-%m-%d') BETWEEN '$date1' AND '$date2' ";
+				$limit = '';
 			}
 		}
 		if(strlen($where) == 6) $where = "";
@@ -234,6 +237,70 @@ class Log_model extends CI_Model {
 			return $row;
 		}
 		return false;	
+	}
+	
+	public function hasEatenToday($iduser)
+	{		
+		$query = $this->db->query("SELECT `meal` AS meals FROM `logs` WHERE `id_user` = '".$iduser."' AND meal = -1 AND DATE_FORMAT(date, '%d %M') = DATE_FORMAT(NOW(), '%d %M')  LIMIT 1");
+		//var_dump("SELECT `meal` AS meals FROM `logs` WHERE `id_user` = '".$iduser."' AND meal = -1 AND DATE_FORMAT(date, '%d %M') = DATE_FORMAT(NOW(), '%d %M')  LIMIT 1"); die;
+		$row = $query->result();
+		if (!empty($row))
+		{
+			if($row[0]->meals === "-1")
+				return true;
+			return false;
+		}
+		return false;
+	}
+	
+	public function getLogsJuices($clause=null)
+	{ 	
+		 
+		//var_dump($clause); die;
+		$where = '';
+		$limit = '';
+		if(!is_null($clause) && !empty($clause)) {
+			$where = "WHERE ";
+			
+			if(array_key_exists('dates', $clause) && $clause['dates'] === '') {
+				$limit = ' LIMIT 1600 ';
+				$where .= " DATE_FORMAT(date, '%m-%Y') = DATE_FORMAT(curdate(), '%m-%Y') ";
+			}
+		
+			
+			if(array_key_exists('dates', $clause) && $clause['dates'] !== '') { 
+				if(strlen($where) > 6) 
+					$where .= " AND ";
+				else
+					$where .= " ";
+				$dates = explode("-", $clause['dates']);
+				$date1 = preg_replace('#(\d{2})/(\d{2})/(\d{4})#', '$3-$1-$2', trim($dates[0]));
+				$date2 = preg_replace('#(\d{2})/(\d{2})/(\d{4})#', '$3-$1-$2', trim($dates[1]));
+				if($date1 == $date2)
+					$where .= " DATE_FORMAT(`date`, '%Y-%m-%d') = '$date2' ";
+				else
+					$where .= " DATE_FORMAT(`date`, '%Y-%m-%d') BETWEEN '$date1' AND '$date2' ";
+			}
+		}
+		
+		if(strlen($where) == 0) 
+			$where .= "WHERE  logs.boissons <> '' AND logs.boissons <> '[]'";
+		else
+			$where .= " AND  logs.boissons <> ''  AND logs.boissons <> '[]'";
+		$sql = "SELECT logs.id, logs.id_user, logs.date, logs.boissons, user_info.firstname, user_info.lastname 
+				FROM logs 
+				LEFT JOIN user_info ON user_info.id_user = logs.id_user 
+				$where 
+				ORDER BY id DESC 
+				$limit;";
+		//var_dump($sql); die;
+		$query = $this->db->query($sql);
+		$row = $query->result();
+		if (isset($row))
+		{
+			return $row;
+		}
+		return false;
 	}
 	
 }

@@ -61,6 +61,22 @@ Class Accounts extends CI_Model
 		return false;
 	}
 	
+	// pour le solde monnaie uniquement
+	public function getActualBalance($id)
+	{
+		$query = $this->db->query("SELECT ub.`meal`, ub.id_user , ub.balance 
+									FROM `user_balance` AS ub  
+									WHERE id_user = '$id';
+								");
+		
+		$row = $query->row();
+		if (isset($row)) {
+			return $row;
+		}
+		
+		return false;
+	}
+	
 	public function getUserWithoutAccount()
 	{
 		$query = $this->db->query("SELECT ui.`firstname`, ui.`lastname`, ua.PIN, ui.`id_user`   
@@ -80,16 +96,16 @@ Class Accounts extends CI_Model
 	public function generateNewPin()
 	{
 		$pins = $this->getAllPins();
+		
 		$PINS = array();
 		if(count($pins)>0)
 			foreach($pins as $pin)
 				$PINS[] = $pin->PIN;
-		
+		//var_dump($PINS); die;
 		$newpin = rand(0, 9) . rand(0, 9) . rand(0, 9) . rand(0, 9);
 		while(in_array($newpin, $PINS)) {
 			$newpin = rand(0, 9) . rand(0, 9) . rand(0, 9) . rand(0, 9);
 		}
-		
 		return $newpin;
 	}
 	
@@ -184,6 +200,39 @@ Class Accounts extends CI_Model
 		return false;
 	}
 	
+	public function updateBalanceFromTerminal($value)
+	{
+		$old_data = $this->getActualBalance($value['id_user']);
+		//var_dump($old_data); die;
+		$value['place'] = $value['place'];;
+		$value['meal'] = (int) $value['meal'];
+		$value['balance'] = (int) $value['balance'];
+		
+		$balance['meal'] = $old_data->meal + $value['meal'];
+		$balance['balance'] = $old_data->balance - $value['balance']; 
+		
+		$this->db->where('id_user', $value['id_user']);
+		//var_dump($this->checkIfAlreadyUpdated($value['id_user'], $value['place'], $value['date'])); die;
+		if($this->checkIfAlreadyUpdated($value['id_user'], $value['place'], $value['date']))
+			return true;
+		
+		if($this->db->update('user_balance', $balance)) { //var_dump($balance); die('12');
+			$value['log_by'] = $value['id_user'];
+			$this->db->insert('logs', $value); // Mise en log
+			return true;
+		}
+		return false;
+	}
+	
+	public function checkIfAlreadyUpdated($iduser, $place, $date) {
+		$query = $this->db->query("SELECT * FROM `logs` l WHERE `id_user` = '$iduser' AND `date` = '$date' AND `place` = '$place'");
+		if (!empty($query->result()))
+		{
+			return true;
+		} else
+			return false; 
+	}
+	
 	public function newAccountsExternal()
 	{
 		$query = $this->db->query("SELECT ua.`PIN`, ua.`id_user`, ua.`date_exp`, ua.`created`, ua.`blocked`, ub.`starter`, ub.`meal`, ub.`dessert`, ub.balance  
@@ -202,9 +251,10 @@ Class Accounts extends CI_Model
 	
 	public function AccountsExternal()
 	{
-		$query = $this->db->query("SELECT ua.`PIN`, ua.`id_user`, ua.`date_exp`, ua.`created`, ua.`blocked`, ub.`starter`, ub.`meal`, ub.`dessert`, ub.`balance`  
+		$query = $this->db->query("SELECT ua.`PIN`, ua.`id_user`, ua.`date_exp`, ua.`created`, ua.`blocked`, ub.`meal`, ub.`balance`, ui.`lastname`, ui.`firstname`, ui.`deleted`   
 									FROM `user_account` ua 
-									LEFT JOIN  `user_balance` ub ON ub.`id_user` = ua.`id_user`
+									LEFT JOIN  `user_balance` ub ON ub.`id_user` = ua.`id_user` 
+									LEFT JOIN  `user_info` ui ON ui.`id_user` = ua.`id_user` 
 								");
 		
 		if (!empty($query->result()))

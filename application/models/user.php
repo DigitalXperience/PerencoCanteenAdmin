@@ -63,5 +63,51 @@ Class User extends CI_Model
         $this->db->where('id_user', $tab['id_user']);
         return $this->db->update('user_info', $tab);
     }
+	
+	public function hasEaten($pin)
+	{
+		$iduser = $this->getIdUserFromPin($pin);
+		
+		if($this->logs->hasEatenToday($iduser))
+			return true;
+		return false;
+	}
+	
+	public function alreadyLogged($pin)
+	{
+		$query = $this->db->query("SELECT `pin` FROM `log_check_day` WHERE `pin` = '".$pin."' LIMIT 1");
+		$row = $query->result();
+		if (!empty($row))
+			return true;
+		return false;
+	}
+	
+	public function log($pin)
+	{
+		return $this->db->insert('log_check_day', array('pin'=>$pin));
+	}
+	
+	public function getIdUserFromPin($pin)
+	{
+		$query = $this->db->query("SELECT id_user FROM `user_account` WHERE `pin` = '".$pin."' AND blocked = '0' LIMIT 1");
+		//var_dump("SELECT id_user FROM `user_account` WHERE `pin` = '".$pin."' AND blocked = '0' LIMIT 1"); die;
+		$row = $query->result();
+		//var_dump($row); die;
+		if (isset($row))
+		{
+			return $row[0]->id_user;
+		}
+		return false;
+	}
+
+	public function isUserByPin($pin)
+	{
+		$query = $this->db->query("SELECT `PIN` FROM `user_account` WHERE `blocked` = '0' AND `PIN` = '".$pin."' LIMIT 1");
+		$row = $query->result();
+		if (!empty($row))
+			return true;
+		return false;
+	}
+	
 }
 ?>

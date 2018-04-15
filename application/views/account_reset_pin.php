@@ -35,7 +35,7 @@
                     </div>
                     <div class="form-group">
                       <label for="entree">Email</label>
-                      <input type="text" class="form-control" id="PIN" name="PIN" value="<?php echo $user->email; ?>">
+                      <input type="text" class="form-control" id="email" name="email" value="<?php if(isset($user->email)) echo $user->email; ?>">
                     </div>
 					
                   </div><!-- /.box-body -->
