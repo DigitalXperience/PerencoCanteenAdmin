@@ -193,8 +193,9 @@ class Log_model extends CI_Model {
 		$sql = "SELECT SUM(`starter`) AS starters, SUM(`meal`) AS meals, SUM(`dessert`) AS desserts, DAYOFWEEK(date) as daynum
 				FROM `logs` 
 				WHERE `place` <> 'server' AND week(DATE_FORMAT(date, '%Y-%m-%d')) = week(curdate(),1) 
+				AND YEAR(DATE_FORMAT(date, '%Y-%m-%d')) = YEAR(curdate()) 
 				GROUP BY DATE_FORMAT(date, '%d-%m-%Y');";
-		
+		//var_dump($sql); die;
 		$query = $this->db->query($sql);
 		$row = $query->result();
 		if (isset($row))
