@@ -139,6 +139,7 @@ class Log_model extends CI_Model {
 				(SELECT SUM(`starter`) AS starter, -1 AS meal, SUM(`dessert`) AS dessert, week(DATE_FORMAT(date, '%Y-%m-%d')) as semaine    
 								FROM `logs` 
 								WHERE `place` <> 'server' AND week(DATE_FORMAT(date, '%Y-%m-%d')) = week(curdate(),1) 
+								AND YEAR(DATE_FORMAT(date, '%Y-%m-%d')) = YEAR(curdate()) 
 								GROUP BY DATE_FORMAT(date, '%H-%i-%s'), DATE_FORMAT(NOW(), '%d-%m-%Y')) tmp 
 				GROUP BY semaine";
 		
@@ -188,6 +189,7 @@ class Log_model extends CI_Model {
 		}
 		return false;	
 	}
+	
 	public function getConsumptionOfTheWeekDayByDay()
 	{
 		$sql = "SELECT SUM(`starter`) AS starters, SUM(`meal`) AS meals, SUM(`dessert`) AS desserts, DAYOFWEEK(date) as daynum
