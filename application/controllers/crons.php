@@ -28,6 +28,7 @@ class Crons extends CI_Controller {
 		parent::__construct();
 		$this->load->model('user','',TRUE);
 		$this->load->model('accounts','', TRUE);
+		$this->load->model('log_model','', TRUE);
 	}
 	
 	
@@ -42,6 +43,7 @@ class Crons extends CI_Controller {
 			return;
 		}
 		$this->accounts->resetAllMeals();
+		$this->log_model->resetLogs();
 	}
 	
 }

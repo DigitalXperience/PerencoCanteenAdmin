@@ -306,6 +306,10 @@ class Log_model extends CI_Model {
 		return false;
 	}
 	
+	public function resetLogs()
+	{
+		$this->db->truncate('log_check_day');
+	}
 }
 
 ?>
