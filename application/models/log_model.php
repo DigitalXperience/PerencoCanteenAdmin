@@ -193,16 +193,46 @@ class Log_model extends CI_Model {
 	public function getConsumptionOfTheWeekDayByDay()
 	{
 		$sql = "SELECT SUM(`starter`) AS starters, SUM(`meal`) AS meals, SUM(`dessert`) AS desserts, DAYOFWEEK(date) as daynum
+
 				FROM `logs` 
-				WHERE `place` <> 'server' AND week(DATE_FORMAT(date, '%Y-%m-%d')) = week(curdate(),1) 
-				AND YEAR(DATE_FORMAT(date, '%Y-%m-%d')) = YEAR(curdate()) 
+
+				WHERE `place` <> 'server' /*AND week(DATE_FORMAT(date, '%Y-%m-%d')) = week(curdate(),1) 
+
+				AND YEAR(DATE_FORMAT(date, '%Y-%m-%d')) = YEAR(curdate()) */
+                
+                AND YEARWEEK(`date`, 1) = YEARWEEK(NOW(), 1)
+
 				GROUP BY DATE_FORMAT(date, '%d-%m-%Y');";
 		//var_dump($sql); die;
 		$query = $this->db->query($sql);
 		$row = $query->result();
 		if (isset($row))
 		{
-			return $row;
+			$i = 0; $day = array(0 => 2, 1 => 3, 2 => 4, 3 => 5, 4 => 6);
+			
+			for($i = 0; $i <= 4; $i++)
+			{
+				if(isset($row[$i]) ) {
+					$row[$i]->daynum = (int) $row[$i]->daynum;
+					$key = array_search($row[$i]->daynum, $day);
+					unset($day[$key]);
+					$conso[$i] = $row[$i];
+				} 
+				else {
+					$d = new stdClass();
+					$d->starters = '0';
+					$d->meals = '0';
+					$d->desserts = '0';
+					$d->daynum = array_shift($day);
+					$conso[$i] = $d;
+				}
+			}
+			 
+			usort($conso, function($first, $second) {
+				return $first->daynum > $second->daynum;
+			}); 
+			
+			return $conso;
 		}
 		return false;	
 	}
