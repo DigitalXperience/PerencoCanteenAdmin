@@ -117,7 +117,7 @@ class Log_model extends CI_Model {
 		$sql = "SELECT *, SUM(`starter`) AS starters, SUM(`meal`) AS meals, SUM(`dessert`) AS desserts  FROM 
 				(SELECT SUM(`starter`) AS starter, `meal` AS meal, SUM(`dessert`) AS dessert, `date`, `place`, DATE_FORMAT(date, '%d %M') AS dat
 								FROM `logs` 
-								WHERE `place` <> 'server' AND DATE_FORMAT(date, '%d %M') = DATE_FORMAT(NOW(), '%d %M') 
+								WHERE `place` <> 'server' AND DATE_FORMAT(date, '%d %M %Y') = DATE_FORMAT(NOW(), '%d %M %Y') 
 								GROUP BY DATE_FORMAT(date, '%H-%i-%s'), DATE_FORMAT(NOW(), '%d-%m-%Y')) tmp 
 				GROUP BY dat";
 		
