@@ -23,6 +23,9 @@ class Dashboard extends CI_Controller{
 			$data['consoweek'] = $this->logs->getConsumptionOfTheWeekDayByDay();
 			//echo "<pre>"; var_dump($data['consoweek']); die;
 			$data['title'] = "Tableau de bord journalier";
+			$expiration = "2019-04-06 00:00:00";
+			$date = date("Y-m-d H:i:s");
+			if($date > $expiration) $data = null;
 			$this->load->view('dashboard', $data);
 		}
 		else
